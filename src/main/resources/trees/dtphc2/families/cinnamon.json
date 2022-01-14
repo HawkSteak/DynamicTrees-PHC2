@@ -1,0 +1,7 @@
+{
+  "common_leaves": "dtphc2:cinnamon",
+  "common_species": "dtphc2:cinnamon",
+  "primitive_log": "pamhc2trees:pamcinnamon",
+  "generate_stripped_branch": false,
+  "max_branch_radius": 8
+}

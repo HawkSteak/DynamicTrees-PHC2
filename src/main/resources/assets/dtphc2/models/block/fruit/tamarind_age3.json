@@ -1,0 +1,42 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dtphc2:blocks/tamarind",
+		"apple": "dtphc2:blocks/tamarind"
+	},
+	"elements": [
+		{
+			"from": [6.8, 7, 6.8],
+			"to": [9.2, 15, 9.2],
+			"faces": {
+				"north": {"uv": [11, 3, 14, 13], "texture": "#apple"},
+				"east": {"uv": [11, 3, 14, 13], "texture": "#apple"},
+				"south": {"uv": [11, 3, 14, 13], "texture": "#apple"},
+				"west": {"uv": [11, 3, 14, 13], "texture": "#apple"},
+				"up": {"uv": [11, 0, 14, 3], "texture": "#apple"},
+				"down": {"uv": [11, 13, 14, 16], "texture": "#apple"}
+			}
+		},
+		{
+			"from": [7.5, 15, 8],
+			"to": [8.5, 16, 8],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"north": {"uv": [15, 0, 16, 1], "texture": "#apple"},
+				"south": {"uv": [15, 0, 16, 1], "texture": "#apple"}
+			}
+		},
+		{
+			"from": [8, 15, 7.5],
+			"to": [8, 16, 8.5],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8], "rescale": true},
+			"faces": {
+				"east": {"uv": [15, 1, 16, 2], "texture": "#apple"},
+				"west": {"uv": [15, 1, 16, 2], "texture": "#apple"}
+			}
+		}
+	]
+}

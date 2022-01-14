@@ -1,0 +1,7 @@
+{
+  "parent": "dtphc2:block/fruit/generic/flower_age0",
+  "textures": {
+    "particle": "dtphc2:blocks/rambutan",
+    "apple": "dtphc2:blocks/rambutan"
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "multipart": [
+    {   "when": { "south": "true" },
+      "apply": { "model": "dtphc2:vine_passionfruit" }
+    },
+    {   "when": { "west": "true" },
+      "apply": { "model": "dtphc2:vine_passionfruit", "y": 90 }
+    },
+    {   "when": { "north": "true" },
+      "apply": { "model": "dtphc2:vine_passionfruit", "y": 180 }
+    },
+    {   "when": { "east": "true" },
+      "apply": { "model": "dtphc2:vine_passionfruit", "y": 270 }
+    },
+    {   "when": { "up": "true" },
+      "apply": { "model": "dtphc2:vine_passionfruit_up" }
+    },
+    {   "when": { "up": "false", "north": "false", "west": "false", "south": "false", "east": "false"  },
+      "apply": { "model": "dtphc2:vine_passionfruit_up" }
+    },
+
+
+    {   "when": { "up": "false", "north": "false", "west": "false", "south": "false", "east": "true" },
+      "apply": [
+        { "model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 270 },
+        { "model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 270 },
+        { "model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 270 }
+      ]
+    },
+    {   "when": { "up": "false", "north": "false", "west": "false", "south": "true", "east": "false"  },
+      "apply": [
+        { "model": "dtphc2:block/fruit/passionfruit_age3_a" },
+        { "model": "dtphc2:block/fruit/passionfruit_age3_b" },
+        { "model": "dtphc2:block/fruit/passionfruit_age3_c" }
+      ]
+    },
+    {   "when": { "up": "false", "north": "false", "west": "true", "south": "false", "east": "false"  },
+      "apply": [
+        { "model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 90 },
+        { "model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 90 },
+        { "model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 90 }
+      ]
+    },
+    {   "when": { "up": "false", "north": "true", "west": "false", "south": "false", "east": "false" },
+      "apply": [
+        { "model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 180 },
+        { "model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 180 },
+        { "model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 180 }
+      ]
+    },
+    {   "when": { "up": "true" },
+      "apply": { "model": "dtphc2:block/fruit/passionfruit_age3_up" }
+    },
+    {   "when": { "up": "false", "north": "false", "west": "false", "south": "false", "east": "false"  },
+      "apply": { "model": "dtphc2:block/fruit/passionfruit_age3_up" }
+    },
+
+
+    {   "when": { "up": "false", "north": "true", "west": "false", "south": "true", "east": "false"  },
+      "apply": [
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 180},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 180},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 180}
+      ]
+    },
+    {   "when": { "up": "false", "north": "true", "west": "true", "south": "false", "east": "false"  },
+      "apply": [
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 180},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 180},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 180}
+      ]
+    },
+    {   "when": { "up": "false", "north": "true", "west": "false", "south": "false", "east": "true" },
+      "apply": [
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 270},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 180},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 270},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 180},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 270},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 180}
+      ]
+    },
+    {   "when": { "up": "false", "north": "false", "west": "true", "south": "true", "east": "false"  },
+      "apply": [
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 90}
+      ]
+    },
+    {   "when": { "up": "false", "north": "false", "west": "true", "south": "false", "east": "true" },
+      "apply": [
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 270},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 270},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 270},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 90}
+      ]
+    },
+    {   "when": { "up": "false", "north": "false", "west": "false", "south": "true", "east": "true" },
+      "apply": [
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 270},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 270},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 270},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c"}
+      ]
+    },
+
+
+    {   "when": { "up": "false", "north": "false", "west": "true", "south": "true", "east": "true"  },
+      "apply": [
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 270 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 270 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 270 }
+      ]
+    },
+    {   "when": { "up": "false", "north": "true", "west": "false", "south": "true", "east": "true" },
+      "apply": [
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 270 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 270 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 270 }
+      ]
+    },
+    {   "when": { "up": "false", "north": "true", "west": "true", "south": "false", "east": "true"  },
+      "apply": [
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 270 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 270 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 270 }
+      ]
+    },
+    {   "when": { "up": "false", "north": "true", "west": "true", "south": "true", "east": "false" },
+      "apply": [
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a" },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b" },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c" }
+      ]
+    },
+
+
+    {   "when": { "up": "false", "north": "true", "west": "true", "south": "true", "east": "true" },
+      "apply": [
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_a", "y": 270 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_b", "y": 270 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c"},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 90},
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 180 },
+        {"model": "dtphc2:block/fruit/passionfruit_age3_c", "y": 270 }
+      ]
+    }
+  ]
+}

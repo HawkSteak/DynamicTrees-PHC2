@@ -1,0 +1,7 @@
+{
+	"parent": "dtphc2:block/fruit/generic/nut_age3_sided",
+	"textures": {
+		"particle": "dtphc2:blocks/chestnut",
+		"apple": "dtphc2:blocks/chestnut"
+	}
+}

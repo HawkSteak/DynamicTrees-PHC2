@@ -1,0 +1,7 @@
+{
+	"parent": "dtphc2:block/fruit/generic/cross_age0",
+	"textures": {
+		"particle": "dtphc2:blocks/cashew",
+		"apple": "dtphc2:blocks/cashew"
+	}
+}

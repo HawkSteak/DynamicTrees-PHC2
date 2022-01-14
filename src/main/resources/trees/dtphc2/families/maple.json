@@ -1,0 +1,7 @@
+{
+  "common_leaves": "dtphc2:maple",
+  "common_species": "dtphc2:maple",
+  "primitive_log": "pamhc2trees:pammaple",
+  "generate_stripped_branch": false,
+  "max_branch_radius": 8
+}

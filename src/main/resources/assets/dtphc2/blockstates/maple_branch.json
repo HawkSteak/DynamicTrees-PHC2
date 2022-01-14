@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "dtbyg:block/maple_branch"
+    "variants": {
+        "": {
+            "model": "dtphc2:block/maple_branch"
+        }
     }
-  }
 }

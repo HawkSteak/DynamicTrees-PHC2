@@ -1,0 +1,7 @@
+{
+    "parent": "dynamictrees:block/smartmodel/branch",
+    "textures": {
+        "bark": "pamhc2trees:block/fruits/stripped_paperbark_log",
+        "rings": "pamhc2trees:block/fruits/stripped_paperbark_log_top"
+    }
+}

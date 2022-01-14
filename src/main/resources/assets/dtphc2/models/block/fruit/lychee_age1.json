@@ -1,0 +1,7 @@
+{
+  "parent": "dtphc2:block/fruit/generic/berry_age1",
+  "textures": {
+    "particle": "dtphc2:blocks/lychee",
+    "apple": "dtphc2:blocks/lychee"
+  }
+}

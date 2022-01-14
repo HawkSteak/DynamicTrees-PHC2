@@ -1,0 +1,10 @@
+{
+  "blocks.fruit.bonk": {
+    "category": "block",
+    "subtitle": "blocks.fruit.bonk",
+    "sounds": [{
+      "name": "dtphc2:blocks/fruit/bonk",
+      "stream": true
+    }]
+  }
+}

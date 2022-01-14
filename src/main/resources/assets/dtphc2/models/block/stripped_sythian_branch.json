@@ -1,7 +1,0 @@
-{
-  "loader": "dynamictrees:branch",
-  "textures": {
-    "bark": "byg:block/stripped_sythian_stem",
-    "rings": "byg:block/stripped_sythian_stem_top"
-  }
-}

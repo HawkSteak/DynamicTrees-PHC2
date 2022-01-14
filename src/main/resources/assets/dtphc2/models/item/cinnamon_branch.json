@@ -1,0 +1,7 @@
+{
+    "parent": "dynamictrees:item/branch",
+    "textures": {
+        "bark": "pamhc2trees:block/cinnamon_log",
+        "rings": "pamhc2trees:block/cinnamon_log_top"
+    }
+}

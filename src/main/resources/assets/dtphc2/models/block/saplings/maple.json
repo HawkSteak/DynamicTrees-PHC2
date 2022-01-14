@@ -1,8 +1,8 @@
 {
-    "parent": "dynamictrees:block/smartmodel/sapling",
-    "textures": {
-        "particle": "byg:block/maple_leaves",
-        "log": "byg:block/maple_log",
-        "leaves": "byg:block/maple_leaves"
-    }
+	"parent": "dynamictrees:block/sapling",
+	"textures": {
+	    "particle": "blocks/leaves_spruce",
+		"log": "pamhc2trees:block/fruits/maple_log",
+		"leaves": "blocks/leaves_spruce"
+	}
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "dtphc2:block/fruit/generic/fruit_small_age3",
+  "textures": {
+    "particle": "dtphc2:blocks/guava",
+    "apple": "dtphc2:blocks/guava"
+  }
+}

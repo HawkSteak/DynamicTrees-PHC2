@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dtphc2:blocks/tamarind",
+		"apple": "dtphc2:blocks/tamarind"
+	},
+	"elements": [
+		{
+			"from": [7.2, 12.8, 7.2],
+			"to": [8.8, 16, 8.8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.6, 9, 7.6]},
+			"faces": {
+				"north": {"uv": [1, 5, 3, 9], "texture": "#apple"},
+				"east": {"uv": [1, 5, 3, 9], "texture": "#apple"},
+				"south": {"uv": [1, 5, 3, 9], "texture": "#apple"},
+				"west": {"uv": [1, 5, 3, 9], "texture": "#apple"},
+				"up": {"uv": [1, 1, 3, 3], "texture": "#apple"},
+				"down": {"uv": [1, 11, 3, 13], "texture": "#apple"}
+			}
+		}
+	]
+}

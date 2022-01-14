@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "age=0": { "model": "dtphc2:block/fruit/spider_web_age0" },
+        "age=1": { "model": "dtphc2:block/fruit/spider_web_age1" },
+        "age=2": { "model": "dtphc2:block/fruit/spider_web_age2" },
+        "age=3": { "model": "dtphc2:block/fruit/spider_web_age3" }
+    }
+}
