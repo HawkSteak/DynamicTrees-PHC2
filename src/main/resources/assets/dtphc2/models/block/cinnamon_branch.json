@@ -1,5 +1,5 @@
 {
-    "parent": "dynamictrees:block/smartmodel/branch",
+    "loader": "dynamictrees:branch",
     "textures": {
         "bark": "pamhc2trees:block/cinnamon_log",
         "rings": "pamhc2trees:block/cinnamon_log_top"

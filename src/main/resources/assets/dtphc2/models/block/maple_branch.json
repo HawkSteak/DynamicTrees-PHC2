@@ -1,7 +1,7 @@
 {
-    "parent": "dynamictrees:block/smartmodel/branch",
+    "loader": "dynamictrees:branch",
     "textures": {
-        "bark": "pamhc2trees:block/fruits/maple_log",
-        "rings": "pamhc2trees:block/fruits/maple_log_top"
+        "bark": "pamhc2trees:block/maple_log",
+        "rings": "pamhc2trees:block/maple_log_top"
     }
 }

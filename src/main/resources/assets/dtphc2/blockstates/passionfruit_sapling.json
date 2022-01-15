@@ -1,5 +1,7 @@
 {
     "variants": {
-        "normal": { "model": "dynamictrees:saplings/jungle" }
+        "": {
+            "model": "dynamictrees:block/saplings/jungle"
+        }
     }
 }

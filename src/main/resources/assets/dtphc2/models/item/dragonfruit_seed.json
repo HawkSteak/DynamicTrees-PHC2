@@ -1,6 +1,6 @@
 {
     "parent":"dynamictrees:item/standard_seed",
     "textures": {
-        "layer0":"dtphc2:items/dragonfruit_seed"
+        "layer0":"dtphc2:item/dragonfruit_seed"
     }
 }

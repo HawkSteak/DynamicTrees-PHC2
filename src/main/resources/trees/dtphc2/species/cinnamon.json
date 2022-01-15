@@ -1,15 +1,15 @@
 {
   "family": "dtphc2:cinnamon",
   "tapering": 0.1,
-  "signal_energy": 12.0,
-  "growth_rate": 0.8,
+  "signal_energy": 14.0,
+  "up_probability": 12,
+  "growth_rate": 1.8,
   "leaves_properties": "dtphc2:cinnamon",
   "environment_factors" : {
     "cold": 0.75,
-    "hot": 0.5,
     "dry": 0.5,
-    "forest": 1.05
+    "snowy": 0.3
   },
-  "perfect_biomes": { "types": [ "forest", "overworld" ] },
+  "perfect_biomes": { "types": [ "jungle", "overworld" ] },
   "primitive_sapling": "pamhc2trees:cinnamon_sapling"
 }

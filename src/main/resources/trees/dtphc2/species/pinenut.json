@@ -1,0 +1,44 @@
+{
+  "family": "spruce",
+  "tapering": 0.25,
+  "signal_energy": 16.0,
+  "up_probability": 3,
+  "lowest_branch_height": 3,
+  "growth_rate": 0.9,
+  "growth_logic_kit": {
+    "name": "conifer",
+    "properties": {
+      "energy_divisor": 4
+    }
+  },
+  "leaves_properties": "spruce",
+  "generate_seed": true,
+  "generate_sapling": true,
+  "environment_factors" : {
+    "hot": 0.50,
+    "dry": 0.25,
+    "wet": 0.75
+  },
+  "perfect_biomes": { "types": [ "conifer", "overworld" ] },
+  "primitive_saplings": [
+    { "sapling_block": "pamhc2trees:pinenut_sapling" },
+    {
+      "sapling_item": "pamhc2trees:pinenutitem",
+      "can_craft_seed_to_sapling": false
+    }
+  ],
+  "drop_creators": [
+    "log",
+    "stick",
+    {
+      "name": "fruit",
+      "properties":{
+        "fruit_item": "pamhc2trees:pinenutitem"
+      }
+    }
+  ],
+  "features" : [
+    "conifer_topper",
+    "podzol"
+  ]
+}

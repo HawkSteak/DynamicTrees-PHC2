@@ -1,7 +1,12 @@
 {
     "variants": {
-        "": {
-            "model": "dtphc2:block/paperback_branch"
-        }
+        "radius=1": {"model": "dtphc2:block/paperbark_branch_0"},
+        "radius=2": {"model": "dtphc2:block/paperbark_branch_0"},
+        "radius=3": {"model": "dtphc2:block/paperbark_branch_1"},
+        "radius=4": {"model": "dtphc2:block/paperbark_branch_1"},
+        "radius=5": {"model": "dtphc2:block/paperbark_branch_1"},
+        "radius=6": {"model": "dtphc2:block/paperbark_branch_2"},
+        "radius=7": {"model": "dtphc2:block/paperbark_branch_2"},
+        "radius=8": {"model": "dtphc2:block/paperbark_branch_2"}
     }
 }

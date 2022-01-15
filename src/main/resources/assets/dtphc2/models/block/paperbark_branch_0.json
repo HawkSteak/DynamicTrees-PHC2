@@ -1,0 +1,7 @@
+{
+    "loader": "dynamictrees:branch",
+    "textures": {
+        "bark": "pamhc2trees:block/paperbark_stage_0",
+        "rings": "pamhc2trees:block/paperbark_log_top"
+    }
+}

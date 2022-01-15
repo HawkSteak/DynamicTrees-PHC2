@@ -1,7 +1,7 @@
 {
-    "parent": "dynamictrees:block/smartmodel/branch",
+    "loader": "dynamictrees:branch",
     "textures": {
-        "bark": "pamhc2trees:block/fruits/stripped_paperbark_log",
-        "rings": "pamhc2trees:block/fruits/stripped_paperbark_log_top"
+        "bark": "pamhc2trees:block/stripped_paperbark_log",
+        "rings": "pamhc2trees:block/stripped_paperbark_log_top"
     }
 }

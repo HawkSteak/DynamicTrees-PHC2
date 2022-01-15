@@ -1,6 +1,6 @@
 {
     "parent":"dynamictrees:item/standard_seed",
     "textures": {
-        "layer0":"dtphc2:items/hazelnut_seed"
+        "layer0":"dtphc2:item/hazelnut_seed"
     }
 }

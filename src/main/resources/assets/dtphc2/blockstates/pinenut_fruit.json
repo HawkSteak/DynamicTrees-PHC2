@@ -1,0 +1,31 @@
+{
+    "multipart": [
+        {   "when": { "age": 0 },
+            "apply": { "model": "dtphc2:block/fruit/pinenut_age0" }
+        },
+        {   "when": { "age": 1 },
+            "apply": [
+                { "model": "dtphc2:block/fruit/pinenut_age1" },
+                { "model": "dtphc2:block/fruit/pinenut_age1", "y": 90 },
+                { "model": "dtphc2:block/fruit/pinenut_age1", "y": 180 },
+                { "model": "dtphc2:block/fruit/pinenut_age1", "y": 270 }
+            ]
+        },
+        {   "when": { "age": 2 },
+            "apply": [
+                { "model": "dtphc2:block/fruit/pinenut_age2" },
+                { "model": "dtphc2:block/fruit/pinenut_age2", "y": 90 },
+                { "model": "dtphc2:block/fruit/pinenut_age2", "y": 180 },
+                { "model": "dtphc2:block/fruit/pinenut_age2", "y": 270 }
+            ]
+        },
+        {   "when": { "age": 3 },
+            "apply": [
+                { "model": "dtphc2:block/fruit/pinenut_age3" },
+                { "model": "dtphc2:block/fruit/pinenut_age3", "y": 90 },
+                { "model": "dtphc2:block/fruit/pinenut_age3", "y": 180 },
+                { "model": "dtphc2:block/fruit/pinenut_age3", "y": 270 }
+            ]
+        }
+    ]
+}

@@ -1,6 +1,6 @@
 {
     "parent":"dynamictrees:item/standard_seed",
     "textures": {
-        "layer0":"dtphc2:items/vanilla_bean_seed"
+        "layer0":"dtphc2:item/vanilla_bean_seed"
     }
 }

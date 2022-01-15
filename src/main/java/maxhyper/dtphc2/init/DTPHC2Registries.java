@@ -39,11 +39,6 @@ public class DTPHC2Registries {
             .setShape(2, ShapeUtils.createFruitShape(2.5f,4,2))
             .setShape(3, ShapeUtils.createFruitShape(3.5f,4,3))
             .setCanBoneMeal(DTConfigs.CAN_BONE_MEAL_APPLE::get);
-//    public static FruitBlock ETHER_BULBS_FRUIT = new EtherBulbsFruitBlock()
-//            .setShape(1, ShapeUtils.createFruitShape(2,3,0))
-//            .setShape(2, ShapeUtils.createFruitShape(2.5f,4,2))
-//            .setShape(3, ShapeUtils.createFruitShape(3.5f,4,3))
-//            .setCanBoneMeal(DTConfigs.CAN_BONE_MEAL_APPLE::get);
     public static FruitBlock HOLLY_BERRIES_FRUIT = new FruitBlock()
             .setShape(1, ShapeUtils.createFruitShape(2,3,0))
             .setShape(2, ShapeUtils.createFruitShape(2.5f,4,2))
@@ -55,13 +50,6 @@ public class DTPHC2Registries {
             .setShape(3, ShapeUtils.createFruitShape(3.5f,4,3))
             .setCanBoneMeal(DTConfigs.CAN_BONE_MEAL_APPLE::get);
 
-    public static final VoxelShape MUSHROOM_STEM_LONG = Block.box(7D, 0D, 7D, 9D, 10D, 9D);
-    public static final VoxelShape SYTHIAN_CAP_A = Block.box(4D, 6D, 4D, 12D, 8D, 12D);
-    public static final VoxelShape SYTHIAN_CAP_B = Block.box(5D, 3D, 5D, 11D, 5D, 11D);
-    public static final VoxelShape SYTHIAN_CAP_C = Block.box(5D, 9D, 5D, 11D, 11D, 11D);
-
-    public static final VoxelShape SYTHIAN_MUSHROOM = VoxelShapes.or(MUSHROOM_STEM_LONG, SYTHIAN_CAP_A, SYTHIAN_CAP_B, SYTHIAN_CAP_C);
-
     public static void setup() {
         //RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("ether_bulbs_fruit"), ETHER_BULBS_FRUIT);
         RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("green_apple_fruit"), GREEN_APPLE_FRUIT);
@@ -69,7 +57,6 @@ public class DTPHC2Registries {
         RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("holly_berries_fruit"), HOLLY_BERRIES_FRUIT);
         RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("baobab_fruit"), BAOBAB_FRUIT);
 
-        CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.resLoc("sythian").toString(), SYTHIAN_MUSHROOM);
     }
 
     public static void setupBlocks() {
