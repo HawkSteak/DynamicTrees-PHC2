@@ -1,0 +1,10 @@
+{
+  "block_registry_name": "pinenut_fruit",
+  "item_stack": "dtphc2:pinenut_seed",
+  "block_shapes": [
+    { "function": "fruit", "parameters": { "radius": 1.1, "height": 4, "stem_length": 0 } },
+    { "function": "fruit", "parameters": { "radius": 1.5, "height": 3, "stem_length": 0 } },
+    { "function": "fruit", "parameters": { "radius": 2, "height": 6, "stem_length": 0 } },
+    { "function": "fruit", "parameters": { "radius": 2, "height": 6, "stem_length": 1.25 } }
+  ]
+}

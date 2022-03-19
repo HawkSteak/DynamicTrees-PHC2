@@ -1,7 +1,7 @@
 {
   "parent": "dtphc2:block/fruit/generic/flower_age0",
   "textures": {
-    "particle": "dtphc2:blocks/vanillabean",
-    "apple": "dtphc2:blocks/vanillabean"
+    "particle": "dtphc2:block/vanillabean",
+    "apple": "dtphc2:block/vanillabean"
   }
 }

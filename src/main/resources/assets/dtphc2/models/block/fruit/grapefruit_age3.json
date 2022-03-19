@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dtphc2:blocks/grapefruit",
-		"apple": "dtphc2:blocks/grapefruit"
+		"particle": "dtphc2:block/grapefruit",
+		"apple": "dtphc2:block/grapefruit"
 	},
 	"elements": [
 		{

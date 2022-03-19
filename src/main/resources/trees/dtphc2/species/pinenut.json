@@ -27,6 +27,19 @@
       "can_craft_seed_to_sapling": false
     }
   ],
+  "fruits": [
+    "dtphc2:pinenut"
+  ],
+  "features": [
+    {
+      "name": "fruit",
+      "properties": {
+        "fruit": "dtphc2:pinenut"
+      }
+    },
+    "conifer_topper",
+    "podzol"
+  ],
   "drop_creators": [
     "log",
     "stick",
@@ -36,9 +49,5 @@
         "fruit_item": "pamhc2trees:pinenutitem"
       }
     }
-  ],
-  "features" : [
-    "conifer_topper",
-    "podzol"
   ]
 }

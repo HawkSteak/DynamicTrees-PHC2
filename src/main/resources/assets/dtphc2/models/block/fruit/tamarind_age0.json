@@ -1,7 +1,7 @@
 {
   "parent": "dtphc2:block/fruit/generic/flower_age0",
   "textures": {
-    "particle": "dtphc2:blocks/tamarind",
-    "apple": "dtphc2:blocks/tamarind"
+    "particle": "dtphc2:block/tamarind",
+    "apple": "dtphc2:block/tamarind"
   }
 }

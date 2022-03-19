@@ -1,8 +1,8 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "syrup": "dtphc2:blocks/maplesyrup",
-        "particle": "dtphc2:blocks/maplesyrup"
+        "syrup": "dtphc2:block/maplesyrup",
+        "particle": "dtphc2:block/maplesyrup"
     },
     "elements": [
         {

@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "dtphc2:blocks/bananapalmfrond",
-		"leaves": "dtphc2:blocks/bananapalmfrond",
+		"particle": "dtphc2:block/bananapalmfrond",
+		"leaves": "dtphc2:block/bananapalmfrond",
 		"log": "blocks/log_jungle"
 	},
 	"ambientocclusion": false,

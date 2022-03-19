@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dtphc2:blocks/tamarind",
-		"apple": "dtphc2:blocks/tamarind"
+		"particle": "dtphc2:block/tamarind",
+		"apple": "dtphc2:block/tamarind"
 	},
 	"elements": [
 		{

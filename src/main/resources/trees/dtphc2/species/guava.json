@@ -19,6 +19,17 @@
       "can_craft_seed_to_sapling": false
     }
   ],
+  "fruits": [
+    "dtphc2:guava"
+  ],
+  "features": [
+    {
+      "name": "fruit",
+      "properties": {
+        "fruit": "dtphc2:guava"
+      }
+    }
+  ],
   "drop_creators": [
     "log",
     "stick",

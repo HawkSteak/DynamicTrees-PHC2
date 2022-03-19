@@ -1,7 +1,7 @@
 {
-  "parent": "dynamictrees:block/apple_age1",
+  "parent": "dynamictrees:block/fruit/apple_age1",
   "textures": {
-    "particle": "dtphc2:blocks/persimmon",
-    "apple": "dtphc2:blocks/persimmon"
+    "particle": "dtphc2:block/persimmon",
+    "apple": "dtphc2:block/persimmon"
   }
 }

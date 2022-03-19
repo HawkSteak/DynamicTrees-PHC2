@@ -3,8 +3,8 @@
 	"ambientocclusion": false,
 	"texture_size": [32, 32],
 	"textures": {
-		"particle": "dtphc2:blocks/papaya",
-		"fruit": "dtphc2:blocks/papaya"
+		"particle": "dtphc2:block/papaya",
+		"fruit": "dtphc2:block/papaya"
 	},
 	"elements": [
 		{

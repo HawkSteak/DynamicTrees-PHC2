@@ -1,7 +1,7 @@
 {
 	"parent": "dtphc2:block/fruit/generic/berry_age2",
 	"textures": {
-		"particle": "dtphc2:blocks/olive",
-		"apple": "dtphc2:blocks/olive"
+		"particle": "dtphc2:block/olive",
+		"apple": "dtphc2:block/olive"
 	}
 }

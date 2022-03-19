@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "dtphc2:blocks/date_base",
-		"texture": "dtphc2:blocks/date_base"
+		"particle": "dtphc2:block/date_base",
+		"texture": "dtphc2:block/date_base"
 	},
 	"elements": [
 		{

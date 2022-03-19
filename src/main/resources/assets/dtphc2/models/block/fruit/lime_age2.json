@@ -1,7 +1,7 @@
 {
     "parent": "dtphc2:block/fruit/generic/lemon_age2",
     "textures": {
-        "particle": "dtphc2:blocks/lime",
-        "apple": "dtphc2:blocks/lime"
+        "particle": "dtphc2:block/lime",
+        "apple": "dtphc2:block/lime"
     }
 }

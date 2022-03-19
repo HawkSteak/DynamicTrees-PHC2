@@ -1,8 +1,8 @@
 {
-	"parent": "dynamictrees:block/sapling",
+	"parent": "dynamictrees:block/smartmodel/sapling",
 	"textures": {
-	    "particle": "blocks/leaves_jungle",
-		"log": "pamhc2trees:block/fruits/cinnamon_log",
-		"leaves": "blocks/leaves_jungle"
+	    "particle": "block/jungle_leaves",
+		"log": "pamhc2trees:block/cinnamon_log",
+		"leaves": "block/jungle_leaves"
 	}
 }

@@ -1,7 +1,7 @@
 {
-  "parent": "dtphc2:block/fruit/generic/cross_age0",
+  "parent": "dtphc2:block/fruit/generic/flower_age0",
   "textures": {
-    "particle": "dtphc2:blocks/guava",
-    "apple": "dtphc2:blocks/guava"
+    "particle": "dtphc2:block/guava",
+    "apple": "dtphc2:block/guava"
   }
 }

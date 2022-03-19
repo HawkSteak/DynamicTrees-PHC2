@@ -1,0 +1,30 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dtphc2:block/pinenut",
+		"apple": "dtphc2:block/pinenut"
+	},
+	"elements": [
+		{
+			"from": [8, 12.6, 6.8],
+			"to": [8, 16, 9.2],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 14.3, 8]},
+			"faces": {
+				"east": {"uv": [0, 12, 3, 16], "rotation": 180, "texture": "#apple"},
+				"west": {"uv": [0, 12, 3, 16], "rotation": 180, "texture": "#apple"}
+			}
+		},
+		{
+			"from": [8, 12.6, 6.8],
+			"to": [8, 16, 9.2],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 14.3, 8]},
+			"faces": {
+				"east": {"uv": [0, 12, 3, 16], "rotation": 180, "texture": "#apple"},
+				"west": {"uv": [0, 12, 3, 16], "rotation": 180, "texture": "#apple"}
+			}
+		}
+	]
+}

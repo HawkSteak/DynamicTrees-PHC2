@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "dtphc2:blocks/coconut_base",
-    "frond": "dtphc2:blocks/coconut_frond"
+    "particle": "dtphc2:block/coconut_base",
+    "frond": "dtphc2:block/coconut_frond"
   },
   "ambientocclusion": false,
   "elements": [

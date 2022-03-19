@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "dtphc2:blocks/passionfruit_vine"
+    "layer0": "dtphc2:block/passionfruit_vine"
   }
 }

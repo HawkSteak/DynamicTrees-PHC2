@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"apple": "dtphc2:blocks/mango"
+		"apple": "dtphc2:block/mango"
 	},
 	"elements": [
 		{

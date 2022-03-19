@@ -1,8 +1,8 @@
 {
     "ambientocclusion": false,
     "textures": {
-        "particle": "dtphc2:blocks/passionfruit_vine",
-        "vine": "dtphc2:blocks/passionfruit_vine"
+        "particle": "dtphc2:block/passionfruit_vine",
+        "vine": "dtphc2:block/passionfruit_vine"
     },
     "elements": [
         {   "from": [ 0, 0, 15.2 ],

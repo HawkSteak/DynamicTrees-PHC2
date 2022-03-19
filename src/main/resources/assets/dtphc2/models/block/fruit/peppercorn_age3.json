@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dtphc2:blocks/peppercorn",
-		"apple": "dtphc2:blocks/peppercorn"
+		"particle": "dtphc2:block/peppercorn",
+		"apple": "dtphc2:block/peppercorn"
 	},
 	"elements": [
 		{

@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dtphc2:blocks/hazelnut",
-		"apple": "dtphc2:blocks/hazelnut"
+		"particle": "dtphc2:block/hazelnut",
+		"apple": "dtphc2:block/hazelnut"
 	},
 	"elements": [
 		{

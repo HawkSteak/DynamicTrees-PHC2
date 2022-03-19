@@ -1,7 +1,7 @@
 {
 	"parent": "dtphc2:block/fruit/generic/pear_age2",
 	"textures": {
-		"particle": "dtphc2:blocks/pear",
-		"apple": "dtphc2:blocks/pear"
+		"particle": "dtphc2:block/pear",
+		"apple": "dtphc2:block/pear"
 	}
 }

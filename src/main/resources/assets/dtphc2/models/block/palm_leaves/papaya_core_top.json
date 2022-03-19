@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "dtphc2:blocks/papaya_base",
-    "frond": "dtphc2:blocks/papaya_frond"
+    "particle": "dtphc2:block/papaya_base",
+    "frond": "dtphc2:block/papaya_frond"
   },
   "ambientocclusion": false,
   "elements": [

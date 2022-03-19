@@ -20,6 +20,17 @@
       "sapling_to_seed_extra_ingredient": "bone_meal"
     }
   ],
+  "fruits": [
+    "dtphc2:pistachio"
+  ],
+  "features": [
+    {
+      "name": "fruit",
+      "properties": {
+        "fruit": "dtphc2:pistachio"
+      }
+    }
+  ],
   "drop_creators": [
     "log",
     "stick",

@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dtphc2:blocks/spiderweb",
-		"apple": "dtphc2:blocks/spiderweb"
+		"particle": "dtphc2:block/spiderweb",
+		"apple": "dtphc2:block/spiderweb"
 	},
 	"elements": [
 		{

@@ -19,6 +19,17 @@
       "can_craft_seed_to_sapling": false
     }
   ],
+  "fruits": [
+    "dtphc2:avocado"
+  ],
+  "features": [
+    {
+      "name": "fruit",
+      "properties": {
+        "fruit": "dtphc2:avocado"
+      }
+    }
+  ],
   "drop_creators": [
     "log",
     "stick",

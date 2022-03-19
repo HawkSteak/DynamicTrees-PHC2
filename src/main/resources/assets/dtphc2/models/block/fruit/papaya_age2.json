@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dtphc2:blocks/papaya",
-		"fruit": "dtphc2:blocks/papaya"
+		"particle": "dtphc2:block/papaya",
+		"fruit": "dtphc2:block/papaya"
 	},
 	"elements": [
 		{

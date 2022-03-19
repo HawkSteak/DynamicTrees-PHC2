@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"apple": "dtphc2:blocks/rambutan"
+		"apple": "dtphc2:block/rambutan"
 	},
 	"elements": [
 		{

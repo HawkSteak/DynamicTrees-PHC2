@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dtphc2:blocks/cashew",
-		"1_apple": "dtphc2:blocks/cashew"
+		"particle": "dtphc2:block/cashew",
+		"1_apple": "dtphc2:block/cashew"
 	},
 	"elements": [
 		{

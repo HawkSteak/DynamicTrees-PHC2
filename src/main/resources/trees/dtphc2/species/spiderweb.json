@@ -13,6 +13,17 @@
   },
   "perfect_biomes": { "types": [ "forest", "overworld" ] },
   "primitive_saplings": "pamhc2trees:spiderweb_sapling",
+  "fruits": [
+    "dtphc2:spiderweb"
+  ],
+  "features": [
+    {
+      "name": "fruit",
+      "properties": {
+        "fruit": "dtphc2:spiderweb"
+      }
+    }
+  ],
   "drop_creators": [
     "log",
     "stick"

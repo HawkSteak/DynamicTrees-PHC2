@@ -1,8 +1,8 @@
 {
     "ambientocclusion": false,
     "textures": {
-        "particle": "dtphc2:blocks/cherry",
-        "apple": "dtphc2:blocks/cherry"
+        "particle": "dtphc2:block/cherry",
+        "apple": "dtphc2:block/cherry"
     },
     "elements": [
         {   "from": [ 6, 12, 6.4 ],

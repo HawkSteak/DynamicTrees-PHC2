@@ -3,7 +3,7 @@
     "category": "block",
     "subtitle": "blocks.fruit.bonk",
     "sounds": [{
-      "name": "dtphc2:blocks/fruit/bonk",
+      "name": "dtphc2:block/fruit/bonk",
       "stream": true
     }]
   }

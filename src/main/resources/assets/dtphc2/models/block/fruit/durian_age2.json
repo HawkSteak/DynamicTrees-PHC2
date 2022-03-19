@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dtphc2:blocks/durian",
-		"apple": "dtphc2:blocks/durian"
+		"particle": "dtphc2:block/durian",
+		"apple": "dtphc2:block/durian"
 	},
 	"elements": [
 		{

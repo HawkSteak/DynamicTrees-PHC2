@@ -2,8 +2,8 @@
 	"__comment": "Designed by Xemnes with Cubik Studio - https://cubik.studio",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dtphc2:blocks/grapefruit",
-		"apple": "dtphc2:blocks/grapefruit"
+		"particle": "dtphc2:block/grapefruit",
+		"apple": "dtphc2:block/grapefruit"
 	},
 	"elements": [ 	 
 		{

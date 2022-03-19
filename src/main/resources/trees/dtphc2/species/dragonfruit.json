@@ -17,6 +17,17 @@
       "can_craft_seed_to_sapling": false
     }
   ],
+  "fruits": [
+    "dtphc2:dragonfruit"
+  ],
+  "features": [
+    {
+      "name": "fruit",
+      "properties": {
+        "fruit": "dtphc2:dragonfruit"
+      }
+    }
+  ],
   "drop_creators": [
     "log",
     "stick",

@@ -1,7 +1,7 @@
 {
 	"parent": "dtphc2:block/fruit/generic/cross_age0",
 	"textures": {
-		"particle": "dtphc2:blocks/mango",
-		"apple": "dtphc2:blocks/mango"
+		"particle": "dtphc2:block/mango",
+		"apple": "dtphc2:block/mango"
 	}
 }

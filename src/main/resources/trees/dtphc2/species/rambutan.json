@@ -19,6 +19,17 @@
       "can_craft_seed_to_sapling": false
     }
   ],
+  "fruits": [
+    "dtphc2:rambutan"
+  ],
+  "features": [
+    {
+      "name": "fruit",
+      "properties": {
+        "fruit": "dtphc2:rambutan"
+      }
+    }
+  ],
   "drop_creators": [
     "log",
     "stick",

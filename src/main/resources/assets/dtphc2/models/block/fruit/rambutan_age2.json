@@ -3,7 +3,7 @@
 	"parent": "dtphc2:block/fruit/generic/berry_age2",
 	"ambientocclusion": false,
 	"textures": {
-		"apple": "dtphc2:blocks/rambutan"
+		"apple": "dtphc2:block/rambutan"
 	},
 	"elements": [
 		{

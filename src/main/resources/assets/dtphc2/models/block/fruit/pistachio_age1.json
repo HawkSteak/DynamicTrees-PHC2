@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "dtphc2:blocks/pistachio",
-		"apple": "dtphc2:blocks/pistachio"
+		"particle": "dtphc2:block/pistachio",
+		"apple": "dtphc2:block/pistachio"
 	},
 	"elements": [
 		{

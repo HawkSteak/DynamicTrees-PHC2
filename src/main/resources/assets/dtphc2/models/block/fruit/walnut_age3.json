@@ -1,7 +1,7 @@
 {
     "parent": "dtphc2:block/fruit/generic/nut_age3",
     "textures": {
-        "particle": "dtphc2:blocks/walnut",
-        "apple": "dtphc2:blocks/walnut"
+        "particle": "dtphc2:block/walnut",
+        "apple": "dtphc2:block/walnut"
     }
 }

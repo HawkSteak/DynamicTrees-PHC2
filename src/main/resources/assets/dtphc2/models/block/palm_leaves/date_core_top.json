@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "dtphc2:blocks/date_base",
-    "frond": "dtphc2:blocks/date_frond"
+    "particle": "dtphc2:block/date_base",
+    "frond": "dtphc2:block/date_frond"
   },
   "ambientocclusion": false,
   "elements": [

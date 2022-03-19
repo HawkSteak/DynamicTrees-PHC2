@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "dtphc2:blocks/banana_base",
-    "frond": "dtphc2:blocks/banana_frond"
+    "particle": "dtphc2:block/banana_base",
+    "frond": "dtphc2:block/banana_frond"
   },
   "ambientocclusion": false,
   "elements": [

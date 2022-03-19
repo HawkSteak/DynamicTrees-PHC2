@@ -1,7 +1,7 @@
 {
 	"parent": "dtphc2:block/fruit/generic/flower_age0",
 	"textures": {
-		"particle": "dtphc2:blocks/orange",
-		"apple": "dtphc2:blocks/orange"
+		"particle": "dtphc2:block/orange",
+		"apple": "dtphc2:block/orange"
 	}
 }
