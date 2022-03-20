@@ -1,9 +1,9 @@
 {
   "family": "jungle",
-  "tapering": 0.3,
-  "signal_energy": 14.0,
-  "up_probability": 4,
-  "lowest_branch_height": 4,
+  "tapering": 0.25,
+  "signal_energy": 10.0,
+  "up_probability": 3,
+  "lowest_branch_height": 3,
   "growth_rate": 1.2,
   "leaves_properties": "jungle",
   "generate_seed": true,
@@ -26,7 +26,8 @@
     {
       "name": "fruit",
       "properties": {
-        "fruit": "dtphc2:grapefruit"
+        "fruit": "dtphc2:grapefruit",
+        "fruiting_radius": 6
       }
     }
   ],

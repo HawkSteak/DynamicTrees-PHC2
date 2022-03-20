@@ -4,6 +4,7 @@
   "signal_energy": 14.0,
   "up_probability": 12,
   "growth_rate": 1.8,
+  "max_branch_radius": 4,
   "leaves_properties": "dtphc2:cinnamon",
   "environment_factors" : {
     "cold": 0.75,

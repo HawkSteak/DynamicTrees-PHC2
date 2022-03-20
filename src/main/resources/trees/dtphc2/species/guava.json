@@ -1,10 +1,10 @@
 {
   "family": "jungle",
-  "tapering": 0.3,
-  "signal_energy": 14.0,
-  "up_probability": 4,
-  "lowest_branch_height": 4,
-  "growth_rate": 1.2,
+  "tapering": 0.25,
+  "signal_energy": 10.0,
+  "up_probability": 3,
+  "lowest_branch_height": 3,
+  "growth_rate": 0.8,
   "leaves_properties": "jungle",
   "generate_seed": true,
   "generate_sapling": true,
@@ -26,7 +26,8 @@
     {
       "name": "fruit",
       "properties": {
-        "fruit": "dtphc2:guava"
+        "fruit": "dtphc2:guava",
+        "fruiting_radius": 6
       }
     }
   ],
