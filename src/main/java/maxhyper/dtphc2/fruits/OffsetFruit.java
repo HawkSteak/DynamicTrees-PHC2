@@ -10,11 +10,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
-public class BananaFruit extends Fruit {
+public class OffsetFruit extends Fruit {
 
-    public static final TypedRegistry.EntryType<Fruit> TYPE = TypedRegistry.newType(BananaFruit::new);
+    public static final TypedRegistry.EntryType<Fruit> TYPE = TypedRegistry.newType(OffsetFruit::new);
 
-    public BananaFruit(ResourceLocation registryName) {
+    public OffsetFruit(ResourceLocation registryName) {
         super(registryName);
     }
 
@@ -22,7 +22,8 @@ public class BananaFruit extends Fruit {
         return new FruitBlock(properties, this){
             @Override
             public boolean isSupported(IBlockReader world, BlockPos pos, BlockState state) {
-                return world.getBlockState(pos.above(2)).getBlock() instanceof LeavesBlock;
+
+                return world.getBlockState(pos.above()).getBlock() instanceof LeavesBlock || world.getBlockState(pos.above(2)).getBlock() instanceof LeavesBlock;
             }
         };
     }

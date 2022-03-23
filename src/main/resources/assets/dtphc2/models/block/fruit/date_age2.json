@@ -13,8 +13,8 @@
 			"to": [8, 17.6, 4.8],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 5.2, 9]},
 			"faces": {
-				"east": {"uv": [7, 1.5, 1.5, 5.5], "texture": "#fruit"},
-				"west": {"uv": [1.5, 1.5, 7, 5.5], "texture": "#fruit"}
+				"east": {"uv": [6.5, 0, 1, 4], "texture": "#fruit"},
+				"west": {"uv": [1, 0, 6.5, 4], "texture": "#fruit"}
 			}
 		},
 		{

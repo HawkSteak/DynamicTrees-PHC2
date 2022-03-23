@@ -1,4 +1,5 @@
 {
+  "type": "dtphc2:palm",
   "block_registry_name": "coconut_fruit",
   "item_stack": "dtphc2:coconut_seed",
   "max_age": 3,

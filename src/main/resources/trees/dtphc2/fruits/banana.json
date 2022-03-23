@@ -1,5 +1,5 @@
 {
-  "type": "dtphc2:banana",
+  "type": "dtphc2:offset_down",
   "block_registry_name": "banana_fruit",
   "item_stack": "pamhc2trees:bananaitem",
   "block_shapes": [

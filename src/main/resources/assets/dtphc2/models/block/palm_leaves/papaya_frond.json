@@ -1,6 +1,6 @@
 {
-  "loader": "dtphc2:palm_fronds",
+  "loader": "dtphc2:medium_palm_fronds",
   "textures": {
-    "frond": "dtphc2:block/papaya_frond"
+    "frond": "dtphc2:block/palm_leaves/papaya_frond"
   }
 }

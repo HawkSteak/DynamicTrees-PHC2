@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "dtphc2:block/dragonfruit_base",
-    "frond": "dtphc2:block/dragonfruit_frond"
+    "particle": "dtphc2:block/palm_leaves/dragonfruit_base",
+    "frond": "dtphc2:block/palm_leaves/dragonfruit_frond"
   },
   "ambientocclusion": false,
   "elements": [

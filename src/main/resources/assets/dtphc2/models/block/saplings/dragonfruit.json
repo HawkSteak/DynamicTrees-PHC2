@@ -1,7 +1,7 @@
 {   "parent": "block/block",
   "textures": {
-    "particle": "pamhc2trees:items/dragonfruititem",
-    "texture": "dtphc2:block/dragonfruit_palm_frond"
+    "particle": "dtphc2:item/dragonfruit_seed",
+    "texture": "dtphc2:block/palm_leaves/dragonfruit_frond"
   },
   "display": {
     "fixed": {

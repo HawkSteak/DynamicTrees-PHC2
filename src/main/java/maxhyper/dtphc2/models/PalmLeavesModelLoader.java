@@ -17,13 +17,19 @@ public class PalmLeavesModelLoader implements IModelLoader<PalmLeavesModelGeomet
     private static final String FROND = "frond";
     private static final String TEXTURES = "textures";
 
+    private int frondType;
+
+    public PalmLeavesModelLoader (int type){
+        frondType = type;
+    }
+
     @Override
     public void onResourceManagerReload(IResourceManager resourceManager) { }
 
     @Override
     public PalmLeavesModelGeometry read(JsonDeserializationContext deserializationContext, JsonObject modelObject) {
         final JsonObject textures = this.getTexturesObject(modelObject);
-        return new PalmLeavesModelGeometry(getTextureLocation(textures, FROND));
+        return new PalmLeavesModelGeometry(getTextureLocation(textures, FROND), frondType);
     }
 
     protected ResourceLocation getTextureLocation (final JsonObject textureObject, final String textureElement) {

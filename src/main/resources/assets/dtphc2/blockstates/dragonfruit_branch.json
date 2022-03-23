@@ -1,7 +1,5 @@
 {
     "variants": {
-        "": {
-            "model": "dynamictrees:block/jungle_branch"
-        }
+        "": { "model": "dynamictrees:block/jungle_branch" }
     }
 }

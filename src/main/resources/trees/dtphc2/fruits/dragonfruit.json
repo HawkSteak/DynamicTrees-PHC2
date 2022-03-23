@@ -1,4 +1,5 @@
 {
+  "type": "dtphc2:offset_down",
   "block_registry_name": "dragonfruit_fruit",
   "item_stack": "pamhc2trees:dragonfruititem",
   "block_shapes": [

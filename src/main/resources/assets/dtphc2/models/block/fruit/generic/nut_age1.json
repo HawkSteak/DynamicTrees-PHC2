@@ -1,8 +1,8 @@
 {
     "ambientocclusion": false,
     "textures": {
-        "particle": "blocks/stone",
-        "apple": "blocks/stone"
+        "particle": "block/stone",
+        "apple": "block/stone"
     },
     "elements": [
         {   "from": [ 7, 14, 7 ],

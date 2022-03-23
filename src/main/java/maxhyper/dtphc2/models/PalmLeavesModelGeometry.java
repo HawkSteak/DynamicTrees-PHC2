@@ -1,6 +1,9 @@
 package maxhyper.dtphc2.models;
 
 import com.mojang.datafixers.util.Pair;
+import maxhyper.dtphc2.models.baked_models.MediumPalmLeavesBakedModel;
+import maxhyper.dtphc2.models.baked_models.LargePalmLeavesBakedModel;
+import maxhyper.dtphc2.models.baked_models.SmallPalmLeavesBakedModel;
 import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -19,13 +22,24 @@ public class PalmLeavesModelGeometry implements IModelGeometry<PalmLeavesModelGe
 
     protected final ResourceLocation frondsResLoc;
 
-    public PalmLeavesModelGeometry (@Nullable final ResourceLocation frondsResLoc){
+    private int frondType;
+
+    public PalmLeavesModelGeometry (@Nullable final ResourceLocation frondsResLoc, int type){
         this.frondsResLoc = frondsResLoc;
+        this.frondType = type;
     }
 
     @Override
     public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<RenderMaterial, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
-        return new PalmLeavesBakedModel(modelLocation, frondsResLoc);
+        switch (frondType){
+            default:
+            case 0:
+                return new LargePalmLeavesBakedModel(modelLocation, frondsResLoc);
+            case 1:
+                return new MediumPalmLeavesBakedModel(modelLocation, frondsResLoc);
+            case 2:
+                return new SmallPalmLeavesBakedModel(modelLocation, frondsResLoc);
+        }
     }
 
     @Override

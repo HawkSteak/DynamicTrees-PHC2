@@ -1,6 +1,6 @@
 {
-  "loader": "dtbyg:palm_fronds",
+  "loader": "dtphc2:large_palm_fronds",
   "textures": {
-    "frond": "dtphc2:block/date_frond"
+    "frond": "dtphc2:block/palm_leaves/date_frond"
   }
 }

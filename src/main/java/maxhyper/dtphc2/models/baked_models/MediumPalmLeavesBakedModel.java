@@ -1,4 +1,4 @@
-package maxhyper.dtphc2.models;
+package maxhyper.dtphc2.models.baked_models;
 
 import com.ferreusveritas.dynamictrees.blocks.leaves.PalmLeavesProperties;
 import com.ferreusveritas.dynamictrees.client.ModelUtils;
@@ -16,9 +16,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class PalmLeavesBakedModel implements IDynamicBakedModel {
+public class MediumPalmLeavesBakedModel implements IDynamicBakedModel {
 
-    public static List<PalmLeavesBakedModel> INSTANCES = new ArrayList<>();
+    public static List<MediumPalmLeavesBakedModel> INSTANCES = new ArrayList<>();
 
     protected final BlockModel blockModel;
 
@@ -27,7 +27,7 @@ public class PalmLeavesBakedModel implements IDynamicBakedModel {
 
     private final IBakedModel[] bakedFronds = new IBakedModel[8]; // 8 = Number of surrounding blocks
 
-    public PalmLeavesBakedModel (ResourceLocation modelResLoc, ResourceLocation frondsResLoc){
+    public MediumPalmLeavesBakedModel(ResourceLocation modelResLoc, ResourceLocation frondsResLoc){
         this.blockModel = new BlockModel(null, new ArrayList<>(), new HashMap<>(), false, BlockModel.GuiLight.FRONT, ItemCameraTransforms.NO_TRANSFORMS, ItemOverrideList.EMPTY.getOverrides());
         this.frondsResLoc = frondsResLoc;
         INSTANCES.add(this);
@@ -54,6 +54,10 @@ public class PalmLeavesBakedModel implements IDynamicBakedModel {
             for (int pass = 0; pass < 3; pass++) {
                 for (int half = 0; half < 2; half++) {
 
+                    //we skip some of the leaves to create a more sparse look
+                    if (pass == 0 && surr.ordinal()%2 != 0) continue;
+                    if (pass == 2 && surr.ordinal()%2 == 0) continue;
+
                     BlockVertexData[] outData = new BlockVertexData[8];
 
                     for (int v = 0; v < 8; v++) {
@@ -68,63 +72,32 @@ public class PalmLeavesBakedModel implements IDynamicBakedModel {
 
                         double len;
                         double angle;
-                        double mult;
+
 
                         // Rotate the vertex around x0,y=0.75
                         // Rotate on z axis
                         len = 0.75 - y;
                         angle = Math.atan2(x, y);
-                        angle += Math.PI * (half == 1 ? 0.8 : -0.8);
+                        angle += Math.PI * (half == 1 ? 1.2 : -1.2);
                         x = (float) (Math.sin(angle) * len);
                         y = (float) (Math.cos(angle) * len);
 
-
+                        //Random rand = new Random();
+                        //rand.setSeed(pass);
                         // Rotate the vertex around x0,z0
                         // Rotate on x axis
                         len = Math.sqrt(y * y + z * z);
                         angle = Math.atan2(y, z);
-                        switch (pass){
-                            case 0:
-                                mult = -0.26;
-                                break;
-                            case 1:
-                                mult = -0.05;
-                                break;
-//                            case 2:
-//                                mult = 0.04;
-//                                break;
-                            case 2:
-                                mult = 0.12;
-                                break;
-                            default:
-                                mult = 0;
-                        }
-                        angle += Math.PI * mult;
+                        angle += Math.PI * ((pass == 2 ? 0.28 : pass == 1 ? 0.06 : -0.17) );// + 0.1*rand.nextFloat());
                         y = (float) (Math.sin(angle) * len);
                         z = (float) (Math.cos(angle) * len);
 
-                        // offset the top leaves to make the canopy less cylindrical
-                        if (pass == 2)
-                            z -= 0.4;
 
                         // Rotate the vertex around x0,z0
                         // Rotate on y axis
                         len = Math.sqrt(x * x + z * z);
                         angle = Math.atan2(x, z);
-                        switch (pass){
-                            default:
-//                            case 3:
-                            case 0:
-                                mult = 0;
-                                break;
-                            case 1:
-                                mult = 0.185 - 0.25;
-                                break;
-                            case 2:
-                                mult = 0.08;
-                                break;
-                        }
-                        angle += Math.PI * 0.25 * surr.ordinal() + (Math.PI * mult);
+                        angle += Math.PI * 0.25 * surr.ordinal() + (Math.PI * (pass == 1 ? (0.185 - 0.25) : pass == 2 ? 0.08 : 0.005));
                         x = (float) (Math.sin(angle) * len);
                         z = (float) (Math.cos(angle) * len);
 
@@ -132,16 +105,7 @@ public class PalmLeavesBakedModel implements IDynamicBakedModel {
                         // Move to center of block
                         x += 0.5f;
                         z += 0.5f;
-                        switch (pass){
-                            case 0:
-                                y += 0.125;
-                                break;
-                            case 2:
-                                y += -0.125;
-                                break;
-                            default:
-                                y += 0;
-                        }
+                        y += pass == 2 ? -0.125 : pass == 0 ? 0.125 : 0;
                         //y -= 0.25f;
 
 

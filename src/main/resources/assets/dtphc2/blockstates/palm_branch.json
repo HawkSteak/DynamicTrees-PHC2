@@ -1,7 +1,5 @@
 {
     "variants": {
-        "": {
-            "model": "dtphc2:block/palm_branch"
-        }
+        "": { "model": "dynamictrees:block/jungle_branch" }
     }
 }

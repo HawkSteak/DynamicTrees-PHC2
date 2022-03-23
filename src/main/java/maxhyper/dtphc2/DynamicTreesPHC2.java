@@ -3,8 +3,6 @@ package maxhyper.dtphc2;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.init.DTConfigs;
 import com.pam.pamhc2trees.config.EnableConfig;
-import maxhyper.dtphc2.init.DTPHC2Client;
-import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -83,7 +81,7 @@ public class DynamicTreesPHC2
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        DTPHC2Client.setup();
+
     }
 
     public static ResourceLocation resLoc (final String path) {

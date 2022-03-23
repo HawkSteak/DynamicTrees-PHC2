@@ -1,8 +1,8 @@
 {
   "textures": {
-    "particle": "blocks/log_jungle",
-    "log": "blocks/log_jungle",
-    "texture": "dtphc2:block/dragonfruit_base"
+    "particle": "block/jungle_log",
+    "log": "block/jungle_log",
+    "texture": "dtphc2:block/palm_leaves/dragonfruit_base"
   },
   "elements": [
     {   "from": [ 5, 0, 5 ],
