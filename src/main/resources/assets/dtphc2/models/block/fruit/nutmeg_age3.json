@@ -2,6 +2,6 @@
 	"parent": "dtphc2:block/fruit/generic/nut_age3_sided",
 	"textures": {
 		"particle": "dtphc2:block/nutmeg",
-		"apple": "dtphc2:block/nutmeg"
+		"fruit": "dtphc2:block/nutmeg"
 	}
 }

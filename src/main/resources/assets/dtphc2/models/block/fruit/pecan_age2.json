@@ -2,6 +2,6 @@
   "parent": "dtphc2:block/fruit/generic/nut_age2",
   "textures": {
     "particle": "dtphc2:block/pecan",
-    "apple": "dtphc2:block/pecan"
+    "fruit": "dtphc2:block/pecan"
   }
 }

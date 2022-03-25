@@ -26,7 +26,8 @@
     {
       "name": "fruit",
       "properties": {
-        "fruit": "dtphc2:apricot"
+        "fruit": "dtphc2:apricot",
+        "fruiting_radius": 5
       }
     }
   ],

@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"particle": "dtphc2:block/jackfruit",
-		"apple": "dtphc2:block/jackfruit"
+		"fruit": "dtphc2:block/jackfruit"
 	},
 	"elements": [
 		{
@@ -11,12 +11,12 @@
 			"to": [10.4, 16, 10.4],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 9, 8]},
 			"faces": {
-				"north": {"uv": [2.5, 3.5, 5.5, 7.5], "texture": "#apple"},
-				"east": {"uv": [2.5, 3.5, 5.5, 7.5], "texture": "#apple"},
-				"south": {"uv": [2.5, 3.5, 5.5, 7.5], "texture": "#apple"},
-				"west": {"uv": [2.5, 3.5, 5.5, 7.5], "texture": "#apple"},
-				"up": {"uv": [2.5, 0, 5.5, 3], "texture": "#apple"},
-				"down": {"uv": [2.5, 8, 5.5, 11], "texture": "#apple"}
+				"north": {"uv": [2.5, 3.5, 5.5, 7.5], "texture": "#fruit"},
+				"east": {"uv": [2.5, 3.5, 5.5, 7.5], "texture": "#fruit"},
+				"south": {"uv": [2.5, 3.5, 5.5, 7.5], "texture": "#fruit"},
+				"west": {"uv": [2.5, 3.5, 5.5, 7.5], "texture": "#fruit"},
+				"up": {"uv": [2.5, 0, 5.5, 3], "texture": "#fruit"},
+				"down": {"uv": [2.5, 8, 5.5, 11], "texture": "#fruit"}
 			}
 		}
 	]

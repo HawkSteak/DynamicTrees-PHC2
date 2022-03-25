@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"particle": "dtphc2:block/pistachio",
-		"apple": "dtphc2:block/pistachio"
+		"fruit": "dtphc2:block/pistachio"
 	},
 	"elements": [
 		{
@@ -12,8 +12,8 @@
 			"shade": false,
 			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
-				"east": {"uv": [10, 11, 15, 16], "texture": "#apple"},
-				"west": {"uv": [10, 11, 15, 16], "texture": "#apple"}
+				"east": {"uv": [10, 11, 15, 16], "texture": "#fruit"},
+				"west": {"uv": [10, 11, 15, 16], "texture": "#fruit"}
 			}
 		},
 		{
@@ -22,8 +22,8 @@
 			"shade": false,
 			"rotation": {"angle": -45, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
-				"east": {"uv": [10, 11, 15, 16], "texture": "#apple"},
-				"west": {"uv": [10, 11, 15, 16], "texture": "#apple"}
+				"east": {"uv": [10, 11, 15, 16], "texture": "#fruit"},
+				"west": {"uv": [10, 11, 15, 16], "texture": "#fruit"}
 			}
 		}
 	]

@@ -2,6 +2,6 @@
     "parent": "dtphc2:block/fruit/generic/cross_age0",
     "textures": {
         "particle": "dtphc2:block/lime",
-        "apple": "dtphc2:block/lime"
+        "fruit": "dtphc2:block/lime"
     }
 }

@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"particle": "dtphc2:block/almond",
-		"apple": "dtphc2:block/almond"
+		"fruit": "dtphc2:block/almond"
 	},
 	"elements": [
 		{
@@ -11,12 +11,12 @@
 			"to": [9.6, 16, 9.6],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 9, 8]},
 			"faces": {
-				"north": {"uv": [4, 5, 8, 10], "texture": "#apple"},
-				"east": {"uv": [4, 5, 8, 10], "texture": "#apple"},
-				"south": {"uv": [4, 5, 8, 10], "texture": "#apple"},
-				"west": {"uv": [4, 5, 8, 10], "texture": "#apple"},
-				"up": {"uv": [4, 0, 8, 4], "texture": "#apple"},
-				"down": {"uv": [4, 11, 8, 15], "texture": "#apple"}
+				"north": {"uv": [4, 5, 8, 10], "texture": "#fruit"},
+				"east": {"uv": [4, 5, 8, 10], "texture": "#fruit"},
+				"south": {"uv": [4, 5, 8, 10], "texture": "#fruit"},
+				"west": {"uv": [4, 5, 8, 10], "texture": "#fruit"},
+				"up": {"uv": [4, 0, 8, 4], "texture": "#fruit"},
+				"down": {"uv": [4, 11, 8, 15], "texture": "#fruit"}
 			}
 		}
 	]

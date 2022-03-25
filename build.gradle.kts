@@ -114,12 +114,15 @@ dependencies {
     implementation(fg.deobf("curse.maven:pams-harvestcraft-2-trees-365460:3281234"))
     implementation(fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-$mcVersion:${property("dynamicTreesVersion")}"))
 
+    // Compile Hwyla API, but don"t include in runtime.
+    compileOnly(fg.deobf("mcp.mobius.waila:Hwyla:${property("hwylaVersion")}:api"))
+
+    // DT+ is optional, but it's implemented as there is access to its classes and needs to be compiled.
+    implementation(fg.deobf("com.ferreusveritas.dynamictreesplus:DynamicTreesPlus-$mcVersion:${property("dynamicTreesPlusVersion")}"))
+
     /////////////////////////////////////////
     /// Runtime Dependencies (optional)
     /////////////////////////////////////////
-
-    // At runtime, use DT+ for BYG's cacti.
-    runtimeOnly(fg.deobf("com.ferreusveritas.dynamictreesplus:DynamicTreesPlus-$mcVersion:${property("dynamicTreesPlusVersion")}"))
 
     // At runtime, use the full Hwyla mod.
     runtimeOnly(fg.deobf("mcp.mobius.waila:Hwyla:${property("hwylaVersion")}"))

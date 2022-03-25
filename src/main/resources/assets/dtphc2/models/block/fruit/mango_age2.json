@@ -3,19 +3,19 @@
 	"ambientocclusion": false,
 	"textures": {
 		"particle": "dtphc2:block/mango",
-		"apple": "dtphc2:block/mango"
+		"fruit": "dtphc2:block/mango"
 	},
 	"elements": [
 		{
 			"from": [6, 12, 6],
 			"to": [10, 16, 10],
 			"faces": {
-				"north": {"uv": [5, 5, 10, 10], "texture": "#apple"},
-				"east": {"uv": [5, 5, 10, 10], "texture": "#apple"},
-				"south": {"uv": [5, 5, 10, 10], "texture": "#apple"},
-				"west": {"uv": [5, 5, 10, 10], "texture": "#apple"},
-				"up": {"uv": [5, 0, 10, 5], "texture": "#apple"},
-				"down": {"uv": [5, 10, 10, 15], "texture": "#apple"}
+				"north": {"uv": [5, 5, 10, 10], "texture": "#fruit"},
+				"east": {"uv": [5, 5, 10, 10], "texture": "#fruit"},
+				"south": {"uv": [5, 5, 10, 10], "texture": "#fruit"},
+				"west": {"uv": [5, 5, 10, 10], "texture": "#fruit"},
+				"up": {"uv": [5, 0, 10, 5], "texture": "#fruit"},
+				"down": {"uv": [5, 10, 10, 15], "texture": "#fruit"}
 			}
 		}
 	]

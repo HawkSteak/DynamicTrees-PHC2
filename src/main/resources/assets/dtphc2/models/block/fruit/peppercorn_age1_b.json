@@ -1,0 +1,24 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "dtphc2:block/fruit/generic/flower_age0",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dtphc2:block/peppercorn",
+		"fruit": "dtphc2:block/peppercorn"
+	},
+	"elements": [
+		{
+			"from": [10.4, 6.2, 13.45],
+			"to": [12, 10.2, 15.05],
+			"rotation": {"angle": 0, "axis": "y", "origin": [11.2, 3.2, 14.25]},
+			"faces": {
+				"north": {"uv": [1, 4, 3, 9], "texture": "#fruit"},
+				"east": {"uv": [1, 4, 3, 9], "texture": "#fruit"},
+				"south": {"uv": [1, 4, 3, 9], "texture": "#fruit"},
+				"west": {"uv": [1, 4, 3, 9], "texture": "#fruit"},
+				"up": {"uv": [1, 1, 3, 3], "texture": "#fruit"},
+				"down": {"uv": [1, 12, 3, 14], "texture": "#fruit"}
+			}
+		}
+	]
+}

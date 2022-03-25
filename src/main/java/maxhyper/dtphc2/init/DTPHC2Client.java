@@ -21,7 +21,7 @@ public class DTPHC2Client {
     }
 
     private static void registerRenderLayers() {
-        RenderTypeLookup.setRenderLayer(DTPHC2Registries.PASSIONFRUIT_VINE, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(DTPHC2Registries.PASSION_FRUIT_VINE, RenderType.cutout());
         RenderTypeLookup.setRenderLayer(DTPHC2Registries.VANILLA_VINE, RenderType.cutout());
         RenderTypeLookup.setRenderLayer(DTPHC2Registries.PEPPERCORN_VINE, RenderType.cutout());
     }
@@ -31,9 +31,9 @@ public class DTPHC2Client {
         final BlockColors blockColors = Minecraft.getInstance().getBlockColors();
         final ItemColors itemColors = Minecraft.getInstance().getItemColors();
 
-        Block[] vines = new Block[]{DTPHC2Registries.PASSIONFRUIT_VINE, DTPHC2Registries.VANILLA_VINE, DTPHC2Registries.PEPPERCORN_VINE};
+        Block[] vines = new Block[]{DTPHC2Registries.PASSION_FRUIT_VINE, DTPHC2Registries.VANILLA_VINE, DTPHC2Registries.PEPPERCORN_VINE};
 
-        Item[] vineItems = new Item[]{DTPHC2Registries.PASSIONFRUIT_VINE_ITEM, DTPHC2Registries.VANILLA_VINE_ITEM, DTPHC2Registries.PEPPERCORN_VINE_ITEM};
+        Item[] vineItems = new Item[]{DTPHC2Registries.PASSION_FRUIT_VINE_ITEM, DTPHC2Registries.VANILLA_VINE_ITEM, DTPHC2Registries.PEPPERCORN_VINE_ITEM};
 
         for (Block vine : vines){
             ModelHelper.regColorHandler(vine, (state, worldIn, pos, tintIndex) ->

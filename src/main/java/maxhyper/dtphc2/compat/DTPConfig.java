@@ -1,0 +1,22 @@
+package maxhyper.dtphc2.compat;
+
+import com.ferreusveritas.dynamictreesplus.init.DTPConfigs;
+
+public class DTPConfig implements DTPConfigProxy {
+
+    @Override
+    public boolean cactusPrickleOnMoveOnlyConfig() {
+        return DTPConfigs.cactusPrickleOnMoveOnly.get();
+    }
+
+    @Override
+    public boolean cactusKillItemsConfig() {
+        return DTPConfigs.cactusKillItems.get();
+    }
+
+    @Override
+    public boolean canBoneMealCactusConfig() {
+        return DTPConfigs.canBoneMealCactus.get();
+    }
+
+}

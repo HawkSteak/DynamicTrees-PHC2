@@ -3,10 +3,14 @@ package maxhyper.dtphc2;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.init.DTConfigs;
 import com.pam.pamhc2trees.config.EnableConfig;
+import maxhyper.dtphc2.compat.DTPConfig;
+import maxhyper.dtphc2.compat.DTPConfigProxy;
+import maxhyper.dtphc2.compat.DefaultConfig;
 import maxhyper.dtphc2.init.DTPHC2Client;
 import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -17,6 +21,8 @@ public class DynamicTreesPHC2
 {
     public static final String MOD_ID = "dtphc2";
 
+    public static DTPConfigProxy DTPlusConfig;
+
     public DynamicTreesPHC2() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
@@ -26,6 +32,11 @@ public class DynamicTreesPHC2
         RegistryHandler.setup(MOD_ID);
 
         DTPHC2Registries.setup();
+
+        if (ModList.get().isLoaded("dynamictreesplus"))
+            DTPlusConfig = new DTPConfig();
+        else
+            DTPlusConfig = new DefaultConfig();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

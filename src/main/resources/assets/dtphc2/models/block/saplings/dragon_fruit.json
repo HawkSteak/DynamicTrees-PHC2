@@ -1,0 +1,41 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"1": "dtphc2:block/dragon_fruit",
+		"texture": "dtphc2:block/palm_leaves/dragon_fruit_frond",
+		"particle": "dtphc2:block/dragon_fruit"
+	},
+	"elements": [
+		{
+			"from": [6, 0, 6],
+			"to": [10, 8, 10],
+			"faces": {
+				"north": {"uv": [10, 1, 11, 3], "texture": "#texture", "tintindex": 0},
+				"east": {"uv": [10, 1, 11, 3], "texture": "#texture", "tintindex": 0},
+				"south": {"uv": [10, 1, 11, 3], "texture": "#texture", "tintindex": 0},
+				"west": {"uv": [10, 1, 11, 3], "texture": "#texture", "tintindex": 0},
+				"up": {"uv": [10, 0, 11, 1], "texture": "#texture", "tintindex": 0},
+				"down": {"uv": [10, 3, 11, 4], "texture": "#texture", "cullface": "down", "tintindex": 0}
+			}
+		},
+		{
+			"from": [9, 5, 9],
+			"to": [11, 7, 11],
+			"faces": {
+				"north": {"uv": [13, 4, 15, 6], "texture": "#1"},
+				"east": {"uv": [11, 4, 13, 6], "texture": "#1"},
+				"south": {"uv": [13, 4, 15, 6], "texture": "#1"},
+				"west": {"uv": [11, 4, 13, 6], "texture": "#1"},
+				"up": {"uv": [11, 2, 13, 4], "texture": "#1"},
+				"down": {"uv": [13, 2, 15, 4], "texture": "#1"}
+			}
+		}
+	],
+	"display": {
+		"fixed": {
+			"rotation": [0, 90, 0],
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
+}

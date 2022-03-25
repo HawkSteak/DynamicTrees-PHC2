@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dtphc2:block/passion_fruit",
+		"fruit": "dtphc2:block/passion_fruit"
+	},
+	"elements": [
+		{
+			"from": [7, 13, 7],
+			"to": [9, 15, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 7, 8]},
+			"faces": {
+				"north": {"uv": [1, 4, 4, 7], "texture": "#fruit"},
+				"east": {"uv": [1, 4, 4, 7], "texture": "#fruit"},
+				"south": {"uv": [1, 4, 4, 7], "texture": "#fruit"},
+				"west": {"uv": [1, 4, 4, 7], "texture": "#fruit"},
+				"up": {"uv": [1, 0, 4, 3], "texture": "#fruit"},
+				"down": {"uv": [1, 8, 4, 11], "texture": "#fruit"}
+			}
+		}
+	]
+}

@@ -2,6 +2,6 @@
   "parent": "dtphc2:block/fruit/generic/flower_age0_32",
   "textures": {
     "particle": "dtphc2:block/soursop",
-    "apple": "dtphc2:block/soursop"
+    "fruit": "dtphc2:block/soursop"
   }
 }

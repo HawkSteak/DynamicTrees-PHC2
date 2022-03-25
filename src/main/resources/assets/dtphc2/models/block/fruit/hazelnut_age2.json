@@ -3,19 +3,19 @@
 	"ambientocclusion": false,
 	"textures": {
 		"particle": "dtphc2:block/hazelnut",
-		"apple": "dtphc2:block/hazelnut"
+		"fruit": "dtphc2:block/hazelnut"
 	},
 	"elements": [
 		{
 			"from": [6.8, 13.6, 6.8],
 			"to": [9.2, 16, 9.2],
 			"faces": {
-				"north": {"uv": [3, 6, 6, 9], "texture": "#apple"},
-				"east": {"uv": [3, 6, 6, 9], "texture": "#apple"},
-				"south": {"uv": [3, 6, 6, 9], "texture": "#apple"},
-				"west": {"uv": [3, 6, 6, 9], "texture": "#apple"},
-				"up": {"uv": [3, 1, 6, 4], "texture": "#apple"},
-				"down": {"uv": [3, 11, 6, 14], "texture": "#apple"}
+				"north": {"uv": [3, 6, 6, 9], "texture": "#fruit"},
+				"east": {"uv": [3, 6, 6, 9], "texture": "#fruit"},
+				"south": {"uv": [3, 6, 6, 9], "texture": "#fruit"},
+				"west": {"uv": [3, 6, 6, 9], "texture": "#fruit"},
+				"up": {"uv": [3, 1, 6, 4], "texture": "#fruit"},
+				"down": {"uv": [3, 11, 6, 14], "texture": "#fruit"}
 			}
 		},
 		{
@@ -23,8 +23,8 @@
 			"to": [9.2, 15.2, 9.2],
 			"rotation": {"angle": 22.5, "axis": "z", "origin": [9.2, 15.2, 8]},
 			"faces": {
-				"east": {"uv": [10, 6, 13, 9], "texture": "#apple"},
-				"west": {"uv": [10, 6, 13, 9], "texture": "#apple"}
+				"east": {"uv": [10, 6, 13, 9], "texture": "#fruit"},
+				"west": {"uv": [10, 6, 13, 9], "texture": "#fruit"}
 			}
 		},
 		{
@@ -32,8 +32,8 @@
 			"to": [6.8, 15.2, 9.2],
 			"rotation": {"angle": -22.5, "axis": "z", "origin": [6.8, 15.2, 8]},
 			"faces": {
-				"east": {"uv": [10, 12, 13, 15], "texture": "#apple"},
-				"west": {"uv": [10, 12, 13, 15], "texture": "#apple"}
+				"east": {"uv": [10, 12, 13, 15], "texture": "#fruit"},
+				"west": {"uv": [10, 12, 13, 15], "texture": "#fruit"}
 			}
 		},
 		{
@@ -41,8 +41,8 @@
 			"to": [9.2, 15.2, 6.8],
 			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 15.2, 6.8]},
 			"faces": {
-				"north": {"uv": [10, 9, 13, 12], "texture": "#apple"},
-				"south": {"uv": [10, 9, 13, 12], "texture": "#apple"}
+				"north": {"uv": [10, 9, 13, 12], "texture": "#fruit"},
+				"south": {"uv": [10, 9, 13, 12], "texture": "#fruit"}
 			}
 		},
 		{
@@ -50,8 +50,8 @@
 			"to": [9.2, 15.2, 9.2],
 			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 15.2, 9.2]},
 			"faces": {
-				"north": {"uv": [10, 3, 13, 6], "texture": "#apple"},
-				"south": {"uv": [10, 3, 13, 6], "texture": "#apple"}
+				"north": {"uv": [10, 3, 13, 6], "texture": "#fruit"},
+				"south": {"uv": [10, 3, 13, 6], "texture": "#fruit"}
 			}
 		}
 	]
