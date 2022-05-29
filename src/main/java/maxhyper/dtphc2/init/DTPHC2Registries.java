@@ -26,6 +26,7 @@ import maxhyper.dtphc2.growthlogic.DTPHC2GrowthLogicKits;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -36,13 +37,13 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class DTPHC2Registries {
 
-    public static final FruitVineBlock PASSION_FRUIT_VINE = new FruitVineBlock(ItemRegistry.passionfruititem);
+    public static final FruitVineBlock PASSION_FRUIT_VINE = new FruitVineBlock();
     public static final Item PASSION_FRUIT_VINE_ITEM = new BlockItem(PASSION_FRUIT_VINE, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
-    public static final FruitVineBlock VANILLA_VINE = new FruitVineBlock(ItemRegistry.vanillabeanitem);
+    public static final FruitVineBlock VANILLA_VINE = new FruitVineBlock();
     public static final Item VANILLA_VINE_ITEM = new BlockItem(VANILLA_VINE, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
-    public static final FruitVineBlock PEPPERCORN_VINE = new FruitVineBlock(ItemRegistry.peppercornitem);
+    public static final FruitVineBlock PEPPERCORN_VINE = new FruitVineBlock();
     public static final Item PEPPERCORN_VINE_ITEM = new BlockItem(PEPPERCORN_VINE, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
     public static VoxelShape DRAGON_FRUIT_CACTUS_SAPLING_SHAPE = VoxelShapes.create(
@@ -121,7 +122,16 @@ public class DTPHC2Registries {
 
     @SubscribeEvent
     public static void onItemsRegistry (final RegistryEvent.Register<Item> event) {
-
+        PASSION_FRUIT_VINE
+                .setFruitStack(new ItemStack(ItemRegistry.passionfruititem))
+                .setFruitingOffset(null);
+        VANILLA_VINE
+                .setFruitStack(new ItemStack(ItemRegistry.vanillabeanitem))
+                .setFruitingOffset(null);
+        PEPPERCORN_VINE
+                .setFruitStack(new ItemStack(ItemRegistry.peppercornitem))
+                .setFruitingOffset(null)
+                .setMatureAge(3);
     }
 
     @SubscribeEvent
