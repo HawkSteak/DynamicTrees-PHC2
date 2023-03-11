@@ -32,6 +32,7 @@ public class FruitVineBlock extends VineBlock {
 
     private static final float baseFruitingChance = 0.002f;
     private static final float fruitGrowChance = 0.2f;
+    private static final float fruitOverripenChance = 0.02f;
     private static final int maxLength = 3;
     private static final int maxAge = 4;
 
@@ -41,8 +42,6 @@ public class FruitVineBlock extends VineBlock {
     private ItemStack overripeFruitStack;
     //private Integer fruitingOffset;
     private int matureAge = maxAge;
-
-    private float growthChance = 0.2F;
 
     @Nullable
     private final Float seasonOffset = 0f;
@@ -56,9 +55,10 @@ public class FruitVineBlock extends VineBlock {
         registerDefaultState(defaultBlockState().setValue(ageProperty, 0));
     }
 
-    public void setAge(World world, BlockPos pos, BlockState state, int age) {
+    public void setAge(World world, BlockPos pos, BlockState state, int age, boolean destroy) {
         state = state.setValue(ageProperty, age);
         //LogManager.getLogger(DynamicTreesPHC2.MOD_ID).info("Set Block at " + pos.toString() + " age to " + age);
+        if (destroy) world.destroyBlock(pos, false);
         world.setBlock(pos, state, 2);
     }
 
@@ -119,7 +119,10 @@ public class FruitVineBlock extends VineBlock {
             }
         }
 
-        if (age < maxAge) {
+        else if (age < maxAge) {
+            if (matureAge != maxAge && age >= matureAge) {
+
+            }
             tryGrow(state, world, pos, random, age, season);
         }
     }
@@ -130,7 +133,9 @@ public class FruitVineBlock extends VineBlock {
 
     private void tryGrow(BlockState state, World world, BlockPos pos, Random random, int age,
                          @Nullable Float season) {
-        float chance = age == 0 ? getFruitingChance(world, pos) : fruitGrowChance;
+        float chance = age == 0 ? getFruitingChance(world, pos)
+                : ((matureAge != maxAge && age >= matureAge) ? fruitOverripenChance : fruitGrowChance);
+
         final boolean doGrow = random.nextFloat() < chance;
         final boolean eventGrow = ForgeHooks.onCropsGrowPre(world, pos, state, doGrow);
         // Prevent a seasons mod from canceling the growth, we handle that ourselves.
@@ -147,7 +152,7 @@ public class FruitVineBlock extends VineBlock {
                 //changeVineWithProperties(world, pos, getStateFromAge(0), state);
                 return;
             }
-            setAge(world, pos, state, age + 1);
+            setAge(world, pos, state, age + 1, false);
             //changeVineWithProperties(worldIn, pos, getStateFromAge(age + 1), state);
             ForgeHooks.onCropsGrowPost(world, pos, state);
         }
@@ -241,8 +246,8 @@ public class FruitVineBlock extends VineBlock {
         // Drop fruit if mature.
         if (age >= matureAge) {
             if (spawnItemFruitIfRipe(world, pos, state)) {
-                setAge(world, pos, state, 0);
-                return ActionResultType.CONSUME;
+                setAge(world, pos, state, 0, true);
+                return ActionResultType.SUCCESS;
             }
         }
         return ActionResultType.PASS;
