@@ -5,14 +5,11 @@ import com.ferreusveritas.dynamictrees.util.WorldContext;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -116,11 +113,11 @@ public class FruitVineBlock extends VineBlock {
 
     private void tryGrow(BlockState state, World world, BlockPos pos, Random random, int age,
                          @Nullable Float season) {
-        final boolean doGrow = random.nextFloat() < getGrowthChance(world, pos);
+        final boolean doGrow = random.nextFloat() < growthChance; //getGrowthChance(world, pos);
         final boolean eventGrow = ForgeHooks.onCropsGrowPre(world, pos, state, doGrow);
         // Prevent a seasons mod from canceling the growth, we handle that ourselves.
         if (season != null ? doGrow || eventGrow : eventGrow) {
-            setAge(world, pos, state, age + 1);
+            //setAge(world, pos, state, age + 1);
             ForgeHooks.onCropsGrowPost(world, pos, state);
         }
     }

@@ -17,6 +17,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class DragonFruitLeavesProperties extends PalmLeavesProperties {
 
     public static final TypedRegistry.EntryType<LeavesProperties> TYPE = TypedRegistry.newType(DragonFruitLeavesProperties::new);
@@ -26,12 +28,14 @@ public class DragonFruitLeavesProperties extends PalmLeavesProperties {
     }
 
     @Override
+    @Nonnull
     public Material getDefaultMaterial() {
         return Material.CACTUS;
     }
 
     @Override
-    protected DynamicLeavesBlock createDynamicLeaves(AbstractBlock.Properties properties) {
+    @Nonnull
+    protected DynamicLeavesBlock createDynamicLeaves(@Nonnull AbstractBlock.Properties properties) {
         return new DynamicDragonfruitLeavesBlock(this, properties);
     }
 
