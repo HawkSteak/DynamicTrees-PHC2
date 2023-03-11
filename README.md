@@ -4,15 +4,15 @@
 # Missing features
 
 - Paperbark does not grow back
-- Papayas have weird hitboxes
+- Papayas have weird hitboxes and show growth two times
 - Coconuts do not drop
 - Maple treetap missing
 - Dragonfruit, Papaya, Coconut, Date, Maple, Paperbark and Cinnamon do not drop items when chopped  
 aka all log fruits and palm type trees
 - Banana does not drop sticks (can't get high enough for logs)
-- Orange trees grow oranges that have apple textures
 - Grapefruits and Oranges have the same texture (item)
 - Dragonfruit Cactus does not look like a cactus?  
+- Ripe peppercorn is useless
 
 # Working
 
@@ -38,11 +38,14 @@ aka all log fruits and palm type trees
 - Mango
 - Nutmeg
 - Olive
+- Orange
 - Pawpaw
+- Passionfruit
 - Pear
 - Peach
 - Pecan
 - Persimmon
+- Peppercorn
 - Pistachio
 - Pine
 - Plum
@@ -51,4 +54,5 @@ aka all log fruits and palm type trees
 - Starfruit
 - Soursop
 - Tamarind
+- Vanilla
 - Walnut

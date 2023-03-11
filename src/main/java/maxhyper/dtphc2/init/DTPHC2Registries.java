@@ -46,6 +46,8 @@ public class DTPHC2Registries {
     public static final FruitVineBlock PEPPERCORN_VINE = new FruitVineBlock();
     public static final Item PEPPERCORN_VINE_ITEM = new BlockItem(PEPPERCORN_VINE, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
+    public static final Item RIPE_PEPPERCORN_ITEM = new Item(new Item.Properties().tab(DTRegistries.ITEM_GROUP));
+
     public static VoxelShape DRAGON_FRUIT_CACTUS_SAPLING_SHAPE = VoxelShapes.create(
             new AxisAlignedBB(0.375f, 0.0f, 0.375f, 0.625f, 0.5f, 0.625f));
 
@@ -58,6 +60,8 @@ public class DTPHC2Registries {
 
         RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("peppercorn_vine"), PEPPERCORN_VINE);
         RegistryHandler.addItem(DynamicTreesPHC2.resLoc("peppercorn_vine"), PEPPERCORN_VINE_ITEM);
+
+        RegistryHandler.addItem(DynamicTreesPHC2.resLoc("ripe_peppercorn_item"), RIPE_PEPPERCORN_ITEM);
 
         CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.resLoc("dragon_fruit_cactus").toString(), DRAGON_FRUIT_CACTUS_SAPLING_SHAPE);
     }
@@ -123,14 +127,15 @@ public class DTPHC2Registries {
     @SubscribeEvent
     public static void onItemsRegistry (final RegistryEvent.Register<Item> event) {
         PASSION_FRUIT_VINE
-                .setFruitStack(new ItemStack(ItemRegistry.passionfruititem))
-                .setFruitingOffset(null);
+                .setFruitStack(new ItemStack(ItemRegistry.passionfruititem));
+                //.setFruitingOffset(null);
         VANILLA_VINE
-                .setFruitStack(new ItemStack(ItemRegistry.vanillabeanitem))
-                .setFruitingOffset(null);
+                .setFruitStack(new ItemStack(ItemRegistry.vanillabeanitem));
+                //.setFruitingOffset(null);
         PEPPERCORN_VINE
                 .setFruitStack(new ItemStack(ItemRegistry.peppercornitem))
-                .setFruitingOffset(null)
+                .setOverripeFruitStack(new ItemStack(RIPE_PEPPERCORN_ITEM))
+                //.setFruitingOffset(null)
                 .setMatureAge(3);
     }
 

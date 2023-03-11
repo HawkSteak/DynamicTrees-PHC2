@@ -12,7 +12,7 @@ logoFile=""
 credits=""
 authors="Max Hyper"
 description='''
-Compatibility Mod between Dynamic trees and Pam's HarvestCraft 2: Trees
+Compatibility Mod between Dynamic Trees and Pam's HarvestCraft 2: Trees
 '''
 
 [[dependencies.dtphc2]]

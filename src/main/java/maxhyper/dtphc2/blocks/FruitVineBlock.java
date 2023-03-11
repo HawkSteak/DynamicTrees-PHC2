@@ -2,18 +2,24 @@ package maxhyper.dtphc2.blocks;
 
 import com.ferreusveritas.dynamictrees.compat.seasons.SeasonHelper;
 import com.ferreusveritas.dynamictrees.util.WorldContext;
+import maxhyper.dtphc2.DynamicTreesPHC2;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
+import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -33,13 +39,13 @@ public class FruitVineBlock extends VineBlock {
 
     private ItemStack fruitStack;
     private ItemStack overripeFruitStack;
-    private Integer fruitingOffset;
+    //private Integer fruitingOffset;
     private int matureAge = maxAge;
 
     private float growthChance = 0.2F;
 
     @Nullable
-    private Float seasonOffset = 0f;
+    private final Float seasonOffset = 0f;
 
     private float flowerHoldPeriodLength = 0.5F;
 
@@ -50,19 +56,32 @@ public class FruitVineBlock extends VineBlock {
         registerDefaultState(defaultBlockState().setValue(ageProperty, 0));
     }
 
-    public FruitVineBlock setMatureAge (int age){
+    public void setAge(World world, BlockPos pos, BlockState state, int age) {
+        state = state.setValue(ageProperty, age);
+        //LogManager.getLogger(DynamicTreesPHC2.MOD_ID).info("Set Block at " + pos.toString() + " age to " + age);
+        world.setBlock(pos, state, 2);
+    }
+
+    public FruitVineBlock setMatureAge(int age) {
         if (age <= maxAge && age > 0)
             matureAge = age;
         return this;
     }
-    public FruitVineBlock setFruitStack (ItemStack stack){
+
+    public FruitVineBlock setFruitStack(ItemStack stack) {
         fruitStack = stack;
         return this;
     }
-    public FruitVineBlock setFruitingOffset (Integer offset){
-        fruitingOffset = offset;
+
+    public FruitVineBlock setOverripeFruitStack(ItemStack stack) {
+        overripeFruitStack = stack;
         return this;
     }
+
+//    public FruitVineBlock setFruitingOffset(Integer offset) {
+//        fruitingOffset = offset;
+//        return this;
+//    }
 
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
@@ -71,14 +90,12 @@ public class FruitVineBlock extends VineBlock {
     }
 
 
+//    private float getFruitOffset() {
+//        return fruitingOffset;
+//    }
 
-    private float getFruitOffset (){
-        return fruitingOffset;
-    }
-
-    @SuppressWarnings("deprecation")
     @Override
-    public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         doTick(state, world, pos, random);
     }
 
@@ -113,11 +130,25 @@ public class FruitVineBlock extends VineBlock {
 
     private void tryGrow(BlockState state, World world, BlockPos pos, Random random, int age,
                          @Nullable Float season) {
-        final boolean doGrow = random.nextFloat() < growthChance; //getGrowthChance(world, pos);
+        float chance = age == 0 ? getFruitingChance(world, pos) : fruitGrowChance;
+        final boolean doGrow = random.nextFloat() < chance;
         final boolean eventGrow = ForgeHooks.onCropsGrowPre(world, pos, state, doGrow);
         // Prevent a seasons mod from canceling the growth, we handle that ourselves.
         if (season != null ? doGrow || eventGrow : eventGrow) {
-            //setAge(world, pos, state, age + 1);
+            //We look for fruit blocks around. If there is more than two we cancel the fruit growth
+            int fruitFoundAround = 0;
+            for (Direction dir : Direction.values()) {
+                Integer sideAge = getAgeFromState(world.getBlockState(pos.offset(dir.getNormal())));
+                if (sideAge != null && sideAge > 0) {
+                    fruitFoundAround++;
+                }
+            }
+            if (fruitFoundAround >= 2) {
+                //changeVineWithProperties(world, pos, getStateFromAge(0), state);
+                return;
+            }
+            setAge(world, pos, state, age + 1);
+            //changeVineWithProperties(worldIn, pos, getStateFromAge(age + 1), state);
             ForgeHooks.onCropsGrowPost(world, pos, state);
         }
     }
@@ -128,11 +159,11 @@ public class FruitVineBlock extends VineBlock {
                 : 1.0F;
     }
 
-    private boolean isOutOfSeason (World world, BlockPos pos){
+    private boolean isOutOfSeason(World world, BlockPos pos) {
         return seasonalFruitProductionFactor(WorldContext.create(world), pos) < minProductionFactor;
     }
 
-    private void outOfSeason (World world, BlockPos pos){
+    private void outOfSeason(World world, BlockPos pos) {
 
     }
 
@@ -150,15 +181,12 @@ public class FruitVineBlock extends VineBlock {
         return isSeasonBetween(seasonValue, min, max);
     }
 
-    private float getFruitingChance (World world, BlockPos pos){
-        float fruitFactor = SeasonHelper.globalSeasonalFruitProductionFactor(WorldContext.create(world), pos, getFruitOffset(), true);
+    private float getFruitingChance(World world, BlockPos pos) {
+        float fruitFactor = SeasonHelper.globalSeasonalFruitProductionFactor(WorldContext.create(world), pos, seasonOffset, true);
         return baseFruitingChance * Math.max((fruitFactor + 0.25f), 1);
     }
 
-    private void changeVineWithProperties(World world, BlockPos pos, BlockState stateWithWantedProperties){
-        changeVineWithProperties(world, pos, getStateFromAge(0), stateWithWantedProperties);
-    }
-    private void changeVineWithProperties(World world, BlockPos pos, BlockState baseState, BlockState stateWithWantedProperties){
+    private void changeVineWithProperties(World world, BlockPos pos, BlockState baseState, BlockState stateWithWantedProperties) {
         BlockState state = baseState.setValue(UP, stateWithWantedProperties.getValue(UP))
                 .setValue(NORTH, stateWithWantedProperties.getValue(NORTH))
                 .setValue(WEST, stateWithWantedProperties.getValue(WEST))
@@ -167,63 +195,57 @@ public class FruitVineBlock extends VineBlock {
         world.setBlock(pos, state, 2);
     }
 
-    protected void growFruit(World worldIn, BlockPos pos, BlockState state, Random rand){
-        Integer age = getAgeFromState(state);
-        if (age == null) return;
-        if ((age == 0 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextFloat() <= getFruitingChance(worldIn, pos))) ||
-                (age > 0 && age < 4 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextFloat() <= fruitGrowChance))) {
-
-            //We look for fruit blocks around. If there is more than two we cancel the fruit growth
-            int fruitFoundAround = 0;
-            for (Direction dir : Direction.values()){
-                Integer sideAge = getAgeFromState(worldIn.getBlockState(pos.offset(dir.getNormal())));
-                if (sideAge != null && sideAge > 0){
-                    fruitFoundAround++;
-                }
-            }
-            if (fruitFoundAround >= 2){
-                changeVineWithProperties(worldIn, pos, getStateFromAge(0), state);
-                return;
-            }
-            changeVineWithProperties(worldIn, pos, getStateFromAge(age + 1), state);
-            net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
-        }
-    }
-
-    private Integer getAgeFromState (BlockState state){
+    private Integer getAgeFromState(BlockState state) {
         if (!state.hasProperty(ageProperty)) return null;
         return state.getValue(ageProperty);
     }
 
     @Nonnull
-    private BlockState getStateFromAge (int age){
+    private BlockState getStateFromAge(int age) {
         return defaultBlockState().setValue(ageProperty, age);
     }
 
-    private ItemStack getOverripeFruit(){
-        return overripeFruitStack;
+    @Nullable
+    private ItemStack getFruit() {
+        if (fruitStack == null) return null;
+        return fruitStack.copy();
     }
 
-    private ItemStack getFruit(){
-        return fruitStack;
+    @Nullable
+    private ItemStack getOverripeFruit() {
+        if (overripeFruitStack == null) return null;
+        return overripeFruitStack.copy();
     }
 
-    private boolean spawnItemFruitIfRipe(World world, BlockPos pos){
-        return spawnItemFruitIfRipe(world, pos, world.getBlockState(pos));
-    }
-    private boolean spawnItemFruitIfRipe(World world, BlockPos pos, BlockState state){
+    private boolean spawnItemFruitIfRipe(World world, BlockPos pos, BlockState state) {
         Integer age = getAgeFromState(state);
-
-            if (!world.isClientSide() && age != null){
-                if (age >= matureAge) {
-                    ItemStack fruit = (age == matureAge) ? getFruit() : getOverripeFruit();
-                    if (fruit == null) return false;
-                    world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, fruit));
-                    return true;
-                }
+        if (!world.isClientSide() && age != null) {
+            if (age >= matureAge) {
+                ItemStack fruit = (age == matureAge) ? getFruit() : getOverripeFruit();
+                if (fruit == null) return false;
+                world.addFreshEntity(new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, fruit));
+                return true;
             }
+        }
 
         return false;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Nonnull
+    @Override
+    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
+                                BlockRayTraceResult hit) {
+        Integer age = getAgeFromState(state);
+        if (age == null) return ActionResultType.PASS;
+        // Drop fruit if mature.
+        if (age >= matureAge) {
+            if (spawnItemFruitIfRipe(world, pos, state)) {
+                setAge(world, pos, state, 0);
+                return ActionResultType.CONSUME;
+            }
+        }
+        return ActionResultType.PASS;
     }
 
 
