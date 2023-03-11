@@ -136,7 +136,8 @@ public class DTPHC2Registries {
                 .setFruitStack(new ItemStack(ItemRegistry.peppercornitem))
                 .setOverripeFruitStack(new ItemStack(RIPE_PEPPERCORN_ITEM))
                 //.setFruitingOffset(null)
-                .setMatureAge(3);
+                .setMatureAge(3)
+                .setFruitOverripenChance(0.01f);
     }
 
     @SubscribeEvent

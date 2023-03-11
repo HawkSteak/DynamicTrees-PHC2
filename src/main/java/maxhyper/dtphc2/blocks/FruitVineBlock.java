@@ -31,8 +31,8 @@ public class FruitVineBlock extends VineBlock {
 
 
     private static final float baseFruitingChance = 0.002f;
-    private static final float fruitGrowChance = 0.2f;
-    private static final float fruitOverripenChance = 0.02f;
+    private static float fruitGrowChance = 0.2f;
+    private static float fruitOverripenChance = 0.02f;
     private static final int maxLength = 3;
     private static final int maxAge = 4;
 
@@ -65,6 +65,18 @@ public class FruitVineBlock extends VineBlock {
     public FruitVineBlock setMatureAge(int age) {
         if (age <= maxAge && age > 0)
             matureAge = age;
+        return this;
+    }
+
+    public FruitVineBlock setFruitGrowChance(float chance) {
+        if (chance <= 1 && chance >= 0)
+            fruitGrowChance = chance;
+        return this;
+    }
+
+    public FruitVineBlock setFruitOverripenChance(float chance) {
+        if (chance <= 1 && chance >= 0)
+            fruitOverripenChance = chance;
         return this;
     }
 
