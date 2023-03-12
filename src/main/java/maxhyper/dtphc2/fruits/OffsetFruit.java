@@ -22,7 +22,6 @@ public class OffsetFruit extends Fruit {
         return new FruitBlock(properties, this){
             @Override
             public boolean isSupported(IBlockReader world, BlockPos pos, BlockState state) {
-
                 return world.getBlockState(pos.above()).getBlock() instanceof LeavesBlock || world.getBlockState(pos.above(2)).getBlock() instanceof LeavesBlock;
             }
         };

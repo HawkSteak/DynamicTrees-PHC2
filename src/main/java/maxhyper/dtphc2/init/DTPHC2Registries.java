@@ -5,14 +5,10 @@ import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.api.registry.TypeRegistryEvent;
 import com.ferreusveritas.dynamictrees.api.worldgen.FeatureCanceller;
 import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
-import com.ferreusveritas.dynamictrees.blocks.rootyblocks.SoilProperties;
-import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKit;
 import com.ferreusveritas.dynamictrees.init.DTRegistries;
 import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
 import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeature;
 import com.ferreusveritas.dynamictrees.systems.pod.Pod;
-import com.ferreusveritas.dynamictrees.trees.Family;
-import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.CommonVoxelShapes;
 import com.pam.pamhc2trees.init.ItemRegistry;
 import maxhyper.dtphc2.DynamicTreesPHC2;
@@ -21,23 +17,20 @@ import maxhyper.dtphc2.blocks.FruitVineBlock;
 import maxhyper.dtphc2.blocks.MapleSpileBlock;
 import maxhyper.dtphc2.blocks.MapleSpileBucketBlock;
 import maxhyper.dtphc2.cells.DTPHC2CellKits;
+import maxhyper.dtphc2.fruits.FallingFruit;
 import maxhyper.dtphc2.fruits.OffsetFruit;
 import maxhyper.dtphc2.fruits.PalmPod;
 import maxhyper.dtphc2.genfeatures.DTPHC2GenFeatures;
-import maxhyper.dtphc2.growthlogic.DTPHC2GrowthLogicKits;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import static maxhyper.dtphc2.DynamicTreesPHC2.MOD_ID;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class DTPHC2Registries {
@@ -84,6 +77,7 @@ public class DTPHC2Registries {
     @SubscribeEvent
     public static void registerFruitType(final TypeRegistryEvent<Fruit> event) {
         event.registerType(DynamicTreesPHC2.resLoc("offset_down"), OffsetFruit.TYPE);
+        event.registerType(DynamicTreesPHC2.resLoc("falling_fruit"), FallingFruit.TYPE);
     }
 
     @SubscribeEvent
@@ -104,39 +98,6 @@ public class DTPHC2Registries {
     @SubscribeEvent
     public static void onCellKitRegistry (final com.ferreusveritas.dynamictrees.api.registry.RegistryEvent<CellKit> event) {
         DTPHC2CellKits.register(event.getRegistry());
-    }
-
-    @SubscribeEvent
-    public static void onGrowthLogicKitRegistry (final com.ferreusveritas.dynamictrees.api.registry.RegistryEvent<GrowthLogicKit> event) {
-        DTPHC2GrowthLogicKits.register(event.getRegistry());
-    }
-
-
-
-    @SubscribeEvent
-    public static void registerSpeciesTypes (final TypeRegistryEvent<Species> event) {
-//        event.registerType(DynamicTreesPHC2.resLoc("poplar"), PoplarSpecies.TYPE);
-//        event.registerType(DynamicTreesPHC2.resLoc("ether"), EtherSpecies.TYPE);
-//        event.registerType(DynamicTreesPHC2.resLoc("twiglet"), TwigletSpecies.TYPE);
-//        event.registerType(DynamicTreesPHC2.resLoc("generates_underwater"), GenUnderwaterSpecies.TYPE);
-//        event.registerType(DynamicTreesPHC2.resLoc("generates_on_mossy_stone"), GenOnMossyStoneSpecies.TYPE);
-//        event.registerType(DynamicTreesPHC2.resLoc("mangrove"), MangroveSpecies.TYPE);
-    }
-    
-    @SubscribeEvent
-    public static void registerFamilyTypes (final TypeRegistryEvent<Family> event) {
-//        event.registerType(DynamicTreesPHC2.resLoc("diagonal_palm"), DiagonalPalmFamily.TYPE);
-//        event.registerType(DynamicTreesPHC2.resLoc("sythian_fungus"), SythianFungusFamily.TYPE);
-    }
-
-    @SubscribeEvent
-    public static void registerLeavesPropertiesTypes (final TypeRegistryEvent<LeavesProperties> event) {
-//        event.registerType(DynamicTreesPHC2.resLoc("scruffy"), ScruffyLeavesProperties.TYPE);
-    }
-
-    @SubscribeEvent
-    public static void registerSoilPropertiesTypes (final TypeRegistryEvent<SoilProperties> event) {
-//        event.registerType(DynamicTreesPHC2.resLoc( "offset_tint"), BYGTintedSoilProperties.TYPE);
     }
 
     @SubscribeEvent
