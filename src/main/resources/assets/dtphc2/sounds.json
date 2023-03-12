@@ -1,10 +1,9 @@
 {
-  "blocks.fruit.bonk": {
-    "category": "block",
-    "subtitle": "blocks.fruit.bonk",
+  "falling_fruit.bonk": {
+    "category": "blocks",
+    "subtitle": "subtitle.dtphc2.falling_fruit.bonk",
     "sounds": [{
-      "name": "dtphc2:block/fruit/bonk",
-      "stream": true
+      "name": "dtphc2:blocks/fruit/bonk"
     }]
   }
 }

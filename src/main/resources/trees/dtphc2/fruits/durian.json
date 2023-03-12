@@ -1,4 +1,5 @@
 {
+  "type": "dtphc2:falling_fruit",
   "block_registry_name": "durian_fruit",
   "item_stack": "pamhc2trees:durianitem",
   "block_shapes": [

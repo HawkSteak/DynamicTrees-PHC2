@@ -1,9 +1,8 @@
 {
-  "type": "dtphc2:palm",
+  "type": "dtphc2:falling_palm",
   "block_registry_name": "coconut_fruit",
   "item_stack": "dtphc2:coconut_seed",
   "max_age": 3,
-  "can_fall": true,
   "block_shapes": {
     "east": [
       [0.45, 0.7, 0.35, 0.9, 1, 0.65],

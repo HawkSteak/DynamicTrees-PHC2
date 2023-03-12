@@ -13,27 +13,17 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import sun.security.util.Debug;
 
-import java.util.Random;
+public class FallingPalmPod extends Pod {
 
-public class PalmPod extends Pod {
+    public static final TypedRegistry.EntryType<Pod> TYPE = TypedRegistry.newType(FallingPalmPod::new);
 
-    public static final TypedRegistry.EntryType<Pod> TYPE = TypedRegistry.newType(PalmPod::new);
-
-    public PalmPod(ResourceLocation registryName) {
+    public FallingPalmPod(ResourceLocation registryName) {
         super(registryName);
     }
 
     protected PodBlock createBlock(Block.Properties properties) {
-        return new PodBlock(properties, this){
-            @Override public boolean isSupported(IBlockReader world, BlockPos pos, BlockState state) {
-                final BlockState branchState = world.getBlockState(pos.relative(state.getValue(HorizontalBlock.FACING)));
-                final BranchBlock branch = TreeHelper.getBranch(branchState);
-                return branch != null && branch.getRadius(branchState) >= 2;
-            }
-        };
+        return new FallingPodBlock(properties, this);
     }
 
 }

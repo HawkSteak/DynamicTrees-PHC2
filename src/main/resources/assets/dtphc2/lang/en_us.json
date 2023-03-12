@@ -1,8 +1,8 @@
 {
-  "death.attack.dtphc2.fallingFruitCoconut": "%1$s was bonked in the head by a falling Coconut",
-  "death.attack.dtphc2.fallingFruitDurian": "%1$s was bonked in the head by a falling Durian",
-  "death.attack.dtphc2.fallingFruitJackfruit": "%1$s was bonked in the head by a falling Jackfruit",
-  "death.attack.dtphc2.fallingFruitBreadfruit": "%1$s was bonked in the head by a falling Breadfruit",
+  "death.attack.dtphc2.falling_fruit.coconut": "%1$s was bonked in the head by a falling Coconut",
+  "death.attack.dtphc2.falling_fruit.durian": "%1$s was bonked in the head by a falling Durian",
+  "death.attack.dtphc2.falling_fruit.jackfruit": "%1$s was bonked in the head by a falling Jackfruit",
+  "death.attack.dtphc2.falling_fruit.breadfruit": "%1$s was bonked in the head by a falling Breadfruit",
 
   "item.dtphc2.fruit_seed": "fruit Pip",
   "item.dtphc2.almond_seed": "Germinated Almond",
@@ -116,5 +116,6 @@
   "block.dtphc2.peppercorn_vine": "Peppercorn Vines",
 
   "item.dtphc2.ripe_peppercorn_item": "Ripe Peppercorn",
-  "tooltip.dtphc2.ripe_peppercorn_item": "Too ripe for black pepper. Pick when they are still green"
+  "tooltip.dtphc2.ripe_peppercorn_item": "Too ripe for black pepper. Pick when they are still green",
+  "subtitle.dtphc2.falling_fruit.bonk": "Player bonked by fruit"
 }

@@ -1,4 +1,5 @@
 {
+  "type": "dtphc2:falling_fruit",
   "block_registry_name": "breadfruit_fruit",
   "item_stack": "pamhc2trees:breadfruititem",
   "block_shapes": [

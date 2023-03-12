@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -26,14 +27,16 @@ public class DynamicTreesPHC2 {
     public static DTPConfigProxy DTPlusConfig;
 
     public DynamicTreesPHC2() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(DynamicTreesPHC2::commonSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        bus.addListener(DynamicTreesPHC2::commonSetup);
+        bus.addListener(this::clientSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
 
         RegistryHandler.setup(MOD_ID);
 
         DTPHC2Registries.setup();
+        DTPHC2Registries.SOUNDS.register(bus);
 
         if (ModList.get().isLoaded("dynamictreesplus"))
             DTPlusConfig = new DTPConfig();
