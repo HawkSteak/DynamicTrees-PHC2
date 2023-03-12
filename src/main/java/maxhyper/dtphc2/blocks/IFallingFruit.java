@@ -9,6 +9,7 @@ import net.minecraft.block.FallingBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
@@ -65,13 +66,13 @@ public interface IFallingFruit {
                 if (i > 0) {
                     List<Entity> list = Lists.newArrayList(this.level.getEntities(this, this.getBoundingBox()));
                     for(Entity entity : list) {
-                        entity.hurt(getDamageSource(),
-                                (float)Math.min(MathHelper.floor((float)i * IFallingFruit.fallDamageAmount),
-                                        IFallingFruit.fallDamageMax)
-                        );
-                        level.playSound(null, pos,
-                                DTPHC2Registries.FRUIT_BONK.get(), SoundCategory.BLOCKS,
-                                1.0F, 1.0F);
+                        if (entity instanceof LivingEntity){
+                            entity.hurt(getDamageSource(),
+                                    (float)Math.min(MathHelper.floor((float)i * IFallingFruit.fallDamageAmount), IFallingFruit.fallDamageMax));
+                            level.playSound(null, pos,
+                                    DTPHC2Registries.FRUIT_BONK.get(), SoundCategory.BLOCKS,
+                                    1.0F, 1.0F);
+                        }
                     }
                 }
                 return false;
