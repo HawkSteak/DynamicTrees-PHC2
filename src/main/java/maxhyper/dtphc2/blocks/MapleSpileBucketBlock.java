@@ -4,17 +4,13 @@ import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -24,6 +20,7 @@ import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -35,7 +32,7 @@ import java.util.Random;
 
 public class MapleSpileBucketBlock extends MapleSpileBlock {
 
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    //public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public static final int maxFilling = 3;
     public static final IntegerProperty FILLING = IntegerProperty.create("filling", 0, maxFilling);
@@ -43,20 +40,22 @@ public class MapleSpileBucketBlock extends MapleSpileBlock {
     private static VoxelShape makeShape(){
         VoxelShape shape = VoxelShapes.empty();
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.25, 0, 0.0625, 0.75, 0.5625, 0.5625), IBooleanFunction.OR);
-        shape = VoxelShapes.join(shape, VoxelShapes.box(0.6875, 0.0625, 0.125, 0.3125, 0.5625, 0.5), IBooleanFunction.OR);
-        shape = VoxelShapes.join(shape, VoxelShapes.box(0.25, 0.5625, 0.25, 0.3125, 0.84375, 0.3125), IBooleanFunction.OR);
-        shape = VoxelShapes.join(shape, VoxelShapes.box(0.6875, 0.5625, 0.25, 0.75, 0.84375, 0.3125), IBooleanFunction.OR);
-        shape = VoxelShapes.join(shape, VoxelShapes.box(0.3125, 0.78125, 0.25, 0.6875, 0.84375, 0.3125), IBooleanFunction.OR);
+        shape = VoxelShapes.join(shape, VoxelShapes.box(0.6875, 0.0625, 0.125, 0.3125, 0.5625, 0.5), IBooleanFunction.ONLY_FIRST);
+        shape = VoxelShapes.join(shape, VoxelShapes.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), IBooleanFunction.OR);
+        shape = VoxelShapes.join(shape, VoxelShapes.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), IBooleanFunction.OR);
 
         return shape;
     }
 
-    private static final VoxelShape SHAPE = makeShape();
+    private static final VoxelShape SHAPE_N = rotateShape(Direction.SOUTH, Direction.NORTH, makeShape());
+    private static final VoxelShape SHAPE_E = rotateShape(Direction.SOUTH, Direction.EAST, SHAPE_N);
+    private static final VoxelShape SHAPE_S = rotateShape(Direction.WEST, Direction.SOUTH, SHAPE_N);
+    private static final VoxelShape SHAPE_W = rotateShape(Direction.WEST, Direction.WEST, SHAPE_N);
 
     public MapleSpileBucketBlock() {
         super();
-        registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FILLING, 0));
-        //registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(FILLING, 0));
+        //registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.SOUTH).setValue(FILLING, 0));
+        registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(FILLING, 0));
     }
 
     @Override
@@ -66,7 +65,7 @@ public class MapleSpileBucketBlock extends MapleSpileBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+    public void randomTick(@Nonnull BlockState state, @Nonnull ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random) {
         if (!this.canBlockStay(world, pos, state)) {
             this.dropBlock(world, pos, state);
         }
@@ -98,6 +97,8 @@ public class MapleSpileBucketBlock extends MapleSpileBlock {
                 int count = (filling + (filling == maxFilling ? 1 : 0)); //Adds one bonus syrup if collected when its full
                 ItemStack drop = new ItemStack(mapleSyrup, count);
                 player.addItem(drop);
+            } else {
+                player.sendMessage(new StringTextComponent("You will not get maple syrup, sorry."), Util.NIL_UUID);
             }
             worldIn.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_PICKUP, SoundCategory.BLOCKS, 1, 1 + filling / 4f, false);
             worldIn.setBlock(pos, state.setValue(FILLING, 0), 3);
@@ -146,7 +147,17 @@ public class MapleSpileBucketBlock extends MapleSpileBlock {
     @Override
     @Nonnull
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return SHAPE;
+        //noinspection DuplicatedCode
+        switch (state.getValue(FACING)) {
+            case EAST:
+                return SHAPE_E;
+            case SOUTH:
+                return SHAPE_S;
+            case WEST:
+                return SHAPE_W;
+            default:
+                return SHAPE_N;
+        }
     }
 
 }
