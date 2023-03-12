@@ -10,8 +10,6 @@
 - Dragonfruit, Papaya, Coconut, Date, Maple, Paperbark and Cinnamon do not drop items when chopped  
 aka all log fruits and palm type trees
 - Banana does not drop sticks (can't get high enough for logs)
-- Grapefruits and Oranges have the same texture (item)
-- Dragonfruit Cactus does not look like a cactus?  
 - Ripe peppercorn is useless
 
 # Working

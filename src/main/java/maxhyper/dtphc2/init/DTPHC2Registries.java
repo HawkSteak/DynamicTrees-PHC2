@@ -18,6 +18,8 @@ import com.pam.pamhc2trees.init.ItemRegistry;
 import maxhyper.dtphc2.DynamicTreesPHC2;
 import maxhyper.dtphc2.blocks.DragonFruitLeavesProperties;
 import maxhyper.dtphc2.blocks.FruitVineBlock;
+import maxhyper.dtphc2.blocks.MapleSpileBlock;
+import maxhyper.dtphc2.blocks.MapleSpileBucketBlock;
 import maxhyper.dtphc2.cells.DTPHC2CellKits;
 import maxhyper.dtphc2.fruits.OffsetFruit;
 import maxhyper.dtphc2.fruits.PalmPod;
@@ -27,12 +29,15 @@ import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import static maxhyper.dtphc2.DynamicTreesPHC2.MOD_ID;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class DTPHC2Registries {
@@ -47,6 +52,11 @@ public class DTPHC2Registries {
     public static final Item PEPPERCORN_VINE_ITEM = new BlockItem(PEPPERCORN_VINE, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
     public static final Item RIPE_PEPPERCORN_ITEM = new Item(new Item.Properties().tab(DTRegistries.ITEM_GROUP));
+
+    public static final MapleSpileBlock MAPLE_SPILE_BLOCK = new MapleSpileBlock();
+    public static final Item MAPLE_SPILE_ITEM = new BlockItem(MAPLE_SPILE_BLOCK, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
+    public static final MapleSpileBucketBlock MAPLE_SPILE_BUCKET_BLOCK = new MapleSpileBucketBlock();
+    public static final Item MAPLE_SPILE_BUCKET_ITEM = new BlockItem(MAPLE_SPILE_BUCKET_BLOCK, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
     public static VoxelShape DRAGON_FRUIT_CACTUS_SAPLING_SHAPE = VoxelShapes.create(
             new AxisAlignedBB(0.375f, 0.0f, 0.375f, 0.625f, 0.5f, 0.625f));
@@ -64,6 +74,11 @@ public class DTPHC2Registries {
         RegistryHandler.addItem(DynamicTreesPHC2.resLoc("ripe_peppercorn_item"), RIPE_PEPPERCORN_ITEM);
 
         CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.resLoc("dragon_fruit_cactus").toString(), DRAGON_FRUIT_CACTUS_SAPLING_SHAPE);
+
+        RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("maple_spile"), MAPLE_SPILE_BLOCK);
+        RegistryHandler.addItem(DynamicTreesPHC2.resLoc("maple_spile"), MAPLE_SPILE_ITEM);
+        RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("maple_spile_bucket"), MAPLE_SPILE_BUCKET_BLOCK);
+        RegistryHandler.addItem(DynamicTreesPHC2.resLoc("maple_spile_bucket"), MAPLE_SPILE_BUCKET_ITEM);
     }
 
     @SubscribeEvent
