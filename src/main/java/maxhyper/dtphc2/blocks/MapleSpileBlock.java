@@ -6,6 +6,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -22,10 +23,15 @@ import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.logging.log4j.core.util.UuidUtil;
+import sun.security.provider.SHA;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -35,26 +41,61 @@ import static maxhyper.dtphc2.init.DTPHC2Registries.MAPLE_SPILE_BUCKET_BLOCK;
 
 public class MapleSpileBlock extends HorizontalBlock {
 
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    //public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public static final BooleanProperty FILLED = BooleanProperty.create("filled");
 
     private static final double chanceToBreak = 0.02D;
 
-    private static VoxelShape makeShape(){
+    private static VoxelShape makeShape() {
         VoxelShape shape = VoxelShapes.empty();
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), IBooleanFunction.OR);
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), IBooleanFunction.OR);
-
         return shape;
     }
 
-    private static final VoxelShape SHAPE = makeShape();
+    public static VoxelShape rotateShape(Direction from, Direction to, VoxelShape shape) {
+        VoxelShape[] buffer = new VoxelShape[]{shape, VoxelShapes.empty()};
+
+        int times = (to.ordinal() - from.get2DDataValue() + 4) % 4;
+        for (int i = 0; i < times; i++) {
+            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> buffer[1] = VoxelShapes.or(buffer[1], VoxelShapes.box(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX)));
+            buffer[0] = buffer[1];
+            buffer[1] = VoxelShapes.empty();
+        }
+
+        return buffer[0];
+    }
+
+    private static final VoxelShape SHAPE_N = rotateShape(Direction.SOUTH, Direction.NORTH, makeShape());
+    private static final VoxelShape SHAPE_E = rotateShape(Direction.SOUTH, Direction.EAST, SHAPE_N);
+    private static final VoxelShape SHAPE_S = rotateShape(Direction.WEST, Direction.SOUTH, SHAPE_N);
+    private static final VoxelShape SHAPE_W = rotateShape(Direction.WEST, Direction.WEST, SHAPE_N);
 
     public MapleSpileBlock() {
         super(Properties.of(Material.METAL).sound(SoundType.METAL).strength(0.5f).randomTicks());
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FILLED, false));
-        //registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(FILLED, false));
+        //registerDefaultState(defaultBlockState().setValue(FACING, Direction.SOUTH).setValue(FILLED, false));
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext pContext) {
+        BlockState blockstate = this.defaultBlockState();
+        IWorldReader iworldreader = pContext.getLevel();
+        BlockPos blockpos = pContext.getClickedPos();
+
+        for (Direction direction : pContext.getNearestLookingDirections()) {
+            direction = direction.getOpposite();
+            if (direction.getAxis().isHorizontal()) {
+                blockstate = blockstate.setValue(FACING, direction);
+                if (canSurvive(blockstate, iworldreader, blockpos)) {
+                    return blockstate;
+                }
+            }
+        }
+
+        return null;
     }
 
     @Override
@@ -64,9 +105,11 @@ public class MapleSpileBlock extends HorizontalBlock {
         builder.add(FILLED);
     }
 
-    public void updateTick(World worldIn, BlockPos pos, BlockState state, Random rand) {
-        if (!this.canBlockStay(worldIn, pos, state)) {
-            this.dropBlock(worldIn, pos, state);
+    @SuppressWarnings("deprecation")
+    @Override
+    public void randomTick(@Nonnull BlockState state, @Nonnull ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random) {
+        if (!this.canBlockStay(world, pos, state)) {
+            this.dropBlock(world, pos, state);
         }
     }
 
@@ -97,9 +140,9 @@ public class MapleSpileBlock extends HorizontalBlock {
                 }
                 return ActionResultType.SUCCESS;
             }
-        }
-        if (giveSyrup(world, pos, state, player)) {
-            return ActionResultType.SUCCESS;
+            if (giveSyrup(world, pos, state, player)) {
+                return ActionResultType.SUCCESS;
+            }
         }
         return super.use(state, world, pos, player, hand, hit);
     }
@@ -111,6 +154,8 @@ public class MapleSpileBlock extends HorizontalBlock {
                 ResourceLocation mapleSyrupRes = new ResourceLocation("pamhc2trees", "maplesyrupitem");
                 Item mapleSyrup = ForgeRegistries.ITEMS.getValue(mapleSyrupRes);
                 player.addItem(new ItemStack(mapleSyrup));
+            } else {
+                player.sendMessage(new StringTextComponent("No syrup for you bro."), Util.NIL_UUID);
             }
             world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_PICKUP, SoundCategory.BLOCKS, 1, 1f, false);
             world.setBlock(pos, state.setValue(FILLED, false), 3);
@@ -158,6 +203,12 @@ public class MapleSpileBlock extends HorizontalBlock {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos) {
+        return canBlockStay(world, pos, state);
+    }
+
     @Override
     public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
         return new ItemStack(Items.IRON_INGOT);
@@ -167,7 +218,24 @@ public class MapleSpileBlock extends HorizontalBlock {
     @Override
     @Nonnull
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return SHAPE;
+        switch (state.getValue(FACING)) {
+            case EAST:
+                return SHAPE_E;
+            case SOUTH:
+                return SHAPE_S;
+            case WEST:
+                return SHAPE_W;
+            default:
+                return SHAPE_N;
+        }
+        //return rotateShape(state.getValue(FACING), defaultBlockState().getValue(FACING), SHAPE);
     }
+
+//    @SuppressWarnings("deprecation")
+//    @Override
+//    @Nonnull
+//    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, IWorld pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+//        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+//    }
 
 }
