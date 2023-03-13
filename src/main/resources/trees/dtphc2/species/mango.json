@@ -29,15 +29,5 @@
         "fruit": "dtphc2:mango"
       }
     }
-  ],
-  "drop_creators": [
-    "log",
-    "stick",
-    {
-      "name": "fruit",
-      "properties":{
-        "fruit_item": "pamhc2trees:mangoitem"
-      }
-    }
   ]
 }

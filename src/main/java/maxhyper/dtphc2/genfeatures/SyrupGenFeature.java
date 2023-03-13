@@ -7,6 +7,7 @@ import com.ferreusveritas.dynamictrees.compat.seasons.SeasonHelper;
 import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeature;
 import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeatureConfiguration;
 import com.ferreusveritas.dynamictrees.systems.genfeatures.context.PostGrowContext;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -41,6 +42,8 @@ public class SyrupGenFeature extends GenFeature {
 
     @Override
     public boolean postGrow(@Nonnull GenFeatureConfiguration configuration, @Nonnull PostGrowContext context) {
+        assert Minecraft.getInstance().player != null;
+        Minecraft.getInstance().player.chat("syrup");
         World world = context.worldContext().level();
         boolean natural = context.natural();
         final BlockPos rootPos = context.pos();

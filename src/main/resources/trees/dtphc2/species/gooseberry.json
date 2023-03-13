@@ -30,15 +30,5 @@
         "fruiting_radius": 5
       }
     }
-  ],
-  "drop_creators": [
-    "log",
-    "stick",
-    {
-      "name": "fruit",
-      "properties":{
-        "fruit_item": "pamhc2trees:gooseberryitem"
-      }
-    }
   ]
 }
