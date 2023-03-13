@@ -20,8 +20,8 @@ import static maxhyper.dtphc2.DynamicTreesPHC2.MOD_ID;
 
 public class SyrupGenFeature extends GenFeature {
 
-    private final ConfigurationProperty<Float> BASE_SYRUP_CHANCE = ConfigurationProperty.floatProperty("base_syrup_chance");
-    private final ConfigurationProperty<Float> OUT_OF_SEASON_SYRUP_CHANCE = ConfigurationProperty.floatProperty("out_of_season_syrup_chance");
+    private static final ConfigurationProperty<Float> BASE_SYRUP_CHANCE = ConfigurationProperty.floatProperty("base_syrup_chance");
+    private static final ConfigurationProperty<Float> OUT_OF_SEASON_SYRUP_CHANCE = ConfigurationProperty.floatProperty("out_of_season_syrup_chance");
 
     public SyrupGenFeature(ResourceLocation registryName) {
         super(registryName);

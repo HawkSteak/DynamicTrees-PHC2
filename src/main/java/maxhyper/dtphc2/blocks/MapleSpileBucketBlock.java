@@ -88,14 +88,15 @@ public class MapleSpileBucketBlock extends MapleSpileBlock {
     protected boolean giveSyrup(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
         int filling = worldIn.getBlockState(pos).getValue(FILLING);
         if (filling > 0) {
-            if (worldIn.isClientSide() && !worldIn.restoringBlockSnapshots) {
+            if (!worldIn.isClientSide() && !worldIn.restoringBlockSnapshots) {
                 //TODO: make dynamic
                 ResourceLocation mapleSyrupRes = new ResourceLocation("pamhc2trees", "maplesyrupitem");
                 Item mapleSyrup = ForgeRegistries.ITEMS.getValue(mapleSyrupRes);
                 //ItemStack drop = new ItemStack(FruitRegistry.getLog(FruitRegistry.MAPLE).getFruitItem());
                 int count = (filling + (filling == maxFilling ? 1 : 0)); //Adds one bonus syrup if collected when its full
                 ItemStack drop = new ItemStack(mapleSyrup, count);
-                player.addItem(drop);
+                worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), drop));
+                //player.addItem(drop);
             }
             worldIn.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_PICKUP, SoundCategory.BLOCKS, 1, 1 + filling / 4f, false);
             worldIn.setBlock(pos, state.setValue(FILLING, 0), 3);

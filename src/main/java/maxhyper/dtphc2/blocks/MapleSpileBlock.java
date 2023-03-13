@@ -143,11 +143,12 @@ public class MapleSpileBlock extends HorizontalBlock {
 
     protected boolean giveSyrup(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (state.getValue(FILLED)) {
-            if (world.isClientSide() && !world.restoringBlockSnapshots) {
+            if (!world.isClientSide() && !world.restoringBlockSnapshots) {
                 //TODO: Make dynamic
                 ResourceLocation mapleSyrupRes = new ResourceLocation("pamhc2trees", "maplesyrupitem");
                 Item mapleSyrup = ForgeRegistries.ITEMS.getValue(mapleSyrupRes);
-                player.addItem(new ItemStack(mapleSyrup));
+                world.addFreshEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(mapleSyrup)));
+                //player.addItem(new ItemStack(mapleSyrup));
             }
             world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_PICKUP, SoundCategory.BLOCKS, 1, 1f, false);
             world.setBlock(pos, state.setValue(FILLED, false), 3);
