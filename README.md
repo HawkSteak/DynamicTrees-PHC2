@@ -3,13 +3,8 @@
 
 # Missing features
 
-- Paperbark does not grow back
-- Papayas have weird hitboxes and show growth two times
-- Coconuts do not drop
 - Maple treetap missing
-- Dragonfruit, Papaya, Coconut, Date, Maple, Paperbark and Cinnamon do not drop items when chopped  
-aka all log fruits and palm type trees
-- Banana does not drop sticks (can't get high enough for logs)
+- Maple, Paperbark and Cinnamon do not drop items when chopped  
 - Ripe peppercorn is useless
 
 # Working
