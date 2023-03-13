@@ -42,8 +42,6 @@ public class SyrupGenFeature extends GenFeature {
 
     @Override
     public boolean postGrow(@Nonnull GenFeatureConfiguration configuration, @Nonnull PostGrowContext context) {
-        assert Minecraft.getInstance().player != null;
-        Minecraft.getInstance().player.chat("syrup");
         World world = context.worldContext().level();
         boolean natural = context.natural();
         final BlockPos rootPos = context.pos();
