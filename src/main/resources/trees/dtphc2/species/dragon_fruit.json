@@ -33,15 +33,5 @@
         "expand_up_fruit_height": 1
       }
     }
-  ],
-  "drop_creators": [
-    "log",
-    "stick",
-    {
-      "name": "fruit",
-      "properties":{
-        "fruit_item": "pamhc2trees:dragonfruititem"
-      }
-    }
   ]
 }

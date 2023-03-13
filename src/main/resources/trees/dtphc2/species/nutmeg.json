@@ -30,15 +30,5 @@
         "fruit": "dtphc2:nutmeg"
       }
     }
-  ],
-  "drop_creators": [
-    "log",
-    "stick",
-    {
-      "name": "fruit",
-      "properties":{
-        "fruit_item": "pamhc2trees:nutmegitem"
-      }
-    }
   ]
 }

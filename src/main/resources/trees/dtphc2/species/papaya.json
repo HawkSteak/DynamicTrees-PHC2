@@ -34,15 +34,5 @@
         "expand_down_fruit_height": 1
       }
     }
-  ],
-  "drop_creators": [
-    "log",
-    "stick",
-    {
-      "name": "fruit",
-      "properties":{
-        "fruit_item": "pamhc2trees:papayaitem"
-      }
-    }
   ]
 }

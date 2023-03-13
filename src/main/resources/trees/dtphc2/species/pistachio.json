@@ -31,15 +31,5 @@
         "fruiting_radius": 6
       }
     }
-  ],
-  "drop_creators": [
-    "log",
-    "stick",
-    {
-      "name": "fruit",
-      "properties":{
-        "fruit_item": "pamhc2trees:pistachioitem"
-      }
-    }
   ]
 }
