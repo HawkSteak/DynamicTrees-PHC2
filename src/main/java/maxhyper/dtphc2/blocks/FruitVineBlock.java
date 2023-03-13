@@ -46,9 +46,9 @@ public class FruitVineBlock extends VineBlock {
     @Nullable
     private final Float seasonOffset = 0f;
 
-    private float flowerHoldPeriodLength = 0.5F;
+    private final float flowerHoldPeriodLength = 0.5F;
 
-    private float minProductionFactor = 0.3F;
+    private final float minProductionFactor = 0.3F;
 
     public FruitVineBlock() {
         super(AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().strength(0.2F).sound(SoundType.VINE));
@@ -127,7 +127,6 @@ public class FruitVineBlock extends VineBlock {
                 return;
             }
             if (age == 0 && isInFlowerHoldPeriod(world, pos, season)) {
-                return;
             }
         }
 

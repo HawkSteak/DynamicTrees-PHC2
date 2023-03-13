@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Random;
 
 public class FallingPodBlock extends PodBlock implements IFallingFruit {
@@ -45,7 +46,7 @@ public class FallingPodBlock extends PodBlock implements IFallingFruit {
     @Override
     public void doTick(BlockState state, World world, BlockPos pos, Random random) {
         if (checkToFall(state, world, pos, random)){
-            System.out.println(this.asItem());
+            //System.out.println(this.asItem());
             doFall(state, world, pos);
         } else
             super.doTick(state, world, pos, random);
@@ -82,7 +83,9 @@ public class FallingPodBlock extends PodBlock implements IFallingFruit {
         if (entity.getServer() == null) return ItemStack.EMPTY;
         ServerWorld world = entity.getServer().getLevel(entity.level.dimension());
         if (world == null) return ItemStack.EMPTY;
-        return getDrops(entity.getBlockState(), world, entity.blockPosition(), null).get(0);
+        List<ItemStack> drops = getDrops(entity.getBlockState(), world, entity.blockPosition(), null);
+        if (drops.isEmpty()) return ItemStack.EMPTY;
+        return drops.get(0);
     }
 
     public float getRandomFruitFallChance() {

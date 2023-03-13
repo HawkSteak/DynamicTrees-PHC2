@@ -273,7 +273,7 @@ publishing {
 
 // Extensions to make CurseGradle extension slightly neater.
 
-fun com.matthewprenger.cursegradle.CurseExtension.project(action: CurseProject.() -> Unit) {
+fun CurseExtension.project(action: CurseProject.() -> Unit) {
     this.project(closureOf(action))
 }
 

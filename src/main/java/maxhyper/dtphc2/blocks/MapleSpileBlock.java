@@ -11,9 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -25,13 +23,10 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.logging.log4j.core.util.UuidUtil;
-import sun.security.provider.SHA;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -75,7 +70,6 @@ public class MapleSpileBlock extends HorizontalBlock {
     public MapleSpileBlock() {
         super(Properties.of(Material.METAL).sound(SoundType.METAL).strength(0.5f).randomTicks());
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FILLED, false));
-        //registerDefaultState(defaultBlockState().setValue(FACING, Direction.SOUTH).setValue(FILLED, false));
     }
 
     @Nullable
@@ -154,8 +148,6 @@ public class MapleSpileBlock extends HorizontalBlock {
                 ResourceLocation mapleSyrupRes = new ResourceLocation("pamhc2trees", "maplesyrupitem");
                 Item mapleSyrup = ForgeRegistries.ITEMS.getValue(mapleSyrupRes);
                 player.addItem(new ItemStack(mapleSyrup));
-            } else {
-                player.sendMessage(new StringTextComponent("No syrup for you bro."), Util.NIL_UUID);
             }
             world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_PICKUP, SoundCategory.BLOCKS, 1, 1f, false);
             world.setBlock(pos, state.setValue(FILLED, false), 3);

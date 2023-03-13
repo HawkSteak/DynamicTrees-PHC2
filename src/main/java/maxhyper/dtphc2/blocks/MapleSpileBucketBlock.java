@@ -54,7 +54,6 @@ public class MapleSpileBucketBlock extends MapleSpileBlock {
 
     public MapleSpileBucketBlock() {
         super();
-        //registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.SOUTH).setValue(FILLING, 0));
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(FILLING, 0));
     }
 
@@ -97,8 +96,6 @@ public class MapleSpileBucketBlock extends MapleSpileBlock {
                 int count = (filling + (filling == maxFilling ? 1 : 0)); //Adds one bonus syrup if collected when its full
                 ItemStack drop = new ItemStack(mapleSyrup, count);
                 player.addItem(drop);
-            } else {
-                player.sendMessage(new StringTextComponent("You will not get maple syrup, sorry."), Util.NIL_UUID);
             }
             worldIn.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_PICKUP, SoundCategory.BLOCKS, 1, 1 + filling / 4f, false);
             worldIn.setBlock(pos, state.setValue(FILLING, 0), 3);
