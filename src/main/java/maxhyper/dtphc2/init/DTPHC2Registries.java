@@ -9,6 +9,7 @@ import com.ferreusveritas.dynamictrees.init.DTRegistries;
 import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
 import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeature;
 import com.ferreusveritas.dynamictrees.systems.pod.Pod;
+import com.ferreusveritas.dynamictrees.trees.Family;
 import com.ferreusveritas.dynamictrees.util.CommonVoxelShapes;
 import com.pam.pamhc2trees.init.ItemRegistry;
 import maxhyper.dtphc2.DynamicTreesPHC2;
@@ -22,6 +23,7 @@ import maxhyper.dtphc2.fruits.FallingPalmPod;
 import maxhyper.dtphc2.fruits.OffsetFruit;
 import maxhyper.dtphc2.fruits.PalmPod;
 import maxhyper.dtphc2.genfeatures.DTPHC2GenFeatures;
+import maxhyper.dtphc2.trees.PaperbarkFamily;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -105,6 +107,11 @@ public class DTPHC2Registries {
     @SubscribeEvent
     public static void registerLeavesPropertiesType(final TypeRegistryEvent<LeavesProperties> event) {
         event.registerType(DynamicTreesPHC2.resLoc("dragon_fruit"), DragonFruitLeavesProperties.TYPE);
+    }
+
+    @SubscribeEvent
+    public static void registerFamilyType(final TypeRegistryEvent<Family> event) {
+        event.registerType(DynamicTreesPHC2.resLoc("paperbark"), PaperbarkFamily.TYPE);
     }
 
     @SubscribeEvent
