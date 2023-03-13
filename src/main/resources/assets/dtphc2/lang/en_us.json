@@ -117,5 +117,8 @@
 
   "item.dtphc2.ripe_peppercorn_item": "Ripe Peppercorn",
   "tooltip.dtphc2.ripe_peppercorn_item": "Too ripe for black pepper. Pick when they are still green",
-  "subtitle.dtphc2.falling_fruit.bonk": "Player bonked by fruit"
+  "subtitle.dtphc2.falling_fruit.bonk": "Player bonked by fruit",
+
+  "item.pamhc2trees.coconutitem": "Open Coconut",
+  "item.pamhc2trees.maplesyrupitem": "Maple Syrup"
 }
