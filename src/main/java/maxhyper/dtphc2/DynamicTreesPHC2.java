@@ -103,7 +103,6 @@ public class DynamicTreesPHC2 {
                 v.set(false);
                 v.save();
             }
-
         }
     }
 
