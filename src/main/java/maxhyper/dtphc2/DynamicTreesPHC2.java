@@ -11,16 +11,16 @@ import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(DynamicTreesPHC2.MOD_ID)
+@Mod.EventBusSubscriber(modid = DynamicTreesPHC2.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DynamicTreesPHC2 {
     public static final String MOD_ID = "dtphc2";
 
@@ -28,7 +28,7 @@ public class DynamicTreesPHC2 {
 
     public DynamicTreesPHC2() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        bus.addListener(DynamicTreesPHC2::commonSetup);
+        bus.addListener(DynamicTreesPHC2::onConstructMod);
         bus.addListener(this::clientSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -44,8 +44,8 @@ public class DynamicTreesPHC2 {
             DTPlusConfig = new DefaultConfig();
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    static void commonSetup(final FMLCommonSetupEvent event) {
+    @SubscribeEvent
+    public static void onConstructMod(final FMLConstructModEvent event) {
         if (DTConfigs.WORLD_GEN.get()) {
             ForgeConfigSpec.BooleanValue[] test = {
                     EnableConfig.apple_worldgen,
@@ -101,7 +101,7 @@ public class DynamicTreesPHC2 {
 
             for (ForgeConfigSpec.BooleanValue v : test) {
                 v.set(false);
-                //v.save();
+                v.save();
             }
 
         }
