@@ -24,6 +24,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -34,38 +35,27 @@ import java.util.Random;
 
 public class MapleSpileBucketBlock extends MapleSpileCommon {
 
-
-    protected static VoxelShape makeShape() {
-        VoxelShape shape = VoxelShapes.empty();
+    static VoxelShape makeBucketShape() {
+        VoxelShape shape = makeShape();
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.25, 0, 0.0625, 0.75, 0.5625, 0.5625), IBooleanFunction.OR);
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.6875, 0.0625, 0.125, 0.3125, 0.5625, 0.5), IBooleanFunction.ONLY_FIRST);
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), IBooleanFunction.OR);
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), IBooleanFunction.OR);
-
         return shape;
     }
 
-    private static final VoxelShape SHAPE_N = rotateShape(Direction.SOUTH, Direction.NORTH, makeShape());
-    private static final VoxelShape SHAPE_E = rotateShape(Direction.SOUTH, Direction.EAST, SHAPE_N);
-    private static final VoxelShape SHAPE_S = rotateShape(Direction.WEST, Direction.SOUTH, SHAPE_N);
-    private static final VoxelShape SHAPE_W = rotateShape(Direction.WEST, Direction.WEST, SHAPE_N);
-
     public MapleSpileBucketBlock() {
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(FILLING, 0));
+        SHAPE_N = rotateShape(Direction.SOUTH, Direction.NORTH, makeBucketShape());
+        SHAPE_E = rotateShape(Direction.SOUTH, Direction.EAST, SHAPE_N);
+        SHAPE_S = rotateShape(Direction.WEST, Direction.SOUTH, SHAPE_N);
+        SHAPE_W = rotateShape(Direction.WEST, Direction.WEST, SHAPE_N);
     }
 
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        //super.createBlockStateDefinition(builder);
-        builder.add(FACING);
-        builder.add(FILLING);
-    }
-
-    @Override
-    public void randomTick(@Nonnull BlockState state, @Nonnull ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random) {
-        if (!this.canBlockStay(world, pos, state)) {
-            this.dropBlock(world, pos, state);
-        }
+        super.createBlockStateDefinition(builder);
+        builder.add(FACING, FILLING);
     }
 
     @SuppressWarnings("deprecation")
@@ -100,27 +90,12 @@ public class MapleSpileBucketBlock extends MapleSpileCommon {
                 worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), drop));
                 //player.addItem(drop);
             }
-            worldIn.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_PICKUP, SoundCategory.BLOCKS, 1, 1 + filling / 4f, false);
+            worldIn.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.HONEY_DRINK, SoundCategory.BLOCKS, 1, 1 + filling / 4f, false);
+            if (filling == maxFilling) worldIn.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUCKET_EMPTY, SoundCategory.BLOCKS, 1, 1 + filling / 4f, false);
             worldIn.setBlock(pos, state.setValue(FILLING, 0), 3);
             return true;
         }
         return false;
-    }
-
-    @Override
-    protected void dropBlock(World worldIn, BlockPos pos, BlockState state) {
-        worldIn.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-        worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.BUCKET)));
-        worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.IRON_NUGGET)));
-    }
-
-    @Override
-    public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity pTe, ItemStack stack) {
-        if (!player.isCreative()) {
-            worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.BUCKET)));
-            worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.IRON_NUGGET)));
-        }
-        super.playerDestroy(worldIn, player, pos, state, pTe, stack);
     }
 
     @Override
@@ -143,21 +118,5 @@ public class MapleSpileBucketBlock extends MapleSpileCommon {
 //    public BlockRenderLayer getBlockLayer() {
 //        return BlockRenderLayer.CUTOUT_MIPPED;
 //    }
-
-    @Override
-    @Nonnull
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        //noinspection DuplicatedCode
-        switch (state.getValue(FACING)) {
-            case EAST:
-                return SHAPE_E;
-            case SOUTH:
-                return SHAPE_S;
-            case WEST:
-                return SHAPE_W;
-            default:
-                return SHAPE_N;
-        }
-    }
 
 }
