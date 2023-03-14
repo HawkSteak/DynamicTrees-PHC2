@@ -2,7 +2,6 @@ package maxhyper.dtphc2.blocks;
 
 import com.ferreusveritas.dynamictrees.compat.seasons.SeasonHelper;
 import com.ferreusveritas.dynamictrees.util.WorldContext;
-import maxhyper.dtphc2.DynamicTreesPHC2;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
@@ -19,7 +18,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
-import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -40,6 +38,7 @@ public class FruitVineBlock extends VineBlock {
 
     private ItemStack fruitStack;
     private ItemStack overripeFruitStack;
+
     //private Integer fruitingOffset;
     private int matureAge = maxAge;
 
@@ -117,7 +116,7 @@ public class FruitVineBlock extends VineBlock {
             return;
         }
 
-        final Integer age = getAgeFromState(state);
+        final Integer age = getAge(state);
         if (age == null) return;
         final Float season = SeasonHelper.getSeasonValue(WorldContext.create(world), pos);
 
@@ -154,7 +153,7 @@ public class FruitVineBlock extends VineBlock {
             //We look for fruit blocks around. If there is more than two we cancel the fruit growth
             int fruitFoundAround = 0;
             for (Direction dir : Direction.values()) {
-                Integer sideAge = getAgeFromState(world.getBlockState(pos.offset(dir.getNormal())));
+                Integer sideAge = getAge(world.getBlockState(pos.offset(dir.getNormal())));
                 if (sideAge != null && sideAge > 0) {
                     fruitFoundAround++;
                 }
@@ -211,9 +210,13 @@ public class FruitVineBlock extends VineBlock {
         world.setBlock(pos, state, 2);
     }
 
-    private Integer getAgeFromState(BlockState state) {
+    public Integer getAge(BlockState state) {
         if (!state.hasProperty(ageProperty)) return null;
         return state.getValue(ageProperty);
+    }
+
+    public int getMatureAge() {
+        return matureAge;
     }
 
     @Nonnull
@@ -234,7 +237,7 @@ public class FruitVineBlock extends VineBlock {
     }
 
     private boolean spawnItemFruitIfRipe(World world, BlockPos pos, BlockState state) {
-        Integer age = getAgeFromState(state);
+        Integer age = getAge(state);
         if (!world.isClientSide() && age != null) {
             if (age >= matureAge) {
                 ItemStack fruit = (age == matureAge) ? getFruit() : getOverripeFruit();
@@ -252,7 +255,7 @@ public class FruitVineBlock extends VineBlock {
     @Override
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
                                 BlockRayTraceResult hit) {
-        Integer age = getAgeFromState(state);
+        Integer age = getAge(state);
         if (age == null) return ActionResultType.PASS;
         // Drop fruit if mature.
         if (age >= matureAge) {

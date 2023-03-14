@@ -4,6 +4,8 @@ import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -30,14 +32,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class MapleSpileBucketBlock extends MapleSpileBlock {
+public class MapleSpileBucketBlock extends MapleSpileCommon {
 
-    //public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public static final int maxFilling = 3;
-    public static final IntegerProperty FILLING = IntegerProperty.create("filling", 0, maxFilling);
-
-    private static VoxelShape makeShape(){
+    protected static VoxelShape makeShape(){
         VoxelShape shape = VoxelShapes.empty();
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.25, 0, 0.0625, 0.75, 0.5625, 0.5625), IBooleanFunction.OR);
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.6875, 0.0625, 0.125, 0.3125, 0.5625, 0.5), IBooleanFunction.ONLY_FIRST);
@@ -53,13 +51,13 @@ public class MapleSpileBucketBlock extends MapleSpileBlock {
     private static final VoxelShape SHAPE_W = rotateShape(Direction.WEST, Direction.WEST, SHAPE_N);
 
     public MapleSpileBucketBlock() {
-        super();
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(FILLING, 0));
     }
 
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
+        //super.createBlockStateDefinition(builder);
+        builder.add(FACING);
         builder.add(FILLING);
     }
 

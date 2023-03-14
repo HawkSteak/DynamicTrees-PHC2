@@ -12,11 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.LogManager;
 
 import javax.annotation.Nonnull;
-
-import static maxhyper.dtphc2.DynamicTreesPHC2.MOD_ID;
 
 public class SyrupGenFeature extends GenFeature {
 
@@ -47,8 +44,6 @@ public class SyrupGenFeature extends GenFeature {
         final BlockPos rootPos = context.pos();
         if (natural && (TreeHelper.getRadius(world, context.treePos()) >= 7) && (world.getRandom().nextFloat() <= getSyrupChance(world, rootPos, configuration))) {
             dripSyrup(world, rootPos);
-        } else {
-            LogManager.getLogger(MOD_ID).info("POST GROW BUT NO DRIP!");
         }
         return true;
     }
@@ -62,7 +57,6 @@ public class SyrupGenFeature extends GenFeature {
     }
 
     private void dripSyrup(World world, BlockPos rootPos) {
-        LogManager.getLogger(MOD_ID).info("DRIPPING SYRUP!");
         TreeHelper.startAnalysisFromRoot(world, rootPos, new MapSignal(new DripSyrupNode()));
     }
 

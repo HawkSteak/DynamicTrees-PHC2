@@ -31,7 +31,6 @@ public class DripSyrupNode implements NodeInspector {
                 BlockPos offPos = pos.relative(face);
                 BlockState state = world.getBlockState(offPos);
                 if(state.getBlock() == DTPHC2Registries.MAPLE_SPILE_BUCKET_BLOCK) { //Found a bucket
-                    LogManager.getLogger(MOD_ID).info("FOUND BUCKET");
                     bucketsVisited++;
                     if(bucketsVisited <= maxBuckets) {
                         int filling = state.getValue(MapleSpileBucketBlock.FILLING);
@@ -45,7 +44,6 @@ public class DripSyrupNode implements NodeInspector {
                     }
                 }
                 else if(state.getBlock() == DTPHC2Registries.MAPLE_SPILE_BLOCK) {
-                    LogManager.getLogger(MOD_ID).info("FOUND SPILE");
                     boolean filled = state.getValue(MapleSpileBlock.FILLED);
                     if(!filled) {
                         world.setBlock(offPos, state.setValue(MapleSpileBlock.FILLED, true), 3);

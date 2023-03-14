@@ -59,9 +59,9 @@ public class DTPHC2Registries {
     public static final Item RIPE_PEPPERCORN_ITEM = new Item(new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
     public static final MapleSpileBlock MAPLE_SPILE_BLOCK = new MapleSpileBlock();
-    public static final Item MAPLE_SPILE_ITEM = new BlockItem(MAPLE_SPILE_BLOCK, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
+    //public static final Item MAPLE_SPILE_ITEM = new BlockItem(MAPLE_SPILE_BLOCK, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
     public static final MapleSpileBucketBlock MAPLE_SPILE_BUCKET_BLOCK = new MapleSpileBucketBlock();
-    public static final Item MAPLE_SPILE_BUCKET_ITEM = new BlockItem(MAPLE_SPILE_BUCKET_BLOCK, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
+    //public static final Item MAPLE_SPILE_BUCKET_ITEM = new BlockItem(MAPLE_SPILE_BUCKET_BLOCK, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
     public static final VoxelShape DRAGON_FRUIT_CACTUS_SAPLING_SHAPE = VoxelShapes.create(
             new AxisAlignedBB(0.375f, 0.0f, 0.375f, 0.625f, 0.5f, 0.625f));
@@ -83,9 +83,9 @@ public class DTPHC2Registries {
         CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.resLoc("dragon_fruit_cactus").toString(), DRAGON_FRUIT_CACTUS_SAPLING_SHAPE);
 
         RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("maple_spile"), MAPLE_SPILE_BLOCK);
-        RegistryHandler.addItem(DynamicTreesPHC2.resLoc("maple_spile"), MAPLE_SPILE_ITEM);
+        //RegistryHandler.addItem(DynamicTreesPHC2.resLoc("maple_spile"), MAPLE_SPILE_ITEM);
         RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("maple_spile_bucket"), MAPLE_SPILE_BUCKET_BLOCK);
-        RegistryHandler.addItem(DynamicTreesPHC2.resLoc("maple_spile_bucket"), MAPLE_SPILE_BUCKET_ITEM);
+        //RegistryHandler.addItem(DynamicTreesPHC2.resLoc("maple_spile_bucket"), MAPLE_SPILE_BUCKET_ITEM);
     }
 
     public static RegistryObject<SoundEvent> registerSound (String name){

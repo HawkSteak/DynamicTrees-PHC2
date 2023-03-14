@@ -6,6 +6,7 @@ import com.pam.pamhc2trees.config.EnableConfig;
 import maxhyper.dtphc2.compat.DTPConfig;
 import maxhyper.dtphc2.compat.DTPConfigProxy;
 import maxhyper.dtphc2.compat.DefaultConfig;
+import maxhyper.dtphc2.event.SpilePlacementEvent;
 import maxhyper.dtphc2.init.DTPHC2Client;
 import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.util.ResourceLocation;
@@ -32,6 +33,7 @@ public class DynamicTreesPHC2 {
         bus.addListener(this::clientSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(SpilePlacementEvent.class);
 
         RegistryHandler.setup(MOD_ID);
 

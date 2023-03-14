@@ -1,9 +1,10 @@
 package maxhyper.dtphc2.compat.waila;
 
-import com.ferreusveritas.dynamictrees.blocks.PodBlock;
 import com.ferreusveritas.dynamictrees.compat.waila.WailaBranchHandler;
-import com.ferreusveritas.dynamictrees.compat.waila.WailaPodHandler;
 import com.ferreusveritas.dynamictrees.compat.waila.WailaRootyHandler;
+import maxhyper.dtphc2.blocks.FruitVineBlock;
+import maxhyper.dtphc2.blocks.MapleSpileBlock;
+import maxhyper.dtphc2.blocks.MapleSpileCommon;
 import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.TooltipPosition;
@@ -14,10 +15,12 @@ public class WailaCompat implements IWailaPlugin {
 
     @Override
     public void register(IRegistrar registrar) {
-        WailaBranchHandler branchHandler = new WailaBranchHandler();
-        WailaRootyHandler rootyHandler = new WailaRootyHandler();
+        //WailaBranchHandler branchHandler = new WailaBranchHandler();
+        //WailaRootyHandler rootyHandler = new WailaRootyHandler();
 
-        //registrar.registerComponentProvider(new WailaPodHandler(), TooltipPosition.BODY, PodBlock.class);
+        registrar.registerComponentProvider(new WailaVineHandler(), TooltipPosition.BODY, FruitVineBlock.class);
+        registrar.registerComponentProvider(new WailaSpileHandler(), TooltipPosition.BODY, MapleSpileCommon.class);
+        registrar.registerStackProvider(new WailaSpileHandler(), MapleSpileCommon.class);
     }
 
 }
