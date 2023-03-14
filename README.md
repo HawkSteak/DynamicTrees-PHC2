@@ -3,7 +3,6 @@
 
 # Missing features
 
-- Maple treetap missing
 - Maple, Paperbark and Cinnamon do not drop items when chopped  
 - Ripe peppercorn is useless
 

@@ -35,7 +35,7 @@ import java.util.Random;
 public class MapleSpileBucketBlock extends MapleSpileCommon {
 
 
-    protected static VoxelShape makeShape(){
+    protected static VoxelShape makeShape() {
         VoxelShape shape = VoxelShapes.empty();
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.25, 0, 0.0625, 0.75, 0.5625, 0.5625), IBooleanFunction.OR);
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.6875, 0.0625, 0.125, 0.3125, 0.5625, 0.5), IBooleanFunction.ONLY_FIRST);
@@ -68,6 +68,7 @@ public class MapleSpileBucketBlock extends MapleSpileCommon {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Nonnull
     @Override
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
@@ -78,6 +79,9 @@ public class MapleSpileBucketBlock extends MapleSpileCommon {
                 player.addItem(new ItemStack(Items.BUCKET));
                 return ActionResultType.SUCCESS;
             }
+        }
+        if (giveSyrup(world, pos, state, player)) {
+            return ActionResultType.SUCCESS;
         }
         return super.use(state, world, pos, player, hand, hit);
     }
