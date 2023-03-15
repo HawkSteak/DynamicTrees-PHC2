@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "dtphc2:ripe_peppercorn_item"
+    },
+
+    {
+      "item": "dynamictrees:dirt_bucket"
+    }
+  ],
+  "result": {
+    "item": "dtphc2:peppercorn_vine",
+    "count": 2
+  }
+}
