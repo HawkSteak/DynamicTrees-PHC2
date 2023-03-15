@@ -7,6 +7,8 @@ import com.ferreusveritas.dynamictrees.compat.seasons.SeasonHelper;
 import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeature;
 import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeatureConfiguration;
 import com.ferreusveritas.dynamictrees.systems.genfeatures.context.PostGrowContext;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -18,6 +20,7 @@ public class SyrupGenFeature extends GenFeature {
 
     private static final ConfigurationProperty<Float> BASE_SYRUP_CHANCE = ConfigurationProperty.floatProperty("base_syrup_chance");
     private static final ConfigurationProperty<Float> OUT_OF_SEASON_SYRUP_CHANCE = ConfigurationProperty.floatProperty("out_of_season_syrup_chance");
+    private static final ConfigurationProperty<Item> SYRUP_ITEM = ConfigurationProperty.item("syrup_item");
 
     public SyrupGenFeature(ResourceLocation registryName) {
         super(registryName);
@@ -25,7 +28,7 @@ public class SyrupGenFeature extends GenFeature {
 
     @Override
     protected void registerProperties() {
-        this.register(BASE_SYRUP_CHANCE, OUT_OF_SEASON_SYRUP_CHANCE);
+        this.register(BASE_SYRUP_CHANCE, OUT_OF_SEASON_SYRUP_CHANCE, SYRUP_ITEM);
     }
 
     @Nonnull
@@ -33,7 +36,12 @@ public class SyrupGenFeature extends GenFeature {
     public GenFeatureConfiguration createDefaultConfiguration() {
         return super.createDefaultConfiguration()
                 .with(BASE_SYRUP_CHANCE, 0.05F)
-                .with(OUT_OF_SEASON_SYRUP_CHANCE, 0.001F);
+                .with(OUT_OF_SEASON_SYRUP_CHANCE, 0.001F)
+                .with(SYRUP_ITEM, Items.AIR);
+    }
+
+    public Item getSyrupItem(GenFeatureConfiguration config){
+        return config.get(SYRUP_ITEM);
     }
 
     @Override

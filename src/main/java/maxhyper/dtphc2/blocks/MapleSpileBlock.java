@@ -1,5 +1,10 @@
 package maxhyper.dtphc2.blocks;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeatureConfiguration;
+import com.ferreusveritas.dynamictrees.trees.Species;
+import maxhyper.dtphc2.genfeatures.DTPHC2GenFeatures;
+import maxhyper.dtphc2.genfeatures.SyrupGenFeature;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
@@ -40,38 +45,35 @@ public class MapleSpileBlock extends MapleSpileCommon {
     @Override
     @Nonnull
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        if (state.hasProperty(FILLED)) {
-            if (player.getMainHandItem().getItem() == Items.BUCKET) {
+            if (state.hasProperty(FILLED)) {
                 Direction dir = state.getValue(FACING);
-                world.setBlock(pos, MAPLE_SPILE_BUCKET_BLOCK.defaultBlockState()
-                        .setValue(FACING, dir)
-                        .setValue(MapleSpileBucketBlock.FILLING, state.getValue(FILLED) ? 1 : 0), 3);
-                if (!player.isCreative()) player.getMainHandItem().shrink(1);
-                world.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundCategory.BLOCKS, 1, 1f);
-                return ActionResultType.SUCCESS;
-            }
-            else if (giveSyrup(world, pos, state, player)) {
+                if (player.getMainHandItem().getItem() == Items.BUCKET) {
+                    world.setBlock(pos, MAPLE_SPILE_BUCKET_BLOCK.defaultBlockState()
+                            .setValue(FACING, dir)
+                            .setValue(MapleSpileBucketBlock.FILLING, state.getValue(FILLED) ? 1 : 0), 3);
+                    if (!player.isCreative()) player.getMainHandItem().shrink(1);
+                    world.playSound(null, pos, SoundEvents.LANTERN_PLACE, SoundCategory.BLOCKS, 1, 1f);
+                    return ActionResultType.SUCCESS;
+                }
+                else if (giveSyrup(world, pos, state, player, pos.offset(dir.getOpposite().getNormal()))) {
 //                if (world.random.nextFloat() <= chanceToBreak) {
 //                    world.destroyBlock(pos, true);
 //                    world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_BREAK, SoundCategory.BLOCKS, 1, 1, false);
 //                }
-                return ActionResultType.SUCCESS;
+                    return ActionResultType.SUCCESS;
+                }
             }
+            return super.use(state, world, pos, player, hand, hit);
         }
-        return super.use(state, world, pos, player, hand, hit);
-    }
 
     @Override
-    protected boolean giveSyrup(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    protected boolean giveSyrup(World world, BlockPos pos, BlockState state, PlayerEntity player, BlockPos treePos) {
+        Species species = TreeHelper.getExactSpecies(world, treePos);
+        if (species == Species.NULL_SPECIES) return false;
         if (state.getValue(FILLED)) {
-            if (!world.isClientSide() && !world.restoringBlockSnapshots) {
-                //TODO: Make dynamic
-                ResourceLocation mapleSyrupRes = new ResourceLocation("pamhc2trees", "maplesyrupitem");
-                Item mapleSyrup = ForgeRegistries.ITEMS.getValue(mapleSyrupRes);
-                world.addFreshEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(mapleSyrup)));
-                //player.addItem(new ItemStack(mapleSyrup));
-            }
-            world.playSound(null, pos, SoundEvents.HONEY_DRINK, SoundCategory.BLOCKS, 1, 1f);
+            if (!world.isClientSide() && !world.restoringBlockSnapshots)
+                world.addFreshEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(getSyrupItem(species))));
+            world.playSound(null, pos, SoundEvents.HONEY_DRINK, SoundCategory.BLOCKS, 1, 2f);
             world.setBlock(pos, state.setValue(FILLED, false), 3);
             return true;
         }

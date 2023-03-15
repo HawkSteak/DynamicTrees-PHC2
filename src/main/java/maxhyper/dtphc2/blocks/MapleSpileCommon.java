@@ -1,6 +1,10 @@
 package maxhyper.dtphc2.blocks;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeatureConfiguration;
+import com.ferreusveritas.dynamictrees.trees.Species;
+import maxhyper.dtphc2.genfeatures.DTPHC2GenFeatures;
+import maxhyper.dtphc2.genfeatures.SyrupGenFeature;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalBlock;
@@ -8,6 +12,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.util.Direction;
@@ -59,26 +65,23 @@ public abstract class MapleSpileCommon extends HorizontalBlock {
         super(Properties.of(Material.METAL).sound(SoundType.METAL).strength(0.5f).randomTicks());
     }
 
-    protected abstract boolean giveSyrup(World world, BlockPos pos, BlockState state, PlayerEntity player);
+    protected abstract boolean giveSyrup(World world, BlockPos pos, BlockState state, PlayerEntity player, BlockPos treePos);
+
+    public static Item getSyrupItem (Species species){
+        if (species == null) return Items.AIR;
+        GenFeatureConfiguration featureConfig = species.getGenFeatures().stream().filter(fc -> fc.getGenFeature() == DTPHC2GenFeatures.SYRUP_GEN).findFirst().orElse(null);
+        if (featureConfig == null) return Items.AIR;
+        return ((SyrupGenFeature)DTPHC2GenFeatures.SYRUP_GEN).getSyrupItem(featureConfig);
+    }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext pContext) {
         BlockState blockstate = this.defaultBlockState();
-        IWorldReader iworldreader = pContext.getLevel();
-        BlockPos blockpos = pContext.getClickedPos();
-
-        for (Direction direction : pContext.getNearestLookingDirections()) {
-            direction = direction.getOpposite();
-            if (direction.getAxis().isHorizontal()) {
-                blockstate = blockstate.setValue(FACING, direction);
-                if (canSurvive(blockstate, iworldreader, blockpos)) {
-                    return blockstate;
-                }
-            }
-        }
-
-        return blockstate.setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
+        Direction direction = pContext.getClickedFace();
+        if (direction.getAxis().isHorizontal())
+            return blockstate.setValue(FACING, direction);
+        return blockstate;
     }
 
     @SuppressWarnings("deprecation")
@@ -86,7 +89,7 @@ public abstract class MapleSpileCommon extends HorizontalBlock {
     public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos) {
         BlockPos offsetPos = pos.relative(state.getValue(FACING).getOpposite());
         BlockState offsetState = world.getBlockState(offsetPos);
-        return TreeHelper.isBranch(offsetState);
+        return TreeHelper.isBranch(offsetState) && TreeHelper.getRadius(world, pos) >= 7;
     }
 
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, IWorld pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {

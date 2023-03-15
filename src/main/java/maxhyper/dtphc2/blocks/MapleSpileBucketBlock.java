@@ -1,5 +1,7 @@
 package maxhyper.dtphc2.blocks;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import com.ferreusveritas.dynamictrees.trees.Species;
 import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -51,37 +53,34 @@ public class MapleSpileBucketBlock extends MapleSpileCommon {
     @Nonnull
     @Override
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+        Direction dir = state.getValue(FACING);
         if (state.hasProperty(FILLING)) {
             if (world.getBlockState(pos).getValue(FILLING) == 0 && player.isCrouching()) {
-                Direction dir = state.getValue(FACING);
                 world.setBlock(pos, DTPHC2Registries.MAPLE_SPILE_BLOCK.defaultBlockState().setValue(FACING, dir), 3);
                 player.addItem(new ItemStack(Items.BUCKET));
                 return ActionResultType.SUCCESS;
             }
         }
-        if (giveSyrup(world, pos, state, player)) {
+        if (giveSyrup(world, pos, state, player, pos.offset(dir.getOpposite().getNormal()))) {
             return ActionResultType.SUCCESS;
         }
         return super.use(state, world, pos, player, hand, hit);
     }
 
     @Override
-    protected boolean giveSyrup(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-        int filling = worldIn.getBlockState(pos).getValue(FILLING);
+    protected boolean giveSyrup(World world, BlockPos pos, BlockState state, PlayerEntity player, BlockPos treePos) {
+        Species species = TreeHelper.getExactSpecies(world, treePos);
+        if (species == Species.NULL_SPECIES) return false;
+        int filling = world.getBlockState(pos).getValue(FILLING);
         if (filling > 0) {
-            if (!worldIn.isClientSide() && !worldIn.restoringBlockSnapshots) {
-                //TODO: make dynamic
-                ResourceLocation mapleSyrupRes = new ResourceLocation("pamhc2trees", "maplesyrupitem");
-                Item mapleSyrup = ForgeRegistries.ITEMS.getValue(mapleSyrupRes);
-                //ItemStack drop = new ItemStack(FruitRegistry.getLog(FruitRegistry.MAPLE).getFruitItem());
+            if (!world.isClientSide() && !world.restoringBlockSnapshots) {
                 int count = (filling + (filling == maxFilling ? 1 : 0)); //Adds one bonus syrup if collected when its full
-                ItemStack drop = new ItemStack(mapleSyrup, count);
-                worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), drop));
-                //player.addItem(drop);
+                ItemStack drop = new ItemStack(getSyrupItem(species), count);
+                world.addFreshEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), drop));
             }
-            worldIn.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.HONEY_DRINK, SoundCategory.BLOCKS, 1, 1 + filling / 4f, false);
-            if (filling == maxFilling) worldIn.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUCKET_EMPTY, SoundCategory.BLOCKS, 1, 1 + filling / 4f, false);
-            worldIn.setBlock(pos, state.setValue(FILLING, 0), 3);
+            world.playSound(null, pos, SoundEvents.HONEY_DRINK, SoundCategory.BLOCKS, 1, 2 - filling / 3f);
+            if (filling == maxFilling) world.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundCategory.BLOCKS, 0.5f, 0.8f);
+            world.setBlock(pos, state.setValue(FILLING, 0), 3);
             return true;
         }
         return false;

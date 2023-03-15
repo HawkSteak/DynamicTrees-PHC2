@@ -59,7 +59,7 @@
                 },
                 {
                   "function": "dynamictrees:multiply_count",
-                  "multiplier": 3.5
+                  "multiplier": 4.5
                 },
                 {
                   "function": "minecraft:explosion_decay"
