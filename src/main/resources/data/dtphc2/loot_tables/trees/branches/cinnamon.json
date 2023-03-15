@@ -22,20 +22,52 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:item",
-          "functions": [
+          "type": "minecraft:alternatives",
+          "children": [
             {
-              "function": "dynamictrees:multiply_logs_count"
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "dynamictrees:multiply_logs_count"
+                },
+                {
+                  "function": "minecraft:explosion_decay"
+                }
+              ],
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "name": "pamhc2trees:pamcinnamon"
             },
             {
-              "function": "dynamictrees:multiply_count",
-              "multiplier": 3.5
-            },
-            {
-              "function": "minecraft:explosion_decay"
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "dynamictrees:multiply_logs_count"
+                },
+                {
+                  "function": "dynamictrees:multiply_count",
+                  "multiplier": 3.5
+                },
+                {
+                  "function": "minecraft:explosion_decay"
+                }
+              ],
+              "name": "pamhc2trees:cinnamonitem"
             }
-          ],
-          "name": "pamhc2trees:cinnamonitem"
+          ]
         }
       ]
     }
