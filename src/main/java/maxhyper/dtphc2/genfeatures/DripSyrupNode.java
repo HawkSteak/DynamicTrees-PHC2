@@ -9,9 +9,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import org.apache.logging.log4j.LogManager;
-
-import static maxhyper.dtphc2.DynamicTreesPHC2.MOD_ID;
 
 public class DripSyrupNode implements NodeInspector {
 

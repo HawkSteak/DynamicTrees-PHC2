@@ -1,7 +1,5 @@
 package maxhyper.dtphc2.compat.waila;
 
-import com.ferreusveritas.dynamictrees.blocks.FruitBlock;
-import com.ferreusveritas.dynamictrees.compat.waila.WailaFruitHandler;
 import maxhyper.dtphc2.blocks.FruitVineBlock;
 import mcp.mobius.waila.api.IComponentProvider;
 import mcp.mobius.waila.api.IDataAccessor;
