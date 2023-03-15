@@ -1,8 +1,5 @@
 package maxhyper.dtphc2.compat.waila;
 
-import java.util.List;
-
-import maxhyper.dtphc2.blocks.FruitVineBlock;
 import maxhyper.dtphc2.blocks.MapleSpileBlock;
 import maxhyper.dtphc2.blocks.MapleSpileBucketBlock;
 import mcp.mobius.waila.api.IComponentProvider;
@@ -13,9 +10,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
 
 public class WailaSpileHandler implements IComponentProvider {
 
