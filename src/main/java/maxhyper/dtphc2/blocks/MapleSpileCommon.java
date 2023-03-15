@@ -43,8 +43,6 @@ public abstract class MapleSpileCommon extends HorizontalBlock {
     protected VoxelShape SHAPE_S;
     protected VoxelShape SHAPE_W;
 
-    protected static final double chanceToBreak = 0.02D;
-
     static VoxelShape makeShape() {
         VoxelShape shape = VoxelShapes.empty();
         shape = VoxelShapes.join(shape, VoxelShapes.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), IBooleanFunction.OR);
