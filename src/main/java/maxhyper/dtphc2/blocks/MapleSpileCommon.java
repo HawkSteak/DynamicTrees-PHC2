@@ -16,8 +16,11 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -34,6 +37,11 @@ public abstract class MapleSpileCommon extends HorizontalBlock {
     public static final BooleanProperty FILLED = BooleanProperty.create("filled");
     public static final int maxFilling = 3;
     public static final IntegerProperty FILLING = IntegerProperty.create("filling", 0, maxFilling);
+
+    protected VoxelShape SHAPE_N;
+    protected VoxelShape SHAPE_E;
+    protected VoxelShape SHAPE_S;
+    protected VoxelShape SHAPE_W;
 
     protected static final double chanceToBreak = 0.02D;
 
@@ -85,62 +93,32 @@ public abstract class MapleSpileCommon extends HorizontalBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void randomTick(@Nonnull BlockState state, @Nonnull ServerWorld world, @Nonnull BlockPos pos, @Nonnull Random random) {
-        if (!this.canBlockStay(world, pos, state)) {
-            this.dropBlock(world, pos, state);
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean pIsMoving) {
-        if (!this.canBlockStay(world, pos, state)) {
-            this.dropBlock(world, pos, state);
-        }
-    }
-
-    protected void dropBlock(World worldIn, BlockPos pos, BlockState state) {
-        worldIn.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-        worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.IRON_NUGGET)));
-    }
-
-    @Override
-    public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity pTe, ItemStack stack) {
-        if (!player.isCreative()) {
-            worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.IRON_NUGGET)));
-        }
-        super.playerDestroy(worldIn, player, pos, state, pTe, stack);
-    }
-
-    public boolean canBlockStay(IWorldReader worldIn, BlockPos pos, BlockState state) {
-        BlockPos offsetPos = pos.relative(state.getValue(FACING).getOpposite());
-        BlockState offsetState = worldIn.getBlockState(offsetPos);
-        if (TreeHelper.isBranch(offsetState)) {
-            BranchBlock branch = TreeHelper.getBranch(offsetState);
-
-            //TODO: Make dynamic
-            ResourceLocation mapleLogRes = new ResourceLocation("pamhc2trees", "pammaple");
-            Block mapleLog = ForgeRegistries.BLOCKS.getValue(mapleLogRes);
-            if (branch != null && branch.getFamily().getPrimitiveLog().isPresent()) {
-                return branch.getFamily().getPrimitiveLog().get() == mapleLog;
-            }
-//            return branch.getFamily().getPrimitiveLog() == FruitRegistry.getLog(FruitRegistry.MAPLE) &&
-//                    branch.getRadius(offsetState) >= 7;
-        }
-        return false;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
     public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos) {
-        return canBlockStay(world, pos, state);
+        BlockPos offsetPos = pos.relative(state.getValue(FACING).getOpposite());
+        BlockState offsetState = world.getBlockState(offsetPos);
+        return TreeHelper.isBranch(offsetState);
     }
 
-//    @SuppressWarnings("deprecation")
-//    @Override
-//    @Nonnull
-//    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, IWorld pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-//        return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
-//    }
+    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, IWorld pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+        return pFacing == pState.getValue(FACING).getOpposite() && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    @Nonnull
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        //noinspection DuplicatedCode
+        switch (state.getValue(FACING)) {
+            case EAST:
+                return SHAPE_E;
+            case SOUTH:
+                return SHAPE_S;
+            case WEST:
+                return SHAPE_W;
+            default:
+                return SHAPE_N;
+        }
+        //return rotateShape(state.getValue(FACING), defaultBlockState().getValue(FACING), SHAPE);
+    }
 
 }

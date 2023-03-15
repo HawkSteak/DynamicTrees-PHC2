@@ -1,5 +1,7 @@
 package maxhyper.dtphc2.event;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import maxhyper.dtphc2.genfeatures.DTPHC2GenFeatures;
 import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -7,9 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
@@ -28,26 +28,30 @@ public class SpilePlacementEvent {
 
     @SubscribeEvent
     public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        World world = event.getWorld();
-        BlockPos pos = event.getPos();
-        BlockState state = world.getBlockState(pos);
+
         PlayerEntity player = event.getPlayer();
         Hand hand = event.getHand();
         ItemStack heldItem = player.getItemInHand(hand);
-        //TODO: make dynamic
-        ResourceLocation mapleLogRes = new ResourceLocation("dtphc2", "maple_branch");
-        Block mapleLog = ForgeRegistries.BLOCKS.getValue(mapleLogRes);
-        if (state.getBlock() == mapleLog && heldItem.getItem() == Items.IRON_INGOT) {
-            // Remove one item from the player's hand
-            if (!player.isCreative()) {
-                heldItem.shrink(1);
-            }
 
+        if (heldItem.getItem() != Items.IRON_INGOT) return;
+
+        World world = event.getWorld();
+        BlockPos pos = event.getPos();
+
+        if (!TreeHelper.isBranch(world.getBlockState(pos))) return;
+
+        //Make sure the tree species has the syrup gen feature
+        if (TreeHelper.getExactSpecies(world, pos).getGenFeatures().stream().anyMatch(gfc -> gfc.getGenFeature() == DTPHC2GenFeatures.SYRUP_GEN)) {
+            // Remove one item from the player's hand
+            if (!player.isCreative()) heldItem.shrink(1);
+            // Play a sound
+            world.playSound(null, pos, SoundEvents.AXE_STRIP, SoundCategory.BLOCKS, 1,1);
             // Place the MapleSpileBlock at the clicked block's position
             BlockPos spilePos = pos.relative(Objects.requireNonNull(event.getFace()));
             if (world.getBlockState(spilePos).getMaterial().isReplaceable()) {
                 BlockItemUseContext context = new BlockItemUseContext(player, hand, heldItem, new BlockRayTraceResult(player.getEyePosition(1.0f), event.getFace(), pos, false));
                 BlockState placeState = DTPHC2Registries.MAPLE_SPILE_BLOCK.getStateForPlacement(context);
+                if (placeState == null) return;
                 world.setBlock(spilePos, placeState, 3);
                 event.setCancellationResult(ActionResultType.SUCCESS);
                 event.setCanceled(true);

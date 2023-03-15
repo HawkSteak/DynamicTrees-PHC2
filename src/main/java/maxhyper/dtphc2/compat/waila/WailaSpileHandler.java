@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class WailaSpileHandler implements IComponentProvider {
@@ -22,13 +23,15 @@ public class WailaSpileHandler implements IComponentProvider {
     public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
         if (accessor.getBlockState().hasProperty(MapleSpileBlock.FILLED)) {
             boolean filled = accessor.getBlockState().getValue(MapleSpileBlock.FILLED);
-            String filledString = filled ? "Filled" : "Not Filled";
-            tooltip.add(new StringTextComponent(filledString));
+            ITextComponent filledText = filled
+                    ? new TranslationTextComponent("tooltip.dtphc2.maple_spile_filled")
+                    : new TranslationTextComponent("tooltip.dtphc2.maple_spile_not_filled") ;
+            tooltip.add(filledText);
         }
         if (accessor.getBlockState().hasProperty(MapleSpileBucketBlock.FILLING)) {
             int filling = accessor.getBlockState().getValue(MapleSpileBucketBlock.FILLING);
             float percent = filling / 3.0F * 100;
-            tooltip.add(new StringTextComponent("Filling: " + String.format("%.0f%%", percent)));
+            tooltip.add(new TranslationTextComponent("tooltip.dtphc2.maple_spile_bucket_filling", String.format("%.0f%%", percent)));
         }
     }
 
