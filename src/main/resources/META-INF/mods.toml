@@ -8,8 +8,8 @@ version="${file.jarVersion}"
 displayName="Dynamic Trees for PHC2"
 #updateJSONURL="https://github.com/supermassimo/DynamicTrees-ExC/blob/1.12.2/.DONE/DynamicTrees-BYG/version_info.json?raw=true" #optional
 #displayURL="https://www.curseforge.com/minecraft/mc-mods/dynamic-trees-byg" #optional
-logoFile=""
-credits=""
+logoFile="logo.png"
+credits="Max Hyper and ChefExperte"
 authors="Max Hyper"
 description='''
 Compatibility Mod between Dynamic Trees and Pam's HarvestCraft 2: Trees
