@@ -1,0 +1,115 @@
+[
+  {
+    "__comment": "Spawn cold trees",
+    "select": {
+      "OR:": [
+        {
+          "type": "cold"
+        },
+        {
+          "type": "hills"
+        },
+        {
+          "type": "coniferous"
+        }
+      ]
+    },
+    "apply": {
+      "species": {
+        "method": "splice_before",
+        "random": {
+          "...": 30,
+          "dtphc2:maple": 1,
+          "dtphc2:pinenut": 1
+        }
+      }
+    }
+  },
+  {
+    "__comment": "Spawn temperate trees",
+    "select": {
+      "types": [
+        "!cold",
+        "!warm"
+      ]
+    },
+    "apply": {
+      "species": {
+        "method": "splice_before",
+        "random": {
+          "...": 30,
+          "dtphc2:avocado": 1,
+          "dtphc2:candlenut": 1,
+          "dtphc2:cherry": 1,
+          "dtphc2:chestnut": 1,
+          "dtphc2:gooseberry": 1,
+          "dtphc2:lemon": 1,
+          "dtphc2:nutmeg": 1,
+          "dtphc2:orange": 1,
+          "dtphc2:peach": 1,
+          "dtphc2:pear": 1,
+          "dtphc2:plum": 1,
+          "dtphc2:walnut": 1,
+          "dtphc2:spiderweb": 1,
+          "dtphc2:hazelnut": 1,
+          "dtphc2:pawpaw": 1,
+          "dtphc2:soursop": 1
+        }
+      }
+    }
+  },
+  {
+    "__comment": "Spawn warm trees",
+    "select": {
+      "OR:": [
+        {
+          "type": "swamp"
+        },
+        {
+          "type": "ocean"
+        },
+        {
+          "type": "jungle"
+        }
+      ]
+    },
+    "apply": {
+      "species": {
+        "method": "splice_before",
+        "random": {
+          "...": 30,
+          "dtphc2:almond": 1,
+          "dtphc2:apricot": 1,
+          "dtphc2:banana": 1,
+          "dtphc2:cashew": 1,
+          "dtphc2:cinnamon": 1,
+          "dtphc2:coconut": 1,
+          "dtphc2:date": 1,
+          "dtphc2:dragonfruit": 1,
+          "dtphc2:durian": 1,
+          "dtphc2:fig": 1,
+          "dtphc2:grapefruit": 1,
+          "dtphc2:lime": 1,
+          "dtphc2:mango": 1,
+          "dtphc2:olive": 1,
+          "dtphc2:papaya": 1,
+          "dtphc2:paperbark": 1,
+          "dtphc2:pecan": 1,
+          "dtphc2:peppercorn": 1,
+          "dtphc2:persimmon": 1,
+          "dtphc2:pistachio": 1,
+          "dtphc2:pomegranate": 1,
+          "dtphc2:starfruit": 1,
+          "dtphc2:vanillabean": 1,
+          "dtphc2:breadfruit": 1,
+          "dtphc2:guava": 1,
+          "dtphc2:jackfruit": 1,
+          "dtphc2:lychee": 1,
+          "dtphc2:passionfruit": 1,
+          "dtphc2:rambutan": 1,
+          "dtphc2:tamarind": 1
+        }
+      }
+    }
+  }
+]
