@@ -45,8 +45,7 @@ public class MapleSpileBucketBlock extends MapleSpileCommon {
 
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(FACING, FILLING);
+        super.createBlockStateDefinition(builder.add(FACING, FILLING));
     }
 
     @SuppressWarnings("deprecation")

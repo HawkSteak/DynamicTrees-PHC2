@@ -13,10 +13,7 @@ import com.ferreusveritas.dynamictrees.trees.Family;
 import com.ferreusveritas.dynamictrees.util.CommonVoxelShapes;
 import com.pam.pamhc2trees.init.ItemRegistry;
 import maxhyper.dtphc2.DynamicTreesPHC2;
-import maxhyper.dtphc2.blocks.DragonFruitLeavesProperties;
-import maxhyper.dtphc2.blocks.FruitVineBlock;
-import maxhyper.dtphc2.blocks.MapleSpileBlock;
-import maxhyper.dtphc2.blocks.MapleSpileBucketBlock;
+import maxhyper.dtphc2.blocks.*;
 import maxhyper.dtphc2.cells.DTPHC2CellKits;
 import maxhyper.dtphc2.fruits.FallingFruit;
 import maxhyper.dtphc2.fruits.FallingPalmPod;
@@ -63,8 +60,18 @@ public class DTPHC2Registries {
     public static final MapleSpileBucketBlock MAPLE_SPILE_BUCKET_BLOCK = new MapleSpileBucketBlock();
     //public static final Item MAPLE_SPILE_BUCKET_ITEM = new BlockItem(MAPLE_SPILE_BUCKET_BLOCK, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
+    public static final BananaSuckerBlock BANANA_SUCKER_BLOCK = new BananaSuckerBlock();
+
     public static final VoxelShape DRAGON_FRUIT_CACTUS_SAPLING_SHAPE = VoxelShapes.create(
-            new AxisAlignedBB(0.375f, 0.0f, 0.375f, 0.625f, 0.5f, 0.625f));
+            new AxisAlignedBB(
+                    0.375f, 0.0f, 0.375f,
+                    0.625f, 0.5f, 0.625f));
+
+    public static final VoxelShape BANANA_SAPLING_SHAPE = VoxelShapes.create(
+            new AxisAlignedBB(
+                    0.375f, 0.0f, 0.375f,
+                    0.625f, 0.9375f, 0.625f));
+
 
     public static final RegistryObject<SoundEvent> FRUIT_BONK = registerSound("falling_fruit.bonk");
 
@@ -81,11 +88,13 @@ public class DTPHC2Registries {
         RegistryHandler.addItem(DynamicTreesPHC2.resLoc("ripe_peppercorn_item"), RIPE_PEPPERCORN_ITEM);
 
         CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.resLoc("dragon_fruit_cactus").toString(), DRAGON_FRUIT_CACTUS_SAPLING_SHAPE);
+        CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.resLoc("banana_sapling").toString(), BANANA_SAPLING_SHAPE);
 
         RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("maple_spile"), MAPLE_SPILE_BLOCK);
-        //RegistryHandler.addItem(DynamicTreesPHC2.resLoc("maple_spile"), MAPLE_SPILE_ITEM);
+
         RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("maple_spile_bucket"), MAPLE_SPILE_BUCKET_BLOCK);
-        //RegistryHandler.addItem(DynamicTreesPHC2.resLoc("maple_spile_bucket"), MAPLE_SPILE_BUCKET_ITEM);
+
+        RegistryHandler.addBlock(DynamicTreesPHC2.resLoc("banana_sucker"), BANANA_SUCKER_BLOCK);
     }
 
     public static RegistryObject<SoundEvent> registerSound (String name){

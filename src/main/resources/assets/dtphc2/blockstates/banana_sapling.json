@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
-      "model": "dynamictrees:block/saplings/jungle"
-    }
+    "": [
+      { "model": "dtphc2:block/saplings/banana" },
+      { "model": "dtphc2:block/saplings/banana", "y": 90 },
+      { "model": "dtphc2:block/saplings/banana", "y": 180 },
+      { "model": "dtphc2:block/saplings/banana", "y": 270 }
+    ]
   }
 }

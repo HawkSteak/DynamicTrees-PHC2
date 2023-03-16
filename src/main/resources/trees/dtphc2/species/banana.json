@@ -14,12 +14,9 @@
   },
   "perfect_biomes": { "types": [ "jungle", "overworld" ] },
   "primitive_saplings": [
-    { "sapling_block": "pamhc2trees:banana_sapling" },
-    {
-      "sapling_item": "pamhc2trees:bananaitem",
-      "can_craft_seed_to_sapling": false
-    }
+    { "sapling_block": "pamhc2trees:banana_sapling" }
   ],
+  "sapling_shape": "dtphc2:banana_sapling",
   "fruits": [
     "dtphc2:banana"
   ],
@@ -29,6 +26,12 @@
       "properties": {
         "fruit": "dtphc2:banana",
         "fruiting_radius": 4
+      }
+    },
+    {
+      "name": "dtphc2:plant_suckers",
+      "properties": {
+        "sucker_block": "dtphc2:banana_sucker"
       }
     }
   ]

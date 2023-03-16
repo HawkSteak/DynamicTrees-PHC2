@@ -37,8 +37,7 @@ public class MapleSpileBlock extends MapleSpileCommon {
 
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(FACING, FILLED);
+        super.createBlockStateDefinition(builder.add(FACING, FILLED));
     }
 
         @SuppressWarnings("deprecation")

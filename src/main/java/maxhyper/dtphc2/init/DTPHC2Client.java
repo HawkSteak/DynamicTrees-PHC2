@@ -25,6 +25,7 @@ public class DTPHC2Client {
         RenderTypeLookup.setRenderLayer(DTPHC2Registries.VANILLA_VINE, RenderType.cutout());
         RenderTypeLookup.setRenderLayer(DTPHC2Registries.PEPPERCORN_VINE, RenderType.cutout());
         RenderTypeLookup.setRenderLayer(DTPHC2Registries.MAPLE_SPILE_BUCKET_BLOCK, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(DTPHC2Registries.BANANA_SUCKER_BLOCK, RenderType.cutout());
     }
 
     private static void registerColorHandlers() {
