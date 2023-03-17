@@ -4,19 +4,16 @@ import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.registry.TypedRegistry;
 import com.ferreusveritas.dynamictrees.blocks.branches.BasicBranchBlock;
 import com.ferreusveritas.dynamictrees.blocks.branches.BranchBlock;
-import com.ferreusveritas.dynamictrees.blocks.branches.ThickBranchBlock;
 import com.ferreusveritas.dynamictrees.init.DTConfigs;
 import com.ferreusveritas.dynamictrees.trees.Family;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -45,7 +42,10 @@ public class PaperbarkFamily extends Family {
         final BasicBranchBlock branch = new BasicBranchBlock(name, this.getProperties().randomTicks()){
             @Override
             public void stripBranch(BlockState state, World world, BlockPos pos, PlayerEntity player, ItemStack heldItem) {
-                world.addFreshEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), getPaperStack(world)));
+                Vector3d center = new Vector3d(pos.getX()+0.5f, pos.getY()+0.5f, pos.getZ()+0.5f);
+                Vector3d offsetDir = player.position().subtract(center).normalize().multiply(0.5,0.5,0.5);
+                center = center.add(offsetDir);
+                world.addFreshEntity(new ItemEntity(world, center.x, center.y, center.z, getPaperStack(world)));
                 super.stripBranch(state,world,pos, getRadius(state));
             }
             @SuppressWarnings("deprecation")

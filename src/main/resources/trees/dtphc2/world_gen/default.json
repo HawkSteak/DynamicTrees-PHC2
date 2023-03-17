@@ -2,23 +2,13 @@
   {
     "__comment": "Spawn cold trees",
     "select": {
-      "OR:": [
-        {
-          "type": "cold"
-        },
-        {
-          "type": "hills"
-        },
-        {
-          "type": "coniferous"
-        }
-      ]
+      "AND": [{"OR": [{"type": "cold"}, {"type": "snowy"}, {"type": "coniferous"}]},{"types": ["overworld", "!spooky"]}]
     },
     "apply": {
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 30,
+          "...": 100,
           "dtphc2:maple": 1,
           "dtphc2:pinenut": 1
         }
@@ -28,16 +18,13 @@
   {
     "__comment": "Spawn temperate trees",
     "select": {
-      "types": [
-        "!cold",
-        "!warm"
-      ]
+      "types": ["!cold", "!hot", "overworld", "!spooky"]
     },
     "apply": {
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 30,
+          "...": 300,
           "dtphc2:avocado": 1,
           "dtphc2:candlenut": 1,
           "dtphc2:cherry": 1,
@@ -61,23 +48,13 @@
   {
     "__comment": "Spawn warm trees",
     "select": {
-      "OR:": [
-        {
-          "type": "swamp"
-        },
-        {
-          "type": "ocean"
-        },
-        {
-          "type": "jungle"
-        }
-      ]
+      "AND": [{"OR": [{"type": "swamp"}, {"type": "ocean"}, {"type": "jungle"}]},{"types": ["overworld", "!spooky"]}]
     },
     "apply": {
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 30,
+          "...": 300,
           "dtphc2:almond": 1,
           "dtphc2:apricot": 1,
           "dtphc2:banana": 1,
@@ -107,7 +84,10 @@
           "dtphc2:lychee": 1,
           "dtphc2:passionfruit": 1,
           "dtphc2:rambutan": 1,
-          "dtphc2:tamarind": 1
+          "dtphc2:tamarind": 1,
+          "dtphc2:vine_passion_fruit": 1,
+          "dtphc2:vine_peppercorn": 1,
+          "dtphc2:vine_vanilla": 1
         }
       }
     }

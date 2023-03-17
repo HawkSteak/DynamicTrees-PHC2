@@ -75,7 +75,7 @@ public class MapleSpileBucketBlock extends MapleSpileCommon {
             if (!world.isClientSide() && !world.restoringBlockSnapshots) {
                 int count = (filling + (filling == maxFilling ? 1 : 0)); //Adds one bonus syrup if collected when its full
                 ItemStack drop = new ItemStack(getSyrupItem(species), count);
-                world.addFreshEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), drop));
+                world.addFreshEntity(new ItemEntity(world, pos.getX()+0.5f, pos.getY()+0.5f, pos.getZ()+0.5f, drop));
             }
             world.playSound(null, pos, SoundEvents.HONEY_DRINK, SoundCategory.BLOCKS, 1, 2 - filling / 3f);
             if (filling == maxFilling) world.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundCategory.BLOCKS, 0.5f, 0.8f);

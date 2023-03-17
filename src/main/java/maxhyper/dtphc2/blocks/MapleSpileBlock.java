@@ -71,7 +71,7 @@ public class MapleSpileBlock extends MapleSpileCommon {
         if (species == Species.NULL_SPECIES) return false;
         if (state.getValue(FILLED)) {
             if (!world.isClientSide() && !world.restoringBlockSnapshots)
-                world.addFreshEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(getSyrupItem(species))));
+                world.addFreshEntity(new ItemEntity(world, pos.getX()+0.5f, pos.getY()+0.5f, pos.getZ()+0.5f, new ItemStack(getSyrupItem(species))));
             world.playSound(null, pos, SoundEvents.HONEY_DRINK, SoundCategory.BLOCKS, 1, 2f);
             world.setBlock(pos, state.setValue(FILLED, false), 3);
             return true;
