@@ -15,10 +15,7 @@ import com.pam.pamhc2trees.init.ItemRegistry;
 import maxhyper.dtphc2.DynamicTreesPHC2;
 import maxhyper.dtphc2.blocks.*;
 import maxhyper.dtphc2.cells.DTPHC2CellKits;
-import maxhyper.dtphc2.fruits.FallingFruit;
-import maxhyper.dtphc2.fruits.FallingPalmPod;
-import maxhyper.dtphc2.fruits.OffsetFruit;
-import maxhyper.dtphc2.fruits.PalmPod;
+import maxhyper.dtphc2.fruits.*;
 import maxhyper.dtphc2.genfeatures.DTPHC2GenFeatures;
 import maxhyper.dtphc2.trees.PaperbarkFamily;
 import net.minecraft.block.Block;
@@ -105,6 +102,7 @@ public class DTPHC2Registries {
     public static void registerFruitType(final TypeRegistryEvent<Fruit> event) {
         event.registerType(DynamicTreesPHC2.resLoc("offset_down"), OffsetFruit.TYPE);
         event.registerType(DynamicTreesPHC2.resLoc("falling_fruit"), FallingFruit.TYPE);
+        event.registerType(DynamicTreesPHC2.resLoc("cobweb"), CobwebFruit.TYPE);
     }
 
     @SubscribeEvent

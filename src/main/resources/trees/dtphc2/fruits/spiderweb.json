@@ -1,4 +1,5 @@
 {
+  "type": "dtphc2:cobweb",
   "block_registry_name": "spiderweb_fruit",
   "item_stack": "string",
   "block_shapes": [

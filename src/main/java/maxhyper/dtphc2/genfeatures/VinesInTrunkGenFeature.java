@@ -29,14 +29,13 @@ public class VinesInTrunkGenFeature extends GenFeature {
 
     @Override
     protected void registerProperties() {
-        this.register(BLOCK, FRUITING_RADIUS, PLACE_CHANCE, MAX_HEIGHT, PLACE_FRUIT_CHANCE);
+        this.register(BLOCK, PLACE_CHANCE, MAX_HEIGHT, PLACE_FRUIT_CHANCE);
     }
 
     @Override
     public GenFeatureConfiguration createDefaultConfiguration() {
         return new GenFeatureConfiguration(this)
                 .with(BLOCK, Blocks.VINE)
-                .with(FRUITING_RADIUS, 5)
                 .with(PLACE_CHANCE, 0.8f)
                 .with(MAX_HEIGHT, 10)
                 .with(PLACE_FRUIT_CHANCE, 0.1f);
@@ -44,7 +43,6 @@ public class VinesInTrunkGenFeature extends GenFeature {
 
     @Override
     protected boolean postGenerate(GenFeatureConfiguration configuration, PostGenerationContext context) {
-        if (context.radius() < configuration.get(FRUITING_RADIUS)) return false;
         boolean placed = false;
         for (Direction dir : Direction.Plane.HORIZONTAL){
             if (context.random().nextFloat() < configuration.get(PLACE_CHANCE)){

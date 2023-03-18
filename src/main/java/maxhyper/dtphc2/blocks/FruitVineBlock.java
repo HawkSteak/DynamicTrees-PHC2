@@ -2,6 +2,7 @@ package maxhyper.dtphc2.blocks;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.compat.seasons.SeasonHelper;
+import com.ferreusveritas.dynamictrees.util.BlockStates;
 import com.ferreusveritas.dynamictrees.util.WorldContext;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -63,7 +64,7 @@ public class FruitVineBlock extends VineBlock {
     public void setAge(World world, BlockPos pos, BlockState state, int age, boolean destroy) {
         state = state.setValue(ageProperty, age);
         //LogManager.getLogger(DynamicTreesPHC2.MOD_ID).info("Set Block at " + pos.toString() + " age to " + age);
-        if (destroy) world.destroyBlock(pos, false);
+        if (destroy) world.levelEvent(2001, pos, Block.getId(state));
         world.setBlock(pos, state, 2);
     }
 

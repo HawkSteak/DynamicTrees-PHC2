@@ -18,7 +18,8 @@
     {
       "name": "fruit",
       "properties": {
-        "fruit": "dtphc2:spiderweb"
+        "fruit": "dtphc2:spiderweb",
+        "fruiting_radius": 6
       }
     }
   ]
