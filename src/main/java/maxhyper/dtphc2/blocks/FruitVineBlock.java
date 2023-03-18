@@ -8,6 +8,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
@@ -35,7 +36,7 @@ public class FruitVineBlock extends VineBlock {
 
     private static final float baseFruitingChance = 0.002f;
     private static float fruitGrowChance = 0.2f;
-    private static float fruitOverripenChance = 0.02f;
+    private static float fruitOverripenChance = 0.005f;
 
     private static final float vineSpreadUpChance = 0.005f;
     private static final float attemptSpread = 0.01f;
@@ -74,44 +75,40 @@ public class FruitVineBlock extends VineBlock {
             matureAge = age;
         return this;
     }
-
     public FruitVineBlock setFruitGrowChance(float chance) {
         if (chance <= 1 && chance >= 0)
             fruitGrowChance = chance;
         return this;
     }
-
     public void setMaxFruitsAround(int maxFruitsAround) {
         this.maxFruitsAround = maxFruitsAround;
     }
-
     public void setFlowerHoldPeriodLength(float flowerHoldPeriodLength) {
         this.flowerHoldPeriodLength = flowerHoldPeriodLength;
     }
-
     public void setMinProductionFactor(float minProductionFactor) {
         this.minProductionFactor = minProductionFactor;
     }
-
     public FruitVineBlock setFruitOverripenChance(float chance) {
         if (chance <= 1 && chance >= 0)
             fruitOverripenChance = chance;
         return this;
     }
-
     public FruitVineBlock setFruitStack(ItemStack stack) {
         fruitStack = stack;
         return this;
     }
-
     public FruitVineBlock setOverripeFruitStack(ItemStack stack) {
         overripeFruitStack = stack;
         return this;
     }
-
     public FruitVineBlock setSeasonOffset(Float seasonOffset){
         this.seasonOffset = seasonOffset;
         return this;
+    }
+
+    public Float getSeasonOffset (){
+        return seasonOffset;
     }
 
     @Override
@@ -120,17 +117,12 @@ public class FruitVineBlock extends VineBlock {
         builder.add(ageProperty);
     }
 
-
-//    private float getFruitOffset() {
-//        return fruitingOffset;
-//    }
+    @Override
+    public Item asItem() {
+        return super.asItem();
+    }
 
     public void doTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (!this.canSurvive(state, world, pos)) {
-            drop(world, pos, state);
-            return;
-        }
-
         final Integer age = getAge(state);
         if (age == null) return;
         final Float season = SeasonHelper.getSeasonValue(WorldContext.create(world), pos);
@@ -147,10 +139,6 @@ public class FruitVineBlock extends VineBlock {
         if (age < maxAge) {
             tryGrow(state, world, pos, random, age, season);
         }
-    }
-
-    protected void drop(World world, BlockPos pos, BlockState state) {
-
     }
 
     private void tryGrow(BlockState state, World world, BlockPos pos, Random random, int age,
