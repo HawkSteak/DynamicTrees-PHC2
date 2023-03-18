@@ -120,7 +120,6 @@ dependencies {
     //compileOnly(fg.deobf("mcp.mobius.waila:Hwyla:${property("hwylaVersion")}:api"))
     compileOnly(fg.deobf("curse.maven:Jade-324717:3389760"))
 
-
     // DT+ is optional, but it's implemented as there is access to its classes and needs to be compiled.
     implementation(fg.deobf("com.ferreusveritas.dynamictreesplus:DynamicTreesPlus-$mcVersion:${property("dynamicTreesPlusVersion")}"))
 
@@ -140,6 +139,9 @@ dependencies {
 
     // At runtime, get rid of experimental settings warning screen.
     runtimeOnly(fg.deobf("curse.maven:ShutUpExperimentalSettings-407174:3188120"))
+
+    // At runtime use serene seasons to test seasonal mechanics
+    runtimeOnly(fg.deobf("curse.maven:SereneSeasons-291874:3650681"))
 
     // At runtime, use suggestion provider fix mod.
     runtimeOnly(fg.deobf("com.harleyoconnor.suggestionproviderfix:SuggestionProviderFix:$mcVersion-${property("suggestionProviderFixVersion")}"))

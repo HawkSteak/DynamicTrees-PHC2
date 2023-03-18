@@ -31,15 +31,14 @@ import static com.ferreusveritas.dynamictrees.compat.seasons.SeasonHelper.isSeas
 
 public class FruitVineBlock extends VineBlock {
 
+    public static final int maxAge = 4;
 
     private static final float baseFruitingChance = 0.002f;
     private static float fruitGrowChance = 0.2f;
     private static float fruitOverripenChance = 0.02f;
-    private static final int maxLength = 3;
-    public static final int maxAge = 4;
 
     private static final float vineSpreadUpChance = 0.005f;
-    private static final float attemptSpread = 0.05f;
+    private static final float attemptSpread = 0.01f;
 
     public static final IntegerProperty ageProperty = IntegerProperty.create("age", 0, maxAge);
 
@@ -50,11 +49,13 @@ public class FruitVineBlock extends VineBlock {
     private int matureAge = maxAge;
 
     @Nullable
-    private final Float seasonOffset = 0f;
+    private Float seasonOffset = 0f;
 
-    private final float flowerHoldPeriodLength = 0.5F;
+    private float flowerHoldPeriodLength = 0.5F;
 
-    private final float minProductionFactor = 0.3F;
+    private float minProductionFactor = 0.3F;
+
+    private int maxFruitsAround = 2;
 
     public FruitVineBlock() {
         super(AbstractBlock.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().strength(0.2F).sound(SoundType.VINE));
@@ -63,7 +64,7 @@ public class FruitVineBlock extends VineBlock {
 
     public void setAge(World world, BlockPos pos, BlockState state, int age, boolean destroy) {
         state = state.setValue(ageProperty, age);
-        //LogManager.getLogger(DynamicTreesPHC2.MOD_ID).info("Set Block at " + pos.toString() + " age to " + age);
+        //Spawn breaking particles and breaking sound
         if (destroy) world.levelEvent(2001, pos, Block.getId(state));
         world.setBlock(pos, state, 2);
     }
@@ -78,6 +79,18 @@ public class FruitVineBlock extends VineBlock {
         if (chance <= 1 && chance >= 0)
             fruitGrowChance = chance;
         return this;
+    }
+
+    public void setMaxFruitsAround(int maxFruitsAround) {
+        this.maxFruitsAround = maxFruitsAround;
+    }
+
+    public void setFlowerHoldPeriodLength(float flowerHoldPeriodLength) {
+        this.flowerHoldPeriodLength = flowerHoldPeriodLength;
+    }
+
+    public void setMinProductionFactor(float minProductionFactor) {
+        this.minProductionFactor = minProductionFactor;
     }
 
     public FruitVineBlock setFruitOverripenChance(float chance) {
@@ -96,10 +109,10 @@ public class FruitVineBlock extends VineBlock {
         return this;
     }
 
-//    public FruitVineBlock setFruitingOffset(Integer offset) {
-//        fruitingOffset = offset;
-//        return this;
-//    }
+    public FruitVineBlock setSeasonOffset(Float seasonOffset){
+        this.seasonOffset = seasonOffset;
+        return this;
+    }
 
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
@@ -124,17 +137,14 @@ public class FruitVineBlock extends VineBlock {
 
         if (season != null) { // Non-Null means we are season capable.
             if (isOutOfSeason(world, pos)) {
-                this.outOfSeason(world, pos); // Destroy the block or similar action.
+                this.outOfSeason(world, pos, state); // Destroy the block or similar action.
                 return;
             }
-            if (age == 0 && isInFlowerHoldPeriod(world, pos, season)) {
+            if (age == 1 && isInFlowerHoldPeriod(world, pos, season)) {
+                return;
             }
         }
-
-        else if (age < maxAge) {
-            if (matureAge != maxAge && age >= matureAge) {
-
-            }
+        if (age < maxAge) {
             tryGrow(state, world, pos, random, age, season);
         }
     }
@@ -160,7 +170,7 @@ public class FruitVineBlock extends VineBlock {
                     fruitFoundAround++;
                 }
             }
-            if (fruitFoundAround >= 2) {
+            if (fruitFoundAround >= maxFruitsAround) {
                 //changeVineWithProperties(world, pos, getStateFromAge(0), state);
                 return;
             }
@@ -180,8 +190,8 @@ public class FruitVineBlock extends VineBlock {
         return seasonalFruitProductionFactor(WorldContext.create(world), pos) < minProductionFactor;
     }
 
-    private void outOfSeason(World world, BlockPos pos) {
-
+    private void outOfSeason(World world, BlockPos pos, BlockState state) {
+        world.setBlock(pos, state.setValue(ageProperty, 0), 2);
     }
 
     public final boolean isInFlowerHoldPeriod(IWorld world, BlockPos rootPos, Float seasonValue) {
@@ -199,17 +209,9 @@ public class FruitVineBlock extends VineBlock {
     }
 
     private float getFruitingChance(World world, BlockPos pos) {
+        if (seasonOffset == null) return baseFruitingChance;
         float fruitFactor = SeasonHelper.globalSeasonalFruitProductionFactor(WorldContext.create(world), pos, seasonOffset, true);
         return baseFruitingChance * Math.max((fruitFactor + 0.25f), 1);
-    }
-
-    private void changeVineWithProperties(World world, BlockPos pos, BlockState baseState, BlockState stateWithWantedProperties) {
-        BlockState state = baseState.setValue(UP, stateWithWantedProperties.getValue(UP))
-                .setValue(NORTH, stateWithWantedProperties.getValue(NORTH))
-                .setValue(WEST, stateWithWantedProperties.getValue(WEST))
-                .setValue(SOUTH, stateWithWantedProperties.getValue(SOUTH))
-                .setValue(EAST, stateWithWantedProperties.getValue(EAST));
-        world.setBlock(pos, state, 2);
     }
 
     public Integer getAge(BlockState state) {

@@ -41,13 +41,13 @@ public class DTPHC2Registries {
 
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, DynamicTreesPHC2.MOD_ID);
 
-    public static final FruitVineBlock PASSION_FRUIT_VINE = new FruitVineBlock();
+    public static final FruitVineBlock PASSION_FRUIT_VINE = new FruitVineBlock().setSeasonOffset(0f); //summer
     public static final Item PASSION_FRUIT_VINE_ITEM = new BlockItem(PASSION_FRUIT_VINE, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
-    public static final FruitVineBlock VANILLA_VINE = new FruitVineBlock();
+    public static final FruitVineBlock VANILLA_VINE = new FruitVineBlock().setSeasonOffset(2f); //winter
     public static final Item VANILLA_VINE_ITEM = new BlockItem(VANILLA_VINE, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
-    public static final FruitVineBlock PEPPERCORN_VINE = new FruitVineBlock();
+    public static final FruitVineBlock PEPPERCORN_VINE = new FruitVineBlock().setSeasonOffset(0f); //summer
     public static final Item PEPPERCORN_VINE_ITEM = new BlockItem(PEPPERCORN_VINE, new Item.Properties().tab(DTRegistries.ITEM_GROUP));
 
     public static final Item RIPE_PEPPERCORN_ITEM = new Item(new Item.Properties().tab(DTRegistries.ITEM_GROUP));
