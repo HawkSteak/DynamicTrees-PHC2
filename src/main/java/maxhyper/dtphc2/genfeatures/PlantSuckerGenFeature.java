@@ -20,7 +20,7 @@ public class PlantSuckerGenFeature extends GenFeature {
 
     public static final ConfigurationProperty<Block> SUCKER_BLOCK =
             ConfigurationProperty.block("sucker_block");
-
+    public static final ConfigurationProperty<Float> PLACE_CHANCE_WORLDGEN = ConfigurationProperty.floatProperty("place_chance_worldgen");
 
     public PlantSuckerGenFeature(ResourceLocation registryName) {
         super(registryName);
@@ -28,36 +28,35 @@ public class PlantSuckerGenFeature extends GenFeature {
 
     @Override
     protected void registerProperties() {
-        this.register(SUCKER_BLOCK, FRUITING_RADIUS, PLACE_CHANCE);
+        this.register(SUCKER_BLOCK, PLACE_CHANCE, PLACE_CHANCE_WORLDGEN);
     }
 
     @Override
     public GenFeatureConfiguration createDefaultConfiguration() {
         return new GenFeatureConfiguration(this)
                 .with(SUCKER_BLOCK, Blocks.AIR)
-                .with(FRUITING_RADIUS, 5)
-                .with(PLACE_CHANCE, 0.1f);
+                .with(PLACE_CHANCE, 0.06f)
+                .with(PLACE_CHANCE_WORLDGEN, 0.6f);
     }
 
     @Override
     protected boolean postGenerate(GenFeatureConfiguration configuration, PostGenerationContext context) {
-        if (context.radius() < configuration.get(FRUITING_RADIUS)) return false;
         IWorld world = context.world();
         boolean placed = false;
-        for (int i=0;i<8;i++){
-            if(context.random().nextInt() % 4 == 0) {
-                addSucker(world, context.pos(), true, configuration.get(SUCKER_BLOCK));
-                placed = true;
+            for (Direction dir : Direction.Plane.HORIZONTAL){
+                if(context.random().nextFloat() < configuration.get(PLACE_CHANCE_WORLDGEN)) {
+                    if (addSucker(world, context.pos(), true, configuration.get(SUCKER_BLOCK), dir))
+                        placed = true;
+                }
             }
-        }
         return placed;
     }
 
     @Override
     protected boolean postGrow(GenFeatureConfiguration configuration, PostGrowContext context) {
-        if (TreeHelper.getRadius(context.world(), context.treePos()) < configuration.get(FRUITING_RADIUS)) return false;
-        if(context.random().nextInt() % 16 == 0) {
-            return addSucker(context.world(), context.treePos(), false, configuration.get(SUCKER_BLOCK));
+        if(context.random().nextFloat() < configuration.get(PLACE_CHANCE)) {
+            Direction dir = Direction.Plane.HORIZONTAL.getRandomDirection(context.random());
+            return addSucker(context.world(), context.treePos(), false, configuration.get(SUCKER_BLOCK), dir);
         }
         return false;
     }
@@ -74,8 +73,7 @@ public class PlantSuckerGenFeature extends GenFeature {
         return null;
     }
 
-    private boolean addSucker(IWorld world, BlockPos rootPos, boolean worldGen, Block sucker) {
-        Direction dir = Direction.Plane.HORIZONTAL.getRandomDirection(world.getRandom());
+    private boolean addSucker(IWorld world, BlockPos rootPos, boolean worldGen, Block sucker, Direction dir) {
         BlockPos ground = getGroundPos(world, rootPos.offset(dir.getNormal()));
         if (ground == null){
             return false;

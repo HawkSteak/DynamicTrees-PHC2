@@ -15,6 +15,12 @@
         "max_length": 8,
         "block": "dtphc2:peppercorn_vine"
       }
+    },
+    {
+      "name": "dtphc2:trunk_vines",
+      "properties": {
+        "block": "dtphc2:peppercorn_vine"
+      }
     }
   ]
 }

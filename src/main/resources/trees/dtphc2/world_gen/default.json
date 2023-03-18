@@ -54,7 +54,7 @@
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 300,
+          "...": 500,
           "dtphc2:almond": 1,
           "dtphc2:apricot": 1,
           "dtphc2:banana": 1,

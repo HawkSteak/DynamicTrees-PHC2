@@ -1,5 +1,6 @@
 package maxhyper.dtphc2.blocks;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.compat.seasons.SeasonHelper;
 import com.ferreusveritas.dynamictrees.util.WorldContext;
 import net.minecraft.block.*;
@@ -7,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.ActionResultType;
@@ -16,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
@@ -34,9 +35,12 @@ public class FruitVineBlock extends VineBlock {
     private static float fruitGrowChance = 0.2f;
     private static float fruitOverripenChance = 0.02f;
     private static final int maxLength = 3;
-    private static final int maxAge = 4;
+    public static final int maxAge = 4;
 
-    private static final IntegerProperty ageProperty = IntegerProperty.create("age", 0, maxAge);
+    private static final float vineSpreadUpChance = 0.005f;
+    private static final float attemptSpread = 0.05f;
+
+    public static final IntegerProperty ageProperty = IntegerProperty.create("age", 0, maxAge);
 
     private ItemStack fruitStack;
     private ItemStack overripeFruitStack;
@@ -106,11 +110,6 @@ public class FruitVineBlock extends VineBlock {
 //    private float getFruitOffset() {
 //        return fruitingOffset;
 //    }
-
-    @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        doTick(state, world, pos, random);
-    }
 
     public void doTick(BlockState state, World world, BlockPos pos, Random random) {
         if (!this.canSurvive(state, world, pos)) {
@@ -267,6 +266,111 @@ public class FruitVineBlock extends VineBlock {
             }
         }
         return ActionResultType.PASS;
+    }
+
+    @Override
+    public boolean canSupportAtFace(IBlockReader pLevel, BlockPos pPos, Direction pDirection) {
+        if (pDirection == Direction.DOWN) {
+            return false;
+        } else {
+            BlockPos blockpos = pPos.relative(pDirection);
+            if (isAcceptableNeighbour(pLevel, blockpos, pDirection)) {
+                return true;
+            } else if (pDirection.getAxis() == Direction.Axis.Y) {
+                return false;
+            } else {
+                BooleanProperty booleanproperty = PROPERTY_BY_DIRECTION.get(pDirection);
+                BlockState blockstate = pLevel.getBlockState(pPos.above());
+                return blockstate.is(this) && blockstate.getValue(booleanproperty);
+            }
+        }
+    }
+
+    public static boolean isAcceptableNeighbour(IBlockReader pBlockReader, BlockPos pLevel, Direction pNeighborPos) {
+        BlockState blockstate = pBlockReader.getBlockState(pLevel);
+        return Block.isFaceFull(blockstate.getCollisionShape(pBlockReader, pLevel), pNeighborPos.getOpposite()) || TreeHelper.isBranch(blockstate);
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        doTick(state, world, pos, random);
+
+        if (world.random.nextFloat() < attemptSpread && world.isAreaLoaded(pos, 4)) { // Forge: check area to prevent loading unloaded chunks
+            Direction randDir = Direction.getRandom(random);
+            BlockPos upPos = pos.above();
+            if (randDir.getAxis().isHorizontal() && !state.getValue(getPropertyForFace(randDir))) {
+                if (this.canSpread(world, pos)) {
+                    BlockPos offsetPos = pos.relative(randDir);
+                    BlockState offsetState = world.getBlockState(offsetPos);
+                    if (offsetState.isAir(world, offsetPos)) {
+                        Direction rightDir = randDir.getClockWise();
+                        Direction leftDir = randDir.getCounterClockWise();
+                        boolean hasFaceRight = state.getValue(getPropertyForFace(rightDir));
+                        boolean hasFaceLeft = state.getValue(getPropertyForFace(leftDir));
+                        BlockPos rightPos = offsetPos.relative(rightDir);
+                        BlockPos leftPos = offsetPos.relative(leftDir);
+                        if (hasFaceRight && isAcceptableNeighbour(world, rightPos, rightDir)) {
+                            world.setBlock(offsetPos, this.defaultBlockState().setValue(getPropertyForFace(rightDir), true), 2);
+                        } else if (hasFaceLeft && isAcceptableNeighbour(world, leftPos, leftDir)) {
+                            world.setBlock(offsetPos, this.defaultBlockState().setValue(getPropertyForFace(leftDir), true), 2);
+                        } else {
+                            Direction oppositeDir = randDir.getOpposite();
+                            if (hasFaceRight && world.isEmptyBlock(rightPos) && isAcceptableNeighbour(world, pos.relative(rightDir), oppositeDir)) {
+                                world.setBlock(rightPos, this.defaultBlockState().setValue(getPropertyForFace(oppositeDir), true), 2);
+                            } else if (hasFaceLeft && world.isEmptyBlock(leftPos) && isAcceptableNeighbour(world, pos.relative(leftDir), oppositeDir)) {
+                                world.setBlock(leftPos, this.defaultBlockState().setValue(getPropertyForFace(oppositeDir), true), 2);
+                            } else if (world.random.nextFloat() < vineSpreadUpChance && isAcceptableNeighbour(world, offsetPos.above(), Direction.UP)) {
+                                world.setBlock(offsetPos, this.defaultBlockState().setValue(UP, true), 2);
+                            }
+                        }
+                    } else if (isAcceptableNeighbour(world, offsetPos, randDir)) {
+                        world.setBlock(pos, state.setValue(getPropertyForFace(randDir), true), 2);
+                    }
+
+                }
+            } else {
+                if (randDir == Direction.UP && pos.getY() < 255) {
+                    if (this.canSupportAtFace(world, pos, randDir)) {
+                        world.setBlock(pos, state.setValue(UP, true), 2);
+                        return;
+                    }
+
+                    if (world.isEmptyBlock(upPos)) {
+                        if (!this.canSpread(world, pos)) {
+                            return;
+                        }
+
+                        BlockState blockstate3 = state;
+
+                        for(Direction direction2 : Direction.Plane.HORIZONTAL) {
+                            if (random.nextBoolean() || !isAcceptableNeighbour(world, upPos.relative(direction2), Direction.UP)) {
+                                blockstate3 = blockstate3.setValue(getPropertyForFace(direction2), false);
+                            }
+                        }
+
+                        if (this.hasHorizontalConnection(blockstate3)) {
+                            world.setBlock(upPos, blockstate3, 2);
+                        }
+
+                        return;
+                    }
+                }
+
+                if (pos.getY() > 0) {
+                    BlockPos blockpos1 = pos.below();
+                    BlockState blockstate = world.getBlockState(blockpos1);
+                    boolean isAir = blockstate.isAir(world, blockpos1);
+                    if (isAir || blockstate.is(this)) {
+                        BlockState blockstate1 = isAir ? this.defaultBlockState() : blockstate;
+                        BlockState blockstate2 = this.copyRandomFaces(state, blockstate1, random);
+                        if (blockstate1 != blockstate2 && this.hasHorizontalConnection(blockstate2)) {
+                            world.setBlock(blockpos1, blockstate2, 2);
+                        }
+                    }
+                }
+
+            }
+        }
     }
 
 }
