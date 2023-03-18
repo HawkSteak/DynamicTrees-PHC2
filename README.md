@@ -3,8 +3,17 @@
 
 # Missing features
 
-- Maple, Paperbark and Cinnamon do not drop items when chopped  
-- Ripe peppercorn is useless
+- Customize world gen
+- make cobweb fruit more cobwebby
+- add sand as beach/desert tree valid soil tiles
+
+# Where do trees spawn? 
+
+Jungle: apricot, passion fruit, banana, dragonfruit, papaya, starfruit, jackfruit/breadfruit, guava, vanilla, tamarind, almond
+Savanna: pecan, pistachio, pomegranate, cashew, cinnamon, peppercorn, persimmon, fig, olive, grapefruit, paperbark
+Beach/River/Ocean: coconut, lime, mango
+Desert: date
+Swamp: lychee/rambutan, durian
 
 # Working
 
@@ -16,6 +25,7 @@
 - Candlenut
 - Chestnut
 - Cherry
+- Cinnamon
 - Durian
 - Fig
 - Grapefruit
@@ -27,10 +37,12 @@
 - Lemon
 - Lime
 - Lychee
+- Maple
 - Mango
 - Nutmeg
 - Olive
 - Orange
+- Paperbark
 - Pawpaw
 - Passionfruit
 - Pear

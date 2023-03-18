@@ -46,48 +46,103 @@
     }
   },
   {
-    "__comment": "Spawn warm trees",
+    "__comment": "Spawn beach trees",
     "select": {
-      "AND": [{"OR": [{"type": "swamp"}, {"type": "ocean"}, {"type": "jungle"}]},{"types": ["overworld", "!spooky"]}]
+      "AND": [{"OR": [{"type": "river"},{"type": "ocean"},{"type": "beach"}]}, {"types": ["overworld", "!spooky"]}]
     },
     "apply": {
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 500,
+          "...": 40,
+          "dtphc2:coconut": 1,
+          "dtphc2:lime": 1,
+          "dtphc2:mango": 1
+        }
+      }
+    }
+  },
+  {
+    "__comment": "Spawn jungle trees",
+    "select": {
+      "types": ["jungle", "overworld", "!spooky"]
+    },
+    "apply": {
+      "species": {
+        "method": "splice_before",
+        "random": {
+          "...": 250,
           "dtphc2:almond": 1,
           "dtphc2:apricot": 1,
           "dtphc2:banana": 1,
-          "dtphc2:cashew": 1,
-          "dtphc2:cinnamon": 1,
-          "dtphc2:coconut": 1,
-          "dtphc2:date": 1,
           "dtphc2:dragonfruit": 1,
-          "dtphc2:durian": 1,
-          "dtphc2:fig": 1,
-          "dtphc2:grapefruit": 1,
-          "dtphc2:lime": 1,
-          "dtphc2:mango": 1,
-          "dtphc2:olive": 1,
           "dtphc2:papaya": 1,
-          "dtphc2:paperbark": 1,
-          "dtphc2:pecan": 1,
-          "dtphc2:peppercorn": 1,
-          "dtphc2:persimmon": 1,
-          "dtphc2:pistachio": 1,
-          "dtphc2:pomegranate": 1,
           "dtphc2:starfruit": 1,
-          "dtphc2:vanillabean": 1,
           "dtphc2:breadfruit": 1,
           "dtphc2:guava": 1,
           "dtphc2:jackfruit": 1,
-          "dtphc2:lychee": 1,
-          "dtphc2:passionfruit": 1,
-          "dtphc2:rambutan": 1,
           "dtphc2:tamarind": 1,
           "dtphc2:vine_passion_fruit": 1,
+          "dtphc2:vine_vanilla": 1
+        }
+      }
+    }
+  },
+  {
+    "__comment": "Spawn savanna trees",
+    "select": {
+      "types": ["savanna", "overworld", "!spooky"]
+    },
+    "apply": {
+      "species": {
+        "method": "splice_before",
+        "random": {
+          "...": 150,
+          "dtphc2:apricot": 1,
+          "dtphc2:cashew": 1,
+          "dtphc2:cinnamon": 1,
+          "dtphc2:fig": 1,
+          "dtphc2:grapefruit": 1,
+          "dtphc2:olive": 1,
+          "dtphc2:paperbark": 1,
+          "dtphc2:pecan": 1,
+          "dtphc2:persimmon": 1,
+          "dtphc2:pistachio": 1,
+          "dtphc2:pomegranate": 1,
           "dtphc2:vine_peppercorn": 1,
           "dtphc2:vine_vanilla": 1
+        }
+      }
+    }
+  },
+  {
+    "__comment": "Spawn desert trees",
+    "select": {
+      "types": ["desert", "overworld", "!spooky"]
+    },
+    "apply": {
+      "species": {
+        "method": "splice_before",
+        "random": {
+          "...": 20,
+          "dtphc2:date": 1
+        }
+      }
+    }
+  },
+  {
+    "__comment": "Spawn swamp trees",
+    "select": {
+      "types": ["swamp", "overworld", "!spooky"]
+    },
+    "apply": {
+      "species": {
+        "method": "splice_before",
+        "random": {
+          "...": 80,
+          "dtphc2:lychee": 1,
+          "dtphc2:rambutan": 1,
+          "dtphc2:durian": 1
         }
       }
     }
