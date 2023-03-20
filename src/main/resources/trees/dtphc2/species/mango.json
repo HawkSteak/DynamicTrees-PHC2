@@ -22,6 +22,9 @@
   "fruits": [
     "dtphc2:mango"
   ],
+  "acceptable_soils": [
+    "dirt_like", "sand_like"
+  ],
   "features": [
     {
       "name": "fruit",

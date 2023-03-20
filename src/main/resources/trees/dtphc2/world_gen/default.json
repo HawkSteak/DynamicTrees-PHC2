@@ -46,9 +46,24 @@
     }
   },
   {
+    "__comment": "Spawn forest trees",
+    "select": {
+      "types": ["forest", "overworld", "!spooky"]
+    },
+    "apply": {
+      "species": {
+        "method": "splice_before",
+        "random": {
+          "...": 40,
+          "dtphc2:apricot": 1
+        }
+      }
+    }
+  },
+  {
     "__comment": "Spawn beach trees",
     "select": {
-      "AND": [{"OR": [{"type": "river"},{"type": "ocean"},{"type": "beach"}]}, {"types": ["overworld", "!spooky"]}]
+      "AND": [{"OR": [{"type": "river"}, {"type": "ocean"}, {"type": "beach"}]}, {"types": ["overworld", "!spooky"]}]
     },
     "apply": {
       "species": {
@@ -118,16 +133,14 @@
   {
     "__comment": "Spawn desert trees",
     "select": {
-      "types": ["desert", "overworld", "!spooky"]
+      "types": ["sandy", "overworld", "!mesa", "!spooky"]
     },
     "apply": {
-      "species": {
-        "method": "splice_before",
-        "random": {
-          "...": 20,
-          "dtphc2:date": 1
-        }
-      }
+      "species" : {
+        "dtphc2:date": 1
+      },
+      "density" : { "math": { "add" : [ { "mul" : [ "noise", 0.6 ] }, 0.4 ] } },
+      "chance": 0.1
     }
   },
   {

@@ -13,7 +13,7 @@
     "cold": 0.75,
     "hot": 1.1
   },
-  "perfect_biomes": { "types": [ "jungle", "overworld" ] },
+  "perfect_biomes": { "AND": [{"OR": [{"type": "jungle"}, {"type": "sandy"}]}, {"types": ["overworld", "!mesa", "!spooky"]}] },
   "primitive_saplings": [
     { "sapling_block": "pamhc2trees:date_sapling" },
     {
@@ -23,6 +23,9 @@
   ],
   "fruits": [
     "dtphc2:date"
+  ],
+  "acceptable_soils": [
+    "dirt_like", "sand_like"
   ],
   "features": [
     {
