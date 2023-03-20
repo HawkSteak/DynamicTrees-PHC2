@@ -9,11 +9,12 @@
 
 # Where do trees spawn? 
 
-Jungle: apricot, passion fruit, banana, dragonfruit, papaya, starfruit, jackfruit/breadfruit, guava, vanilla, tamarind, almond
+Jungle: passion fruit, banana, dragonfruit, papaya, starfruit, jackfruit/breadfruit, guava, vanilla, tamarind, almond
 Savanna: pecan, pistachio, pomegranate, cashew, cinnamon, peppercorn, persimmon, fig, olive, grapefruit, paperbark
 Beach/River/Ocean: coconut, lime, mango
 Desert: date
 Swamp: lychee/rambutan, durian
+Forest: apricot
 
 # Working
 
