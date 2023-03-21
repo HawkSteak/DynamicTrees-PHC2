@@ -127,8 +127,7 @@ dependencies {
     /// Runtime Dependencies (optional)
     /////////////////////////////////////////
 
-    // At runtime, use the full Hwyla mod.
-    //runtimeOnly(fg.deobf("mcp.mobius.waila:Hwyla:${property("hwylaVersion")}"))
+    // At runtime, use the full Jade mod.
     runtimeOnly(fg.deobf("curse.maven:Jade-324717:3389760"))
 
     // At runtime, use the full JEI mod.

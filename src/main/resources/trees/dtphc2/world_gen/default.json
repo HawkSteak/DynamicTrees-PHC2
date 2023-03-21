@@ -8,9 +8,9 @@
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 100,
+          "...": 75,
           "dtphc2:maple": 1,
-          "dtphc2:pinenut": 1
+          "dtphc2:pinenut": 2
         }
       }
     }
@@ -18,7 +18,7 @@
   {
     "__comment": "Spawn temperate trees",
     "select": {
-      "types": ["!cold", "!hot", "overworld", "!spooky"]
+      "types": ["!cold", "!hot", "!wet", "!dry", "overworld", "!spooky"]
     },
     "apply": {
       "species": {
@@ -27,20 +27,53 @@
           "...": 300,
           "dtphc2:avocado": 1,
           "dtphc2:candlenut": 1,
-          "dtphc2:cherry": 1,
           "dtphc2:chestnut": 1,
-          "dtphc2:gooseberry": 1,
           "dtphc2:lemon": 1,
           "dtphc2:nutmeg": 1,
           "dtphc2:orange": 1,
           "dtphc2:peach": 1,
-          "dtphc2:pear": 1,
           "dtphc2:plum": 1,
           "dtphc2:walnut": 1,
-          "dtphc2:spiderweb": 1,
           "dtphc2:hazelnut": 1,
-          "dtphc2:pawpaw": 1,
           "dtphc2:soursop": 1
+        }
+      }
+    }
+  },
+  {
+    "__comment": "Spawn forest trees",
+    "select": {
+      "types": ["forest", "!coniferous", "overworld", "!spooky"]
+    },
+    "apply": {
+      "species": {
+        "method": "splice_before",
+        "random": {
+          "...": 100,
+          "dtphc2:apricot": 1,
+          "dtphc2:spiderweb": 1,
+          "dtphc2:gooseberry": 1,
+          "dtphc2:plum": 1,
+          "dtphc2:pawpaw": 1
+        }
+      }
+    }
+  },
+  {
+    "__comment": "Spawn hills / mountain trees",
+    "select": {
+      "AND": [{"OR": [{"type": "hills"}, {"type": "mountain"}]},{"types": ["overworld", "!spooky"]}]
+    },
+    "apply": {
+      "species": {
+        "method": "splice_before",
+        "random": {
+          "...": 75,
+          "dtphc2:apricot": 2,
+          "dtphc2:cherry": 5,
+          "dtphc2:peach": 2,
+          "dtphc2:pear": 2,
+          "apple_oak": 1
         }
       }
     }

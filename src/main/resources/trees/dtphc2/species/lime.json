@@ -26,6 +26,9 @@
   "fruits": [
     "dtphc2:lime"
   ],
+  "acceptable_soils": [
+    "dirt_like", "sand_like"
+  ],
   "features": [
     {
       "name": "fruit",

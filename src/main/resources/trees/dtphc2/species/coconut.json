@@ -28,6 +28,9 @@
   "pods": [
     "dtphc2:coconut"
   ],
+  "acceptable_soils": [
+    "dirt_like", "sand_like"
+  ],
   "features": [
     {
       "name": "dtphc2:palm_fruit",
