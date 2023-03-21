@@ -50,11 +50,12 @@
         "method": "splice_before",
         "random": {
           "...": 100,
-          "dtphc2:apricot": 1,
-          "dtphc2:spiderweb": 1,
-          "dtphc2:gooseberry": 1,
-          "dtphc2:plum": 1,
-          "dtphc2:pawpaw": 1
+          "dtphc2:apricot": 2,
+          "dtphc2:spiderweb": 2,
+          "dtphc2:gooseberry": 2,
+          "dtphc2:plum": 2,
+          "dtphc2:pawpaw": 2,
+          "dtphc2:lime": 1
         }
       }
     }
@@ -105,7 +106,7 @@
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 250,
+          "...": 260,
           "dtphc2:almond": 2,
           "dtphc2:apricot": 2,
           "dtphc2:banana": 3,
@@ -118,7 +119,8 @@
           "dtphc2:tamarind": 2,
           "dtphc2:vine_passion_fruit": 4,
           "dtphc2:vine_vanilla": 4,
-          "dtphc2:date": 1
+          "dtphc2:date": 1,
+          "dtphc2:mango": 1
         }
       }
     }
