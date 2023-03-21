@@ -11,6 +11,8 @@
   "environment_factors" : {
 
   },
+  "seasonal_fruiting_offset": 0,
+  "inherit_fruiting_offset_to_fruits": true,
   "perfect_biomes": { "types": [ "forest", "overworld" ] },
   "primitive_saplings": [
     { "sapling_block": "pamhc2trees:gooseberry_sapling" },

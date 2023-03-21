@@ -9,6 +9,8 @@
   "environment_factors" : {
 
   },
+  "seasonal_fruiting_offset": null,
+  "inherit_fruiting_offset_to_fruits": true,
   "perfect_biomes": { "types": [ "forest", "overworld" ] },
   "primitive_saplings": "pamhc2trees:spiderweb_sapling",
   "fruits": [

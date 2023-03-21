@@ -11,6 +11,8 @@
     "cold": 0.75,
     "hot": 1.1
   },
+  "seasonal_fruiting_offset": 0,
+  "inherit_fruiting_offset_to_fruits": true,
   "acceptable_soils": ["dirt_like", "sand_like"],
   "perfect_biomes": { "types": [ "jungle", "overworld" ] },
   "primitive_saplings": [

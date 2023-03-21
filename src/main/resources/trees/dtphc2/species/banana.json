@@ -12,6 +12,8 @@
     "dry": 0.75,
     "hot": 1.1
   },
+  "seasonal_fruiting_offset": null,
+  "inherit_fruiting_offset_to_fruits": true,
   "perfect_biomes": { "types": [ "jungle", "overworld" ] },
   "primitive_saplings": [
     { "sapling_block": "pamhc2trees:banana_sapling" }

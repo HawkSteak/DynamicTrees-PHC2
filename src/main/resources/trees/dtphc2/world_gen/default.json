@@ -46,16 +46,17 @@
     }
   },
   {
-    "__comment": "Spawn beach trees",
+    "__comment": "Spawn beach and river trees",
+    "__": "\"AND\": [{\"OR\": [{\"type\": \"river\"},{\"type\": \"ocean\"},{\"type\": \"beach\"}]}, {\"types\": [\"overworld\", \"!spooky\"]}]",
     "select": {
-      "AND": [{"OR": [{"type": "river"},{"type": "ocean"},{"type": "beach"}]}, {"types": ["overworld", "!spooky"]}]
+      "types": ["beach", "overworld", "!spooky"]
     },
     "apply": {
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 40,
-          "dtphc2:coconut": 1,
+          "...": 10,
+          "dtphc2:coconut": 2,
           "dtphc2:lime": 1,
           "dtphc2:mango": 1
         }
@@ -72,18 +73,19 @@
         "method": "splice_before",
         "random": {
           "...": 250,
-          "dtphc2:almond": 1,
-          "dtphc2:apricot": 1,
-          "dtphc2:banana": 1,
-          "dtphc2:dragonfruit": 1,
-          "dtphc2:papaya": 1,
-          "dtphc2:starfruit": 1,
-          "dtphc2:breadfruit": 1,
-          "dtphc2:guava": 1,
-          "dtphc2:jackfruit": 1,
-          "dtphc2:tamarind": 1,
-          "dtphc2:vine_passion_fruit": 1,
-          "dtphc2:vine_vanilla": 1
+          "dtphc2:almond": 2,
+          "dtphc2:apricot": 2,
+          "dtphc2:banana": 3,
+          "dtphc2:dragonfruit": 4,
+          "dtphc2:papaya": 3,
+          "dtphc2:starfruit": 2,
+          "dtphc2:breadfruit": 2,
+          "dtphc2:guava": 2,
+          "dtphc2:jackfruit": 2,
+          "dtphc2:tamarind": 2,
+          "dtphc2:vine_passion_fruit": 4,
+          "dtphc2:vine_vanilla": 4,
+          "dtphc2:date": 1
         }
       }
     }
@@ -97,7 +99,7 @@
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 150,
+          "...": 250,
           "dtphc2:apricot": 1,
           "dtphc2:cashew": 1,
           "dtphc2:cinnamon": 1,
@@ -118,13 +120,13 @@
   {
     "__comment": "Spawn desert trees",
     "select": {
-      "types": ["desert", "overworld", "!spooky"]
+      "types": ["sandy", "hot", "overworld", "!spooky"]
     },
     "apply": {
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 20,
+          "...": 100,
           "dtphc2:date": 1
         }
       }
@@ -139,10 +141,11 @@
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 80,
-          "dtphc2:lychee": 1,
-          "dtphc2:rambutan": 1,
-          "dtphc2:durian": 1
+          "...": 200,
+          "dtphc2:lychee": 3,
+          "dtphc2:rambutan": 3,
+          "dtphc2:durian": 3,
+          "dtphc2:papaya": 1
         }
       }
     }

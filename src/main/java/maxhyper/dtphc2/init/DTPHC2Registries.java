@@ -10,6 +10,7 @@ import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
 import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeature;
 import com.ferreusveritas.dynamictrees.systems.pod.Pod;
 import com.ferreusveritas.dynamictrees.trees.Family;
+import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.CommonVoxelShapes;
 import com.pam.pamhc2trees.init.ItemRegistry;
 import maxhyper.dtphc2.DynamicTreesPHC2;
@@ -19,6 +20,7 @@ import maxhyper.dtphc2.fruits.*;
 import maxhyper.dtphc2.genfeatures.DTPHC2GenFeatures;
 import maxhyper.dtphc2.items.FruitVineItem;
 import maxhyper.dtphc2.items.RipePeppercornItem;
+import maxhyper.dtphc2.trees.GenOnExtraSoilSpecies;
 import maxhyper.dtphc2.trees.PaperbarkFamily;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -121,6 +123,11 @@ public class DTPHC2Registries {
     @SubscribeEvent
     public static void registerFamilyType(final TypeRegistryEvent<Family> event) {
         event.registerType(DynamicTreesPHC2.resLoc("paperbark"), PaperbarkFamily.TYPE);
+    }
+
+    @SubscribeEvent
+    public static void registerSpeciesType(final TypeRegistryEvent<Species> event) {
+        event.registerType(DynamicTreesPHC2.resLoc("generates_on_extra_soil"), GenOnExtraSoilSpecies.TYPE);
     }
 
     @SubscribeEvent

@@ -6,6 +6,5 @@
     { "function": "fruit", "parameters": { "radius": 2, "height": 2.667, "stem_length": 0, "fraction": 16 } },
     { "function": "fruit", "parameters": { "radius": 4.6, "height": 5.5, "stem_length": 1.5 } },
     { "function": "fruit", "parameters": { "radius": 4.6, "height": 6, "stem_length": 2 } }
-  ],
-  "season_offset": 0.5
+  ]
 }

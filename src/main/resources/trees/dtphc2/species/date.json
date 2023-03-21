@@ -13,7 +13,10 @@
     "cold": 0.75,
     "hot": 1.1
   },
-  "perfect_biomes": { "types": [ "jungle", "overworld" ] },
+  "seasonal_fruiting_offset": 1.5,
+  "inherit_fruiting_offset_to_pods": true,
+  "perfect_biomes": { "types": [ "desert", "overworld" ] },
+  "acceptable_soils": ["dirt_like", "sand_like"],
   "primitive_saplings": [
     { "sapling_block": "pamhc2trees:date_sapling" },
     {
@@ -21,7 +24,7 @@
       "can_craft_seed_to_sapling": false
     }
   ],
-  "fruits": [
+  "pods": [
     "dtphc2:date"
   ],
   "features": [

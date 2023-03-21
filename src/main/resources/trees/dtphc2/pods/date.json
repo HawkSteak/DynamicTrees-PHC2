@@ -28,6 +28,5 @@
       { "function": "pod", "parameters": { "radius": 4, "height": 10, "stem_length": 9, "side_offset": 6, "side": "south", "fraction": 20 } },
       { "function": "pod", "parameters": { "radius": 4, "height": 10, "stem_length": 9, "side_offset": 6, "side": "south", "fraction": 20 } }
     ]
-  },
-  "season_offset": 1.5
+  }
 }
