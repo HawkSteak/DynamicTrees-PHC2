@@ -117,11 +117,6 @@ public class FruitVineBlock extends VineBlock {
         builder.add(ageProperty);
     }
 
-    @Override
-    public Item asItem() {
-        return super.asItem();
-    }
-
     public void doTick(BlockState state, World world, BlockPos pos, Random random) {
         final Integer age = getAge(state);
         if (age == null) return;

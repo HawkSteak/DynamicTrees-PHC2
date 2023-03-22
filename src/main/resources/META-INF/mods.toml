@@ -49,3 +49,44 @@ Compatibility Mod between Dynamic Trees and Pam's HarvestCraft 2: Trees
     versionRange="[1.0.1,)"
     ordering="AFTER"
     side="BOTH"
+
+[[dependencies.dtphc2]]
+    modId="dtbyg"
+    mandatory=false
+    versionRange="(0.0,)"
+    ordering="AFTER"
+[[dependencies.dtphc2]]
+    modId="dtbop"
+    mandatory=false
+    versionRange="(0.0,)"
+    ordering="AFTER"
+[[dependencies.dtphc2]]
+    modId="dtbop"
+    mandatory=false
+    versionRange="(0.0,)"
+    ordering="AFTER"
+[[dependencies.dtphc2]]
+    modId="dttraverse"
+    mandatory=false
+    versionRange="(0.0,)"
+    ordering="AFTER"
+[[dependencies.dtphc2]]
+    modId="dtterraforged"
+    mandatory=false
+    versionRange="(0.0,)"
+    ordering="AFTER"
+[[dependencies.dtphc2]]
+    modId="dtautumnity"
+    mandatory=false
+    versionRange="(0.0,)"
+    ordering="AFTER"
+[[dependencies.dtphc2]]
+    modId="dtmysticalbiomes"
+    mandatory=false
+    versionRange="(0.0,)"
+    ordering="AFTER"
+[[dependencies.dtphc2]]
+    modId="dtvoyage"
+    mandatory=false
+    versionRange="(0.0,)"
+    ordering="AFTER"

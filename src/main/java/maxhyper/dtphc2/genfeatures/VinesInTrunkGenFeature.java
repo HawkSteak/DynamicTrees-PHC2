@@ -16,6 +16,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 
+import java.util.Random;
+
 public class VinesInTrunkGenFeature extends GenFeature {
 
     protected final BooleanProperty[] sideVineStates = new BooleanProperty[]{null, null, VineBlock.NORTH, VineBlock.SOUTH, VineBlock.WEST, VineBlock.EAST};
@@ -56,12 +58,13 @@ public class VinesInTrunkGenFeature extends GenFeature {
 
     private void placeVines (GenFeatureConfiguration configuration, IWorld world, BlockPos pos, Direction direction){
         BlockState state = configuration.get(BLOCK).defaultBlockState().setValue(sideVineStates[direction.getOpposite().ordinal()], true);
+        Random rand = world.getRandom();
         for (int i=0; i < configuration.get(MAX_HEIGHT); i++){
             BlockPos current = pos.above(i);
             if (VineBlock.isAcceptableNeighbour(world, current.above(), Direction.UP) || TreeHelper.isBranch(world.getBlockState(current.above())))
                 state = state.setValue(VineBlock.UP, true);
-            if (state.hasProperty(FruitVineBlock.ageProperty) && world.getRandom().nextFloat() < configuration.get(PLACE_FRUIT_CHANCE))
-                state = state.setValue(FruitVineBlock.ageProperty, 1 + world.getRandom().nextInt(FruitVineBlock.maxAge - 1));
+            if (state.hasProperty(FruitVineBlock.ageProperty) && rand.nextFloat() < configuration.get(PLACE_FRUIT_CHANCE))
+                state = state.setValue(FruitVineBlock.ageProperty, 1 + rand.nextInt(FruitVineBlock.maxAge - 1));
             if (world.getBlockState(current).getMaterial().isReplaceable() && TreeHelper.isBranch(world.getBlockState(current.offset(direction.getOpposite().getNormal())))){
                 world.setBlock(current, state, 0);
             }

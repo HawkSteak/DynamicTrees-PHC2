@@ -2,7 +2,7 @@
   {
     "__comment": "Spawn cold trees",
     "select": {
-      "AND": [{"OR": [{"type": "cold"}, {"type": "snowy"}, {"type": "coniferous"}]},{"types": ["overworld", "!spooky"]}]
+      "AND": [{"OR": [{"type": "cold"}, {"type": "snowy"}, {"type": "coniferous"}]},{"types": ["overworld", "!spooky", "!rare"]}]
     },
     "apply": {
       "species": {
@@ -16,15 +16,30 @@
     }
   },
   {
-    "__comment": "Spawn temperate trees",
+    "__comment": "Shove maple trees in any biome with maple in its name",
     "select": {
-      "types": ["!cold", "!hot", "!wet", "!dry", "overworld", "!spooky"]
+      "name": ".*maple.*"
     },
     "apply": {
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 300,
+          "...": 40,
+          "dtphc2:maple": 1
+        }
+      }
+    }
+  },
+  {
+    "__comment": "Spawn temperate trees",
+    "select": {
+      "types": ["!cold", "!hot", "!wet", "!dry", "overworld", "!spooky", "!rare"]
+    },
+    "apply": {
+      "species": {
+        "method": "splice_before",
+        "random": {
+          "...": 450,
           "dtphc2:avocado": 1,
           "dtphc2:candlenut": 1,
           "dtphc2:chestnut": 1,
@@ -43,13 +58,13 @@
   {
     "__comment": "Spawn forest trees",
     "select": {
-      "types": ["forest", "!coniferous", "overworld", "!spooky"]
+      "types": ["forest", "!coniferous", "overworld", "!spooky", "!rare"]
     },
     "apply": {
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 100,
+          "...": 350,
           "dtphc2:apricot": 2,
           "dtphc2:spiderweb": 2,
           "dtphc2:gooseberry": 2,
@@ -63,13 +78,13 @@
   {
     "__comment": "Spawn hills / mountain trees",
     "select": {
-      "AND": [{"OR": [{"type": "hills"}, {"type": "mountain"}]},{"types": ["overworld", "!spooky"]}]
+      "AND": [{"OR": [{"type": "hills"}, {"type": "mountain"}]},{"types": ["overworld", "!spooky", "!rare"]}]
     },
     "apply": {
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 75,
+          "...": 150,
           "dtphc2:apricot": 2,
           "dtphc2:cherry": 5,
           "dtphc2:peach": 2,
@@ -83,7 +98,7 @@
     "__comment": "Spawn beach and river trees",
     "__": "\"AND\": [{\"OR\": [{\"type\": \"river\"},{\"type\": \"ocean\"},{\"type\": \"beach\"}]}, {\"types\": [\"overworld\", \"!spooky\"]}]",
     "select": {
-      "types": ["beach", "overworld", "!spooky"]
+      "types": ["beach", "overworld", "!spooky", "!rare"]
     },
     "apply": {
       "species": {
@@ -100,7 +115,7 @@
   {
     "__comment": "Spawn jungle trees",
     "select": {
-      "types": ["jungle", "overworld", "!spooky"]
+      "types": ["jungle", "overworld", "!spooky", "!rare"]
     },
     "apply": {
       "species": {
@@ -128,7 +143,7 @@
   {
     "__comment": "Spawn savanna trees",
     "select": {
-      "types": ["savanna", "overworld", "!spooky"]
+      "types": ["savanna", "overworld", "!spooky", "!rare"]
     },
     "apply": {
       "species": {
@@ -155,7 +170,7 @@
   {
     "__comment": "Spawn desert trees",
     "select": {
-      "types": ["sandy", "hot", "overworld", "!spooky"]
+      "types": ["sandy", "hot", "overworld", "!spooky", "!rare"]
     },
     "apply": {
       "species": {
@@ -170,7 +185,7 @@
   {
     "__comment": "Spawn swamp trees",
     "select": {
-      "types": ["swamp", "overworld", "!spooky"]
+      "types": ["swamp", "overworld", "!spooky", "!rare"]
     },
     "apply": {
       "species": {
@@ -180,7 +195,8 @@
           "dtphc2:lychee": 3,
           "dtphc2:rambutan": 3,
           "dtphc2:durian": 3,
-          "dtphc2:papaya": 1
+          "dtphc2:papaya": 1,
+          "dtphc2:vine_passion_fruit": 1
         }
       }
     }
