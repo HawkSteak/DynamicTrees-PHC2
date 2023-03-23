@@ -24,11 +24,11 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> BANANA_SUCKER_BLOCK = registerBlock("banana_sucker", BananaSuckerBlock::new, CreativeModeTab.TAB_MISC);
     public static final RegistryObject<FruitVineBlock> PASSION_FRUIT_VINE = registerBlock("passion_fruit_vine",
-            () -> new FruitVineBlock().setFruitStack(new ItemStack(ItemRegistry.passionfruititem.get())).setSeasonOffset(0f), CreativeModeTab.TAB_MISC); //summer
+            () -> new FruitVineBlock().setSeasonOffset(0f), CreativeModeTab.TAB_MISC); //summer
     public static final RegistryObject<FruitVineBlock> VANILLA_VINE = registerBlock("vanilla_vine",
-            () -> new FruitVineBlock().setSeasonOffset(2f).setFruitStack(new ItemStack(ItemRegistry.vanillabeanitem.get())), CreativeModeTab.TAB_MISC); //winter
+            () -> new FruitVineBlock().setSeasonOffset(2f), CreativeModeTab.TAB_MISC); //winter
     public static final RegistryObject<FruitVineBlock> PEPPERCORN_VINE = registerBlock("peppercorn_vine",
-            () -> new FruitVineBlock().setSeasonOffset(0f).setFruitStack(new ItemStack(ItemRegistry.peppercornitem.get()))
+            () -> new FruitVineBlock().setSeasonOffset(0f)
                     .setOverripeFruitStack(new ItemStack(RIPE_PEPPERCORN_ITEM.get()))
                     .setMatureAge(3)
                     .setFruitOverripenChance(0.01f), CreativeModeTab.TAB_MISC); //summer

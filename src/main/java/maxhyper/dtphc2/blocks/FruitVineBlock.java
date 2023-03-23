@@ -1,6 +1,5 @@
 package maxhyper.dtphc2.blocks;
 
-import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.compat.season.SeasonHelper;
 import com.ferreusveritas.dynamictrees.util.LevelContext;
 import net.minecraft.core.BlockPos;
@@ -17,7 +16,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
@@ -59,7 +58,7 @@ public class FruitVineBlock extends VineBlock {
 
     public FruitVineBlock() {
         super(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().strength(0.2F).sound(SoundType.VINE));
-        registerDefaultState(defaultBlockState().setValue(ageProperty, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(ageProperty, 0));
     }
 
     public void setAge(Level world, BlockPos pos, BlockState state, int age, boolean destroy) {
@@ -110,12 +109,11 @@ public class FruitVineBlock extends VineBlock {
         return seasonOffset;
     }
 
-    //TODO
-//    @Override
-//    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-//        super.createBlockStateDefinition(builder);
-//        builder.add(ageProperty);
-//    }
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(ageProperty);
+    }
 
     public void doTick(BlockState state, Level world, BlockPos pos, Random random) {
         final Integer age = getAge(state);

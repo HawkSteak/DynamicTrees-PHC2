@@ -39,10 +39,10 @@ public class DynamicTreesPHC2 {
 
         RegistryHandler.setup(MOD_ID);
 
-        DTPHC2Registries.setup();
-        DTPHC2Registries.SOUNDS.register(bus);
         ModBlocks.register(bus);
         ModItems.register(bus);
+        DTPHC2Registries.setup();
+        DTPHC2Registries.SOUNDS.register(bus);
 
         if (ModList.get().isLoaded("dynamictreesplus"))
             DTPlusConfig = new DTPConfig();
