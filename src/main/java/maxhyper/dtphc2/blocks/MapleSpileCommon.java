@@ -1,36 +1,41 @@
 package maxhyper.dtphc2.blocks;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeatureConfiguration;
-import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictrees.growthlogic.context.DirectionSelectionContext;
+import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeatureConfiguration;
+import com.ferreusveritas.dynamictrees.tree.species.Species;
+import com.google.common.collect.ImmutableMap;
 import maxhyper.dtphc2.genfeatures.DTPHC2GenFeatures;
 import maxhyper.dtphc2.genfeatures.SyrupGenFeature;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.function.Function;
 
-public abstract class MapleSpileCommon extends HorizontalBlock {
+public abstract class MapleSpileCommon extends HorizontalDirectionalBlock {
 
     public static final BooleanProperty FILLED = BooleanProperty.create("filled");
     public static final int maxFilling = 3;
@@ -42,20 +47,20 @@ public abstract class MapleSpileCommon extends HorizontalBlock {
     protected VoxelShape SHAPE_W;
 
     static VoxelShape makeShape() {
-        VoxelShape shape = VoxelShapes.empty();
-        shape = VoxelShapes.join(shape, VoxelShapes.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), IBooleanFunction.OR);
-        shape = VoxelShapes.join(shape, VoxelShapes.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), IBooleanFunction.OR);
+        VoxelShape shape = Shapes.empty();
+        shape = Shapes.join(shape, Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), BooleanOp.OR);
+        shape = Shapes.join(shape, Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), BooleanOp.OR);
         return shape;
     }
 
     public static VoxelShape rotateShape(Direction from, Direction to, VoxelShape shape) {
-        VoxelShape[] buffer = new VoxelShape[]{shape, VoxelShapes.empty()};
+        VoxelShape[] buffer = new VoxelShape[]{shape, Shapes.empty()};
 
         int times = (to.ordinal() - from.get2DDataValue() + 4) % 4;
         for (int i = 0; i < times; i++) {
-            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> buffer[1] = VoxelShapes.or(buffer[1], VoxelShapes.box(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX)));
+            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> buffer[1] = Shapes.or(buffer[1], Block.box(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX)));
             buffer[0] = buffer[1];
-            buffer[1] = VoxelShapes.empty();
+            buffer[1] = Shapes.empty();
         }
 
         return buffer[0];
@@ -65,7 +70,7 @@ public abstract class MapleSpileCommon extends HorizontalBlock {
         super(Properties.of(Material.METAL).sound(SoundType.METAL).strength(0.5f).randomTicks());
     }
 
-    protected abstract boolean giveSyrup(World world, BlockPos pos, BlockState state, PlayerEntity player, BlockPos treePos);
+    protected abstract boolean giveSyrup(Level world, BlockPos pos, BlockState state, Player player, BlockPos treePos);
 
     public static Item getSyrupItem (Species species){
         if (species == null) return Items.AIR;
@@ -76,7 +81,7 @@ public abstract class MapleSpileCommon extends HorizontalBlock {
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext pContext) {
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         BlockState blockstate = this.defaultBlockState();
         Direction direction = pContext.getClickedFace();
         if (direction.getAxis().isHorizontal())
@@ -86,20 +91,25 @@ public abstract class MapleSpileCommon extends HorizontalBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos) {
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
         BlockPos offsetPos = pos.relative(state.getValue(FACING).getOpposite());
         BlockState offsetState = world.getBlockState(offsetPos);
         return TreeHelper.isBranch(offsetState) && TreeHelper.getRadius(world, pos) >= 7;
     }
 
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, IWorld pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
         return pFacing == pState.getValue(FACING).getOpposite() && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
     @Nonnull
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    @Override
+    protected ImmutableMap<BlockState, VoxelShape> getShapeForEachState(Function<BlockState, VoxelShape> p_152459_) {
+        return super.getShapeForEachState(p_152459_);
+    }
+
+    //TODO
+    @Nonnull
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, DirectionSelectionContext context) {
         //noinspection DuplicatedCode
         switch (state.getValue(FACING)) {
             case EAST:

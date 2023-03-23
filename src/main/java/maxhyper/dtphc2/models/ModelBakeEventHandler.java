@@ -4,7 +4,7 @@ import maxhyper.dtphc2.DynamicTreesPHC2;
 import maxhyper.dtphc2.models.baked_models.MediumPalmLeavesBakedModel;
 import maxhyper.dtphc2.models.baked_models.LargePalmLeavesBakedModel;
 import maxhyper.dtphc2.models.baked_models.SmallPalmLeavesBakedModel;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;

@@ -1,24 +1,24 @@
 package maxhyper.dtphc2.blocks;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import com.ferreusveritas.dynamictrees.blocks.PodBlock;
-import com.ferreusveritas.dynamictrees.blocks.branches.BranchBlock;
-import com.ferreusveritas.dynamictrees.blocks.rootyblocks.RootyBlock;
+import com.ferreusveritas.dynamictrees.block.PodBlock;
+import com.ferreusveritas.dynamictrees.block.branch.BranchBlock;
+import com.ferreusveritas.dynamictrees.block.rooty.RootyBlock;
 import com.ferreusveritas.dynamictrees.systems.pod.Pod;
 import maxhyper.dtphc2.DynamicTreesPHC2;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.entity.item.FallingBlockEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.DebugPacketSender;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.protocol.game.DebugPackets;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -37,14 +37,14 @@ public class FallingPodBlock extends PodBlock implements IFallingFruit {
     }
 
     @Override
-    public boolean isSupported(IBlockReader world, BlockPos pos, BlockState state) {
-        final BlockState branchState = world.getBlockState(pos.relative(state.getValue(HorizontalBlock.FACING)));
+    public boolean isSupported(LevelReader world, BlockPos pos, BlockState state) {
+        final BlockState branchState = world.getBlockState(pos.relative(state.getValue(HorizontalDirectionalBlock.FACING)));
         final BranchBlock branch = TreeHelper.getBranch(branchState);
         return branch != null && branch.getRadius(branchState) == 3;
     }
 
     @Override
-    public void doTick(BlockState state, World world, BlockPos pos, Random random) {
+    public void doTick(BlockState state, Level world, BlockPos pos, Random random) {
         if (checkToFall(state, world, pos, random)){
             //System.out.println(this.asItem());
             doFall(state, world, pos);
@@ -53,12 +53,12 @@ public class FallingPodBlock extends PodBlock implements IFallingFruit {
     }
 
     @Override
-    public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
+    public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
         if (!isSupported(world, pos, state)) {
             if (!doFall(state, world, pos))
                 super.neighborChanged(state, world, pos, block, fromPos, isMoving);
         }
-        DebugPacketSender.sendNeighborsUpdatePacket(world, pos);
+        DebugPackets.sendNeighborsUpdatePacket(world, pos);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class FallingPodBlock extends PodBlock implements IFallingFruit {
     }
 
     @Override
-    public int getRootY(BlockState state, World world, BlockPos pos) {
+    public int getRootY(BlockState state, Level world, BlockPos pos) {
         Direction dir = state.getValue(FallingPodBlock.FACING);
         for (int i=0;i<20;i++){
             BlockPos pos2 = pos.offset(dir.getNormal()).below(i);
@@ -79,11 +79,11 @@ public class FallingPodBlock extends PodBlock implements IFallingFruit {
     }
 
     @Override
-    public ItemStack getDropOnFallItems(IItemProvider item, @Nonnull FallingBlockEntity entity) {
+    public ItemStack getDropOnFallItems(ItemLike item, @Nonnull FallingBlockEntity entity) {
         if (entity.getServer() == null) return ItemStack.EMPTY;
-        ServerWorld world = entity.getServer().getLevel(entity.level.dimension());
-        if (world == null) return ItemStack.EMPTY;
-        List<ItemStack> drops = getDrops(entity.getBlockState(), world, entity.blockPosition(), null);
+        ServerLevel level = entity.getServer().getLevel(entity.level.dimension());
+        if (level == null) return ItemStack.EMPTY;
+        List<ItemStack> drops = getDrops(entity.getBlockState(), level, entity.blockPosition(), null);
         if (drops.isEmpty()) return ItemStack.EMPTY;
         return drops.get(0);
     }

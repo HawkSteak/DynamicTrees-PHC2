@@ -1,6 +1,6 @@
 package maxhyper.dtphc2.cells;
 
-import com.ferreusveritas.dynamictrees.api.cells.CellKit;
+import com.ferreusveritas.dynamictrees.api.cell.CellKit;
 import com.ferreusveritas.dynamictrees.api.registry.Registry;
 
 public class DTPHC2CellKits {

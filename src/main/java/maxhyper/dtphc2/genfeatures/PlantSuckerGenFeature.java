@@ -1,20 +1,17 @@
 package maxhyper.dtphc2.genfeatures;
 
-import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import com.ferreusveritas.dynamictrees.api.configurations.ConfigurationProperty;
-import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeature;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeatureConfiguration;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.context.PostGenerationContext;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.context.PostGrowContext;
+import com.ferreusveritas.dynamictrees.api.configuration.ConfigurationProperty;
+import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeature;
+import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeatureConfiguration;
+import com.ferreusveritas.dynamictrees.systems.genfeature.context.PostGenerationContext;
+import com.ferreusveritas.dynamictrees.systems.genfeature.context.PostGrowContext;
 import maxhyper.dtphc2.blocks.BananaSuckerBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class PlantSuckerGenFeature extends GenFeature {
 
@@ -41,7 +38,7 @@ public class PlantSuckerGenFeature extends GenFeature {
 
     @Override
     protected boolean postGenerate(GenFeatureConfiguration configuration, PostGenerationContext context) {
-        IWorld world = context.world();
+        LevelAccessor world = context.level();
         boolean placed = false;
             for (Direction dir : Direction.Plane.HORIZONTAL){
                 if(context.random().nextFloat() < configuration.get(PLACE_CHANCE_WORLDGEN)) {
@@ -56,12 +53,12 @@ public class PlantSuckerGenFeature extends GenFeature {
     protected boolean postGrow(GenFeatureConfiguration configuration, PostGrowContext context) {
         if(context.random().nextFloat() < configuration.get(PLACE_CHANCE)) {
             Direction dir = Direction.Plane.HORIZONTAL.getRandomDirection(context.random());
-            return addSucker(context.world(), context.treePos(), false, configuration.get(SUCKER_BLOCK), dir);
+            return addSucker(context.level(), context.treePos(), false, configuration.get(SUCKER_BLOCK), dir);
         }
         return false;
     }
 
-    private BlockPos getGroundPos (IWorld world, BlockPos pos){
+    private BlockPos getGroundPos (LevelAccessor world, BlockPos pos){
         for (int i=0; i < 3; i++){
             BlockPos testPos = pos.offset(0, i,0);
             if (world.isAreaLoaded(testPos, 16) &&
@@ -73,7 +70,7 @@ public class PlantSuckerGenFeature extends GenFeature {
         return null;
     }
 
-    private boolean addSucker(IWorld world, BlockPos rootPos, boolean worldGen, Block sucker, Direction dir) {
+    private boolean addSucker(LevelAccessor world, BlockPos rootPos, boolean worldGen, Block sucker, Direction dir) {
         BlockPos ground = getGroundPos(world, rootPos.offset(dir.getNormal()));
         if (ground == null){
             return false;

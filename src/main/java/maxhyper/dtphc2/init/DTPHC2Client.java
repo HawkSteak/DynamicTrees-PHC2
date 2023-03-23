@@ -1,16 +1,18 @@
 package maxhyper.dtphc2.init;
 
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import maxhyper.dtphc2.blocks.ModBlocks;
+import maxhyper.dtphc2.items.ModItems;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class DTPHC2Client {
 
@@ -21,11 +23,11 @@ public class DTPHC2Client {
     }
 
     private static void registerRenderLayers() {
-        RenderTypeLookup.setRenderLayer(DTPHC2Registries.PASSION_FRUIT_VINE, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(DTPHC2Registries.VANILLA_VINE, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(DTPHC2Registries.PEPPERCORN_VINE, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(DTPHC2Registries.MAPLE_SPILE_BUCKET_BLOCK, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(DTPHC2Registries.BANANA_SUCKER_BLOCK, RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.PASSION_FRUIT_VINE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.VANILLA_VINE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.PEPPERCORN_VINE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAPLE_SPILE_BUCKET_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.BANANA_SUCKER_BLOCK.get(), RenderType.cutout());
     }
 
     private static void registerColorHandlers() {
@@ -33,9 +35,9 @@ public class DTPHC2Client {
         final BlockColors blockColors = Minecraft.getInstance().getBlockColors();
         final ItemColors itemColors = Minecraft.getInstance().getItemColors();
 
-        Block[] vines = new Block[]{DTPHC2Registries.PASSION_FRUIT_VINE, DTPHC2Registries.VANILLA_VINE, DTPHC2Registries.PEPPERCORN_VINE};
+        Block[] vines = new Block[]{ModBlocks.PASSION_FRUIT_VINE.get(), ModBlocks.VANILLA_VINE.get(), ModBlocks.PEPPERCORN_VINE.get()};
 
-        Item[] vineItems = new Item[]{DTPHC2Registries.PASSION_FRUIT_VINE_ITEM, DTPHC2Registries.VANILLA_VINE_ITEM, DTPHC2Registries.PEPPERCORN_VINE_ITEM};
+        Item[] vineItems = new Item[]{ModItems.PASSION_FRUIT_VINE_ITEM.get(), ModItems.VANILLA_VINE_ITEM.get(), ModItems.PEPPERCORN_VINE_ITEM.get()};
 
         for (Block vine : vines){
             ModelHelper.regColorHandler(vine, (state, worldIn, pos, tintIndex) ->

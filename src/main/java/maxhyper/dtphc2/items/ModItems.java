@@ -1,0 +1,36 @@
+package maxhyper.dtphc2.items;
+
+import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
+import com.ferreusveritas.dynamictrees.init.DTRegistries;
+import maxhyper.dtphc2.DynamicTreesPHC2;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+
+import static maxhyper.dtphc2.blocks.ModBlocks.*;
+
+public class ModItems {
+
+    public static final DeferredRegister<Item> ITEMS =
+            DeferredRegister.create(ForgeRegistries.ITEMS, DynamicTreesPHC2.MOD_ID);
+
+    public static final RegistryObject<Item> PASSION_FRUIT_VINE_ITEM = ITEMS.register("passion_fruit_vine_item",
+            () -> new FruitVineItem(PASSION_FRUIT_VINE.get(), new Item.Properties().tab(DTRegistries.ITEM_GROUP)));
+
+    public static final RegistryObject<Item> VANILLA_VINE_ITEM = ITEMS.register("vanilla_vine_item",
+            () -> new FruitVineItem(VANILLA_VINE.get(), new Item.Properties().tab(DTRegistries.ITEM_GROUP)));
+
+    public static final RegistryObject<Item> PEPPERCORN_VINE_ITEM = ITEMS.register("peppercorn_vine_item",
+            () -> new FruitVineItem(PEPPERCORN_VINE.get(), new Item.Properties().tab(DTRegistries.ITEM_GROUP)));
+
+    public static final RegistryObject<Item> RIPE_PEPPERCORN_ITEM = ITEMS.register("ripe_peppercorn_item",
+            () -> new RipePeppercornItem(new Item.Properties().tab(DTRegistries.ITEM_GROUP)));
+
+    public static void register(IEventBus eventBus) {
+        ITEMS.register(eventBus);
+    }
+
+}

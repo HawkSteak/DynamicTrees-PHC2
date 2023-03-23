@@ -6,17 +6,17 @@ public class DTPConfig implements DTPConfigProxy {
 
     @Override
     public boolean cactusPrickleOnMoveOnlyConfig() {
-        return DTPConfigs.cactusPrickleOnMoveOnly.get();
+        return DTPConfigs.CACTUS_PRICKLE_ON_MOVE_ONLY.get();
     }
 
     @Override
     public boolean cactusKillItemsConfig() {
-        return DTPConfigs.cactusKillItems.get();
+        return DTPConfigs.CACTUS_KILL_ITEMS.get();
     }
 
     @Override
     public boolean canBoneMealCactusConfig() {
-        return DTPConfigs.canBoneMealCactus.get();
+        return DTPConfigs.CAN_BONE_MEAL_CACTUS.get();
     }
 
 }

@@ -1,12 +1,12 @@
 package maxhyper.dtphc2.init;
 
-import com.ferreusveritas.dynamictrees.api.treepacks.ApplierRegistryEvent;
+import com.ferreusveritas.dynamictrees.api.applier.ApplierRegistryEvent;
 import com.ferreusveritas.dynamictrees.deserialisation.PropertyAppliers;
-import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.google.gson.JsonElement;
 import maxhyper.dtphc2.DynamicTreesPHC2;
 import maxhyper.dtphc2.trees.GenOnExtraSoilSpecies;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 

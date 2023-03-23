@@ -1,19 +1,18 @@
 package maxhyper.dtphc2.blocks;
 
-import com.ferreusveritas.dynamictrees.blocks.FruitBlock;
-import com.ferreusveritas.dynamictrees.blocks.rootyblocks.RootyBlock;
+import com.ferreusveritas.dynamictrees.block.FruitBlock;
+import com.ferreusveritas.dynamictrees.block.rooty.RootyBlock;
 import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
 import maxhyper.dtphc2.DynamicTreesPHC2;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.item.FallingBlockEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.DebugPacketSender;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -32,7 +31,7 @@ public class FallingFruitBlock extends FruitBlock implements IFallingFruit {
     }
 
     @Override
-    public void doTick(BlockState state, World world, BlockPos pos, Random random) {
+    public void doTick(BlockState state, Level world, BlockPos pos, Random random) {
         if (checkToFall(state, world, pos, random)){
             doFall(state, world, pos);
         } else
@@ -40,18 +39,19 @@ public class FallingFruitBlock extends FruitBlock implements IFallingFruit {
     }
 
     @Override
-    public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
+    public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
         if (!isSupported(world, pos, state)) {
             if (!doFall(state, world, pos))
                 super.neighborChanged(state, world, pos, block, fromPos, isMoving);
         }
-        DebugPacketSender.sendNeighborsUpdatePacket(world, pos);
+        //TODO
+        //DebugPacketSender.sendNeighborsUpdatePacket(world, pos);
     }
 
     @Override
-    public ItemStack getDropOnFallItems(IItemProvider item, @Nonnull FallingBlockEntity entity) {
+    public ItemStack getDropOnFallItems(ItemLike item, @Nonnull FallingBlockEntity entity) {
         if (entity.getServer() == null) return ItemStack.EMPTY;
-        ServerWorld world = entity.getServer().getLevel(entity.level.dimension());
+        ServerLevel world = entity.getServer().getLevel(entity.level.dimension());
         if (world == null) return ItemStack.EMPTY;
         List<ItemStack> items = getDrops(entity.getBlockState(), world, entity.blockPosition(), null);
         return items.isEmpty() ? ItemStack.EMPTY : items.get(0);
@@ -63,7 +63,7 @@ public class FallingFruitBlock extends FruitBlock implements IFallingFruit {
     }
 
     @Override
-    public int getRootY(BlockState state, World world, BlockPos pos) {
+    public int getRootY(BlockState state, Level world, BlockPos pos) {
         for (int i=0;i<20;i++){
             BlockPos pos2 = pos.below(i);
             if (world.getBlockState(pos2).getBlock() instanceof RootyBlock){

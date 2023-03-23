@@ -1,21 +1,21 @@
 package maxhyper.dtphc2.blocks;
 
 import com.ferreusveritas.dynamictrees.api.registry.TypedRegistry;
-import com.ferreusveritas.dynamictrees.blocks.leaves.DynamicLeavesBlock;
-import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
-import com.ferreusveritas.dynamictrees.blocks.leaves.PalmLeavesProperties;
+import com.ferreusveritas.dynamictrees.block.leaves.DynamicLeavesBlock;
+import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
+import com.ferreusveritas.dynamictrees.block.leaves.PalmLeavesProperties;
 import maxhyper.dtphc2.DynamicTreesPHC2;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 
 import javax.annotation.Nonnull;
 
@@ -35,7 +35,7 @@ public class DragonFruitLeavesProperties extends PalmLeavesProperties {
 
     @Override
     @Nonnull
-    protected DynamicLeavesBlock createDynamicLeaves(@Nonnull AbstractBlock.Properties properties) {
+    protected DynamicLeavesBlock createDynamicLeaves(@Nonnull BlockBehaviour.Properties properties) {
         return new DynamicDragonfruitLeavesBlock(this, properties);
     }
 
@@ -47,7 +47,7 @@ public class DragonFruitLeavesProperties extends PalmLeavesProperties {
 
         private static final double hurtMovementDelta = 0.003;
         @Override
-        public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entity) {
+        public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entity) {
             boolean damage = false;
             if (DynamicTreesPHC2.DTPlusConfig.cactusPrickleOnMoveOnlyConfig() && entity instanceof LivingEntity) {
                 boolean falling = entity.getDeltaMovement().y < 0;

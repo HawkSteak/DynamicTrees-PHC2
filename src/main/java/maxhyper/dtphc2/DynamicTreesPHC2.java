@@ -3,13 +3,15 @@ package maxhyper.dtphc2;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.init.DTConfigs;
 import com.pam.pamhc2trees.config.EnableConfig;
+import maxhyper.dtphc2.blocks.ModBlocks;
 import maxhyper.dtphc2.compat.DTPConfig;
 import maxhyper.dtphc2.compat.DTPConfigProxy;
 import maxhyper.dtphc2.compat.DefaultConfig;
 import maxhyper.dtphc2.event.SpilePlacementEvent;
 import maxhyper.dtphc2.init.DTPHC2Client;
 import maxhyper.dtphc2.init.DTPHC2Registries;
-import net.minecraft.util.ResourceLocation;
+import maxhyper.dtphc2.items.ModItems;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -39,6 +41,8 @@ public class DynamicTreesPHC2 {
 
         DTPHC2Registries.setup();
         DTPHC2Registries.SOUNDS.register(bus);
+        ModBlocks.register(bus);
+        ModItems.register(bus);
 
         if (ModList.get().isLoaded("dynamictreesplus"))
             DTPlusConfig = new DTPConfig();

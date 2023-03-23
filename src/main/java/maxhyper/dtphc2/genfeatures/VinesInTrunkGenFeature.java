@@ -1,20 +1,20 @@
 package maxhyper.dtphc2.genfeatures;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import com.ferreusveritas.dynamictrees.api.configurations.ConfigurationProperty;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeature;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeatureConfiguration;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.context.PostGenerationContext;
+import com.ferreusveritas.dynamictrees.api.configuration.ConfigurationProperty;
+import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeature;
+import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeatureConfiguration;
+import com.ferreusveritas.dynamictrees.systems.genfeature.context.PostGenerationContext;
 import maxhyper.dtphc2.blocks.FruitVineBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.VineBlock;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.VineBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import java.util.Random;
 
@@ -49,14 +49,14 @@ public class VinesInTrunkGenFeature extends GenFeature {
         for (Direction dir : Direction.Plane.HORIZONTAL){
             if (context.random().nextFloat() < configuration.get(PLACE_CHANCE)){
                 BlockPos offset = context.pos().offset(dir.getNormal());
-                placeVines(configuration,context.world(), offset, dir);
+                placeVines(configuration, context.level(), offset, dir);
                 placed = true;
             }
         }
         return placed;
     }
 
-    private void placeVines (GenFeatureConfiguration configuration, IWorld world, BlockPos pos, Direction direction){
+    private void placeVines (GenFeatureConfiguration configuration, LevelAccessor world, BlockPos pos, Direction direction){
         BlockState state = configuration.get(BLOCK).defaultBlockState().setValue(sideVineStates[direction.getOpposite().ordinal()], true);
         Random rand = world.getRandom();
         for (int i=0; i < configuration.get(MAX_HEIGHT); i++){

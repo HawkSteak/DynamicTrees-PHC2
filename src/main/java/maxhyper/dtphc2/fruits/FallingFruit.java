@@ -1,11 +1,11 @@
 package maxhyper.dtphc2.fruits;
 
 import com.ferreusveritas.dynamictrees.api.registry.TypedRegistry;
-import com.ferreusveritas.dynamictrees.blocks.FruitBlock;
+import com.ferreusveritas.dynamictrees.block.FruitBlock;
 import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
 import maxhyper.dtphc2.blocks.FallingFruitBlock;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class FallingFruit extends Fruit {
 
@@ -16,7 +16,7 @@ public class FallingFruit extends Fruit {
     }
 
     @Override
-    protected FruitBlock createBlock(AbstractBlock.Properties properties) {
+    protected FruitBlock createBlock(BlockBehaviour.Properties properties) {
         return new FallingFruitBlock(properties, this);
     }
 }

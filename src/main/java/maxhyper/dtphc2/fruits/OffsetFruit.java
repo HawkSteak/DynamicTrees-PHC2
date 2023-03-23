@@ -1,14 +1,14 @@
 package maxhyper.dtphc2.fruits;
 
 import com.ferreusveritas.dynamictrees.api.registry.TypedRegistry;
-import com.ferreusveritas.dynamictrees.blocks.FruitBlock;
+import com.ferreusveritas.dynamictrees.block.FruitBlock;
 import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class OffsetFruit extends Fruit {
 
@@ -21,7 +21,7 @@ public class OffsetFruit extends Fruit {
     protected FruitBlock createBlock(Block.Properties properties) {
         return new FruitBlock(properties, this){
             @Override
-            public boolean isSupported(IBlockReader world, BlockPos pos, BlockState state) {
+            public boolean isSupported(LevelReader world, BlockPos pos, BlockState state) {
                 return world.getBlockState(pos.above()).getBlock() instanceof LeavesBlock || world.getBlockState(pos.above(2)).getBlock() instanceof LeavesBlock;
             }
         };

@@ -4,11 +4,12 @@ import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.network.NodeInspector;
 import maxhyper.dtphc2.blocks.MapleSpileBlock;
 import maxhyper.dtphc2.blocks.MapleSpileBucketBlock;
+import maxhyper.dtphc2.blocks.ModBlocks;
 import maxhyper.dtphc2.init.DTPHC2Registries;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class DripSyrupNode implements NodeInspector {
 
@@ -17,7 +18,7 @@ public class DripSyrupNode implements NodeInspector {
     public int maxBuckets = 4;
 
     @Override
-    public boolean run(BlockState blockState, IWorld world, BlockPos pos, Direction fromDir) {
+    public boolean run(BlockState blockState, LevelAccessor world, BlockPos pos, Direction fromDir) {
 
         if(!finished && TreeHelper.isBranch(blockState)) { //Only process branch blocks
             if(fromDir != Direction.DOWN && fromDir != null) {//If we turn then we're no longer in the main trunk where the buckets are. Null direction means we're in the origin node
@@ -27,7 +28,7 @@ public class DripSyrupNode implements NodeInspector {
             for(Direction face : Direction.Plane.HORIZONTAL) { //Check all sides of this block
                 BlockPos offPos = pos.relative(face);
                 BlockState state = world.getBlockState(offPos);
-                if(state.getBlock() == DTPHC2Registries.MAPLE_SPILE_BUCKET_BLOCK) { //Found a bucket
+                if(state.getBlock() == ModBlocks.MAPLE_SPILE_BUCKET_BLOCK.get()) { //Found a bucket
                     bucketsVisited++;
                     if(bucketsVisited <= maxBuckets) {
                         int filling = state.getValue(MapleSpileBucketBlock.FILLING);
@@ -40,7 +41,7 @@ public class DripSyrupNode implements NodeInspector {
                         finished = true; //We've hit our limit of buckets we can visit
                     }
                 }
-                else if(state.getBlock() == DTPHC2Registries.MAPLE_SPILE_BLOCK) {
+                else if(state.getBlock() == ModBlocks.MAPLE_SPILE_BLOCK.get()) {
                     boolean filled = state.getValue(MapleSpileBlock.FILLED);
                     if(!filled) {
                         world.setBlock(offPos, state.setValue(MapleSpileBlock.FILLED, true), 3);
@@ -55,7 +56,7 @@ public class DripSyrupNode implements NodeInspector {
     }
 
     @Override
-    public boolean returnRun(BlockState blockState, IWorld world, BlockPos pos, Direction fromDir) {
+    public boolean returnRun(BlockState blockState, LevelAccessor world, BlockPos pos, Direction fromDir) {
         return false;
     }
 

@@ -1,20 +1,20 @@
 package maxhyper.dtphc2.genfeatures;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import com.ferreusveritas.dynamictrees.api.configurations.ConfigurationProperty;
-import com.ferreusveritas.dynamictrees.compat.seasons.SeasonHelper;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeature;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeatureConfiguration;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.context.PostGenerationContext;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.context.PostGrowContext;
+import com.ferreusveritas.dynamictrees.api.configuration.ConfigurationProperty;
+import com.ferreusveritas.dynamictrees.compat.season.SeasonHelper;
+import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeature;
+import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeatureConfiguration;
+import com.ferreusveritas.dynamictrees.systems.genfeature.context.PostGenerationContext;
+import com.ferreusveritas.dynamictrees.systems.genfeature.context.PostGrowContext;
 import com.ferreusveritas.dynamictrees.systems.pod.Pod;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
-import com.ferreusveritas.dynamictrees.util.WorldContext;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import com.ferreusveritas.dynamictrees.util.LevelContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.LeavesBlock;
 
 public class PalmFruitGenFeature extends GenFeature {
 
@@ -58,19 +58,19 @@ public class PalmFruitGenFeature extends GenFeature {
 
     @Override
     protected boolean postGrow(GenFeatureConfiguration configuration, PostGrowContext context) {
-        final IWorld world = context.world();
+        final LevelAccessor world = context.level();
         final BlockPos rootPos = context.pos();
         if ((TreeHelper.getRadius(world, rootPos.above()) >= configuration.get(FRUITING_RADIUS)) && context.natural() &&
                 world.getRandom().nextInt() % 16 == 0) {
-            if (context.species().seasonalFruitProductionFactor(WorldContext.create(world), rootPos) > world.getRandom().nextFloat()) {
-                addFruit(configuration, world, rootPos, getLeavesHeight(rootPos, world).below(), false);
+            if (context.species().seasonalFruitProductionFactor(LevelContext.create(world), rootPos) > world.getRandom().nextFloat()) {
+                addFruit(configuration, context.levelContext(), rootPos, getLeavesHeight(rootPos, world).below(), false);
                 return true;
             }
         }
         return false;
     }
 
-    private BlockPos getLeavesHeight(BlockPos rootPos, IWorld world) {
+    private BlockPos getLeavesHeight(BlockPos rootPos, LevelAccessor world) {
         for (int y = 1; y < 20; y++) {
             BlockPos testPos = rootPos.above(y);
             if ((world.getBlockState(testPos).getBlock() instanceof LeavesBlock)) {
@@ -82,26 +82,27 @@ public class PalmFruitGenFeature extends GenFeature {
 
     @Override
     protected boolean postGenerate(GenFeatureConfiguration configuration, PostGenerationContext context) {
-        final IWorld world = context.world();
+        final LevelAccessor world = context.level();
         final BlockPos rootPos = context.pos();
         boolean placed = false;
         int qty = configuration.get(QUANTITY);
         qty *= context.fruitProductionFactor();
         for (int i = 0; i < qty; i++) {
             if (!context.endPoints().isEmpty() && world.getRandom().nextFloat() <= configuration.get(PLACE_CHANCE)) {
-                addFruit(configuration, world, rootPos, context.endPoints().get(0), true);
+                addFruit(configuration, context.levelContext(), rootPos, context.endPoints().get(0), true);
                 placed = true;
             }
         }
         return placed;
     }
 
-    protected void addFruit(GenFeatureConfiguration configuration, IWorld world, BlockPos rootPos, BlockPos leavesPos, boolean worldGen) {
+    protected void addFruit(GenFeatureConfiguration configuration, LevelContext context, BlockPos rootPos, BlockPos leavesPos, boolean worldGen) {
         if (rootPos.getY() == leavesPos.getY()) return;
+        LevelAccessor world = context.accessor();
         Direction placeDir = CoordUtils.HORIZONTALS[world.getRandom().nextInt(4)];
         BlockPos pos = expandRandom(configuration, world, leavesPos.offset(placeDir.getNormal()));
         if (world.getBlockState(pos).getMaterial().isReplaceable()) {
-            Float seasonValue = SeasonHelper.getSeasonValue(world, rootPos);
+            Float seasonValue = SeasonHelper.getSeasonValue(context, rootPos);
             Pod pod = configuration.get(POD);
             if (worldGen) {
                 pod.placeDuringWorldGen(world, pos, seasonValue, placeDir.getOpposite());
@@ -111,7 +112,7 @@ public class PalmFruitGenFeature extends GenFeature {
         }
     }
 
-    protected BlockPos expandRandom(GenFeatureConfiguration configuration, IWorld world, BlockPos startingPos){
+    protected BlockPos expandRandom(GenFeatureConfiguration configuration, LevelAccessor world, BlockPos startingPos){
         int fullHeight = 1+configuration.get(EXPAND_UP_FRUIT_HEIGHT)+configuration.get(EXPAND_DOWN_FRUIT_HEIGHT);
         return startingPos.below(configuration.get(EXPAND_DOWN_FRUIT_HEIGHT))
                 .above(world.getRandom().nextInt(fullHeight));

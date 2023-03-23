@@ -1,7 +1,7 @@
 package maxhyper.dtphc2.genfeatures;
 
 import com.ferreusveritas.dynamictrees.api.registry.Registry;
-import com.ferreusveritas.dynamictrees.systems.genfeatures.GenFeature;
+import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeature;
 import maxhyper.dtphc2.DynamicTreesPHC2;
 
 public class DTPHC2GenFeatures {
