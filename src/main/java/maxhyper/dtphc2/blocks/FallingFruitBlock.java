@@ -5,6 +5,7 @@ import com.ferreusveritas.dynamictrees.block.rooty.RootyBlock;
 import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
 import maxhyper.dtphc2.DynamicTreesPHC2;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.item.FallingBlockEntity;
@@ -44,8 +45,7 @@ public class FallingFruitBlock extends FruitBlock implements IFallingFruit {
             if (!doFall(state, world, pos))
                 super.neighborChanged(state, world, pos, block, fromPos, isMoving);
         }
-        //TODO
-        //DebugPacketSender.sendNeighborsUpdatePacket(world, pos);
+        DebugPackets.sendNeighborsUpdatePacket(world, pos);
     }
 
     @Override

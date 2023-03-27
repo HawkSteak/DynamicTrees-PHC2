@@ -16,6 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -26,11 +27,12 @@ import javax.annotation.Nonnull;
 public class MapleSpileBucketBlock extends MapleSpileCommon {
 
     static VoxelShape makeBucketShape() {
-        VoxelShape shape = makeShape();
-        shape = Shapes.join(shape, Block.box(0.25, 0, 0.0625, 0.75, 0.5625, 0.5625), BooleanOp.OR);
-        shape = Shapes.join(shape, Block.box(0.6875, 0.0625, 0.125, 0.3125, 0.5625, 0.5), BooleanOp.ONLY_FIRST);
-        shape = Shapes.join(shape, Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), BooleanOp.OR);
-        shape = Shapes.join(shape, Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), BooleanOp.OR);
+//        VoxelShape shape = makeShape();
+//        shape = Shapes.join(shape, Block.box(0.25, 0, 0.0625, 0.75, 0.5625, 0.5625), BooleanOp.OR);
+//        shape = Shapes.join(shape, Block.box(0.6875, 0.0625, 0.125, 0.3125, 0.5625, 0.5), BooleanOp.ONLY_FIRST);
+//        shape = Shapes.join(shape, Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), BooleanOp.OR);
+//        shape = Shapes.join(shape, Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), BooleanOp.OR);
+        VoxelShape shape = Shapes.join(Block.box(5, 1, 2, 11, 9, 8), Block.box(4, 0, 1, 12, 9, 9), BooleanOp.OR);
         return shape;
     }
 
@@ -42,11 +44,10 @@ public class MapleSpileBucketBlock extends MapleSpileCommon {
         SHAPE_W = rotateShape(Direction.WEST, Direction.WEST, SHAPE_N);
     }
 
-    //TODO
-//    @Override
-//    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-//        super.createBlockStateDefinition(builder.add(FACING, FILLING));
-//    }
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder.add(FACING, FILLING));
+    }
 
 
 

@@ -56,11 +56,6 @@ public class DTPHC2Registries {
     public static final RegistryObject<SoundEvent> FRUIT_BONK = registerSound("falling_fruit.bonk");
 
     public static void setup() {
-
-        ModBlocks.PASSION_FRUIT_VINE.get().setFruitStack(new ItemStack(ItemRegistry.passionfruititem.get()));
-        ModBlocks.VANILLA_VINE.get().setFruitStack(new ItemStack(ItemRegistry.vanillabeanitem.get()));
-        ModBlocks.PEPPERCORN_VINE.get().setFruitStack(new ItemStack(ItemRegistry.peppercornitem.get()));
-
         CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.resLoc("dragon_fruit_cactus").toString(), DRAGON_FRUIT_CACTUS_SAPLING_SHAPE);
         CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.resLoc("banana_sapling").toString(), BANANA_SAPLING_SHAPE);
 

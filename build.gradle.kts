@@ -132,7 +132,7 @@ dependencies {
 
     // At runtime, use the full JEI mod.
     // TEMP FIX: TEHNUT MAVEN IS DOWN
-    runtimeOnly(fg.deobf("curse.maven:jei-238222:3940240"))
+    runtimeOnly(fg.deobf("curse.maven:jei-238222:4434393"))
     //runtimeOnly(fg.deobf("mezz.jei:jei-$mcVersion:${property("jeiVersion")}"))
 
     // At runtime, use CC for creating growth chambers.

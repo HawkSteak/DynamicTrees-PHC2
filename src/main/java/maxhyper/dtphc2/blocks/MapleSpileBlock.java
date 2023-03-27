@@ -16,6 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
@@ -31,11 +32,10 @@ public class MapleSpileBlock extends MapleSpileCommon {
         SHAPE_W = rotateShape(Direction.WEST, Direction.WEST, SHAPE_N);
     }
 
-    //TODO
-//    @Override
-//    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-//        super.createBlockStateDefinition(builder.add(FACING, FILLED));
-//    }
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder.add(FACING, FILLED));
+    }
 
         @SuppressWarnings("deprecation")
     @Override

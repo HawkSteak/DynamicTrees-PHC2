@@ -114,6 +114,9 @@ public class DynamicTreesPHC2 {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         DTPHC2Client.setup();
+        ModBlocks.PASSION_FRUIT_VINE.get().setFruitStack(new ItemStack(ItemRegistry.passionfruititem.get()));
+        ModBlocks.VANILLA_VINE.get().setFruitStack(new ItemStack(ItemRegistry.vanillabeanitem.get()));
+        ModBlocks.PEPPERCORN_VINE.get().setFruitStack(new ItemStack(ItemRegistry.peppercornitem.get())).setOverripeFruitStack(new ItemStack(RIPE_PEPPERCORN_ITEM.get()));
     }
 
     public static ResourceLocation resLoc(final String path) {

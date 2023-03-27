@@ -29,7 +29,6 @@ public class ModBlocks {
             () -> new FruitVineBlock().setSeasonOffset(2f), CreativeModeTab.TAB_MISC); //winter
     public static final RegistryObject<FruitVineBlock> PEPPERCORN_VINE = registerBlock("peppercorn_vine",
             () -> new FruitVineBlock().setSeasonOffset(0f)
-                    .setOverripeFruitStack(new ItemStack(RIPE_PEPPERCORN_ITEM.get()))
                     .setMatureAge(3)
                     .setFruitOverripenChance(0.01f), CreativeModeTab.TAB_MISC); //summer
     public static final RegistryObject<Block> MAPLE_SPILE_BLOCK = registerBlock("maple_spile", MapleSpileBlock::new, CreativeModeTab.TAB_MISC);
@@ -38,7 +37,7 @@ public class ModBlocks {
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
-        registerBlockItem(name, toReturn, tab);
+        //registerBlockItem(name, toReturn, tab);
         return toReturn;
     }
 
