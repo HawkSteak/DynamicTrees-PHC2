@@ -106,8 +106,8 @@ public class DynamicTreesPHC2 {
             };
 
             for (ForgeConfigSpec.BooleanValue v : test) {
-                v.set(false);
-                v.save();
+                //v.set(false);
+                //v.save();
             }
         }
     }

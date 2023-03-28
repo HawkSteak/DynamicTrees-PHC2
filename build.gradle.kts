@@ -146,6 +146,10 @@ dependencies {
 
     // At runtime, use suggestion provider fix mod.
     runtimeOnly(fg.deobf("com.harleyoconnor.suggestionproviderfix:SuggestionProviderFix-1.18.1:${property("suggestionProviderFixVersion")}"))
+
+    // If needed, include Cyanide mod to get more info about datapack errors
+    runtimeOnly(fg.deobf("curse.maven:Cyanide-541676:3811793"))
+
 }
 
 tasks.jar {

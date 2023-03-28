@@ -17,13 +17,13 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, DynamicTreesPHC2.MOD_ID);
 
-    public static final RegistryObject<Item> PASSION_FRUIT_VINE_ITEM = ITEMS.register("passion_fruit_vine_item",
+    public static final RegistryObject<Item> PASSION_FRUIT_VINE_ITEM = ITEMS.register("passion_fruit_vine",
             () -> new FruitVineItem(PASSION_FRUIT_VINE.get(), new Item.Properties().tab(DTRegistries.ITEM_GROUP)));
 
-    public static final RegistryObject<Item> VANILLA_VINE_ITEM = ITEMS.register("vanilla_vine_item",
+    public static final RegistryObject<Item> VANILLA_VINE_ITEM = ITEMS.register("vanilla_vine",
             () -> new FruitVineItem(VANILLA_VINE.get(), new Item.Properties().tab(DTRegistries.ITEM_GROUP)));
 
-    public static final RegistryObject<Item> PEPPERCORN_VINE_ITEM = ITEMS.register("peppercorn_vine_item",
+    public static final RegistryObject<Item> PEPPERCORN_VINE_ITEM = ITEMS.register("peppercorn_vine",
             () -> new FruitVineItem(PEPPERCORN_VINE.get(), new Item.Properties().tab(DTRegistries.ITEM_GROUP)));
 
     public static final RegistryObject<Item> RIPE_PEPPERCORN_ITEM = ITEMS.register("ripe_peppercorn_item",

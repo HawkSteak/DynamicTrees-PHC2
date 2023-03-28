@@ -41,15 +41,16 @@ public abstract class MapleSpileCommon extends HorizontalDirectionalBlock {
     public static final int maxFilling = 3;
     public static final IntegerProperty FILLING = IntegerProperty.create("filling", 0, maxFilling);
 
-    protected VoxelShape SHAPE_N;
-    protected VoxelShape SHAPE_E;
-    protected VoxelShape SHAPE_S;
-    protected VoxelShape SHAPE_W;
+    protected static VoxelShape SHAPE_N;
+    protected static VoxelShape SHAPE_E;
+    protected static VoxelShape SHAPE_S;
+    protected static VoxelShape SHAPE_W;
 
-    static VoxelShape makeShape() {
-        VoxelShape shape = Shapes.empty();
-        shape = Shapes.join(shape, Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), BooleanOp.OR);
-        shape = Shapes.join(shape, Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), BooleanOp.OR);
+    protected static VoxelShape makeShape() {
+//        VoxelShape shape = Shapes.empty();
+//        shape = Shapes.join(shape, Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), BooleanOp.OR);
+//        shape = Shapes.join(shape, Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), BooleanOp.OR);
+        VoxelShape shape = Shapes.or(Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375));
         return shape;
     }
 
@@ -72,11 +73,11 @@ public abstract class MapleSpileCommon extends HorizontalDirectionalBlock {
 
     protected abstract boolean giveSyrup(Level world, BlockPos pos, BlockState state, Player player, BlockPos treePos);
 
-    public static Item getSyrupItem (Species species){
+    public static Item getSyrupItem(Species species) {
         if (species == null) return Items.AIR;
         GenFeatureConfiguration featureConfig = species.getGenFeatures().stream().filter(fc -> fc.getGenFeature() == DTPHC2GenFeatures.SYRUP_GEN).findFirst().orElse(null);
         if (featureConfig == null) return Items.AIR;
-        return ((SyrupGenFeature)DTPHC2GenFeatures.SYRUP_GEN).getSyrupItem(featureConfig);
+        return ((SyrupGenFeature) DTPHC2GenFeatures.SYRUP_GEN).getSyrupItem(featureConfig);
     }
 
     @Nullable
@@ -97,19 +98,15 @@ public abstract class MapleSpileCommon extends HorizontalDirectionalBlock {
         return TreeHelper.isBranch(offsetState) && TreeHelper.getRadius(world, pos) >= 7;
     }
 
+    @Override
+    @Nonnull
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
         return pFacing == pState.getValue(FACING).getOpposite() && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
 
     @Nonnull
     @Override
-    protected ImmutableMap<BlockState, VoxelShape> getShapeForEachState(Function<BlockState, VoxelShape> p_152459_) {
-        return super.getShapeForEachState(p_152459_);
-    }
-
-    //TODO
-    @Nonnull
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, DirectionSelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         //noinspection DuplicatedCode
         switch (state.getValue(FACING)) {
             case EAST:
@@ -120,8 +117,19 @@ public abstract class MapleSpileCommon extends HorizontalDirectionalBlock {
                 return SHAPE_W;
             default:
                 return SHAPE_N;
-        }
-        //return rotateShape(state.getValue(FACING), defaultBlockState().getValue(FACING), SHAPE);
+        }//return rotateShape(state.getValue(FACING), defaultBlockState().getValue(FACING), SHAPE);
+    }
+
+    @Nonnull
+    @Override
+    public BlockState rotate(BlockState pState, Rotation pRotation) {
+        return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
+    }
+
+    @Nonnull
+    @Override
+    public BlockState mirror(BlockState pState, Mirror pMirror) {
+        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
 
 }

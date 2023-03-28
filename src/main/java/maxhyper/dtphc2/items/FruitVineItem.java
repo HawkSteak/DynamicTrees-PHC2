@@ -31,8 +31,7 @@ public class FruitVineItem extends BlockItem {
     public void appendHoverText(@Nonnull ItemStack stack, @Nullable Level world, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flagIn) {
         super.appendHoverText(stack, world, tooltip, flagIn);
         if (world == null) return;
-        //TODO
-        //if (SeasonHelper.getSeasonValue(world, BlockPos.ZERO) == null) return;
+        if (SeasonHelper.getSeasonValue(LevelContext.create(world), BlockPos.ZERO) == null) return;
         int flags = getSeasonalTooltipFlags(world);
 
         if (flags != 0) {

@@ -1,5 +1,6 @@
 package maxhyper.dtphc2.blocks;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.compat.season.SeasonHelper;
 import com.ferreusveritas.dynamictrees.util.LevelContext;
 import net.minecraft.core.BlockPos;
@@ -10,6 +11,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -17,6 +19,7 @@ import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
@@ -252,28 +255,28 @@ public class FruitVineBlock extends VineBlock {
         return InteractionResult.PASS;
     }
 
-//    @Override
-//    public boolean canSupportAtFace(IBlockReader pLevel, BlockPos pPos, Direction pDirection) {
-//        if (pDirection == Direction.DOWN) {
-//            return false;
-//        } else {
-//            BlockPos blockpos = pPos.relative(pDirection);
-//            if (isAcceptableNeighbour(pLevel, blockpos, pDirection)) {
-//                return true;
-//            } else if (pDirection.getAxis() == Direction.Axis.Y) {
-//                return false;
-//            } else {
-//                BooleanProperty booleanproperty = PROPERTY_BY_DIRECTION.get(pDirection);
-//                BlockState blockstate = pLevel.getBlockState(pPos.above());
-//                return blockstate.is(this) && blockstate.getValue(booleanproperty);
-//            }
-//        }
-//    }
+    @Override
+    public boolean canSupportAtFace(BlockGetter pLevel, BlockPos pPos, Direction pDirection) {
+        if (pDirection == Direction.DOWN) {
+            return false;
+        } else {
+            BlockPos blockpos = pPos.relative(pDirection);
+            if (isAcceptableNeighbour(pLevel, blockpos, pDirection)) {
+                return true;
+            } else if (pDirection.getAxis() == Direction.Axis.Y) {
+                return false;
+            } else {
+                BooleanProperty booleanproperty = PROPERTY_BY_DIRECTION.get(pDirection);
+                BlockState blockstate = pLevel.getBlockState(pPos.above());
+                return blockstate.is(this) && blockstate.getValue(booleanproperty);
+            }
+        }
+    }
 
-//    public static boolean isAcceptableNeighbour(IBlockReader pBlockReader, BlockPos pLevel, Direction pNeighborPos) {
-//        BlockState blockstate = pBlockReader.getBlockState(pLevel);
-//        return Block.isFaceFull(blockstate.getCollisionShape(pBlockReader, pLevel), pNeighborPos.getOpposite()) || TreeHelper.isBranch(blockstate);
-//    }
+    public static boolean isAcceptableNeighbour(BlockGetter pBlockReader, BlockPos pLevel, Direction pNeighborPos) {
+        BlockState blockstate = pBlockReader.getBlockState(pLevel);
+        return Block.isFaceFull(blockstate.getCollisionShape(pBlockReader, pLevel), pNeighborPos.getOpposite()) || TreeHelper.isBranch(blockstate);
+    }
 
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
@@ -284,7 +287,7 @@ public class FruitVineBlock extends VineBlock {
             BlockPos upPos = pos.above();
             if (randDir.getAxis().isHorizontal() && !state.getValue(getPropertyForFace(randDir))) {
                 //TODO
-                //if (this.canSpread(world, pos)) {
+                if (this.canSpread(world, pos)) {
                     BlockPos offsetPos = pos.relative(randDir);
                     BlockState offsetState = world.getBlockState(offsetPos);
                     if (offsetState.isAir()) {
@@ -312,36 +315,33 @@ public class FruitVineBlock extends VineBlock {
                         world.setBlock(pos, state.setValue(getPropertyForFace(randDir), true), 2);
                     }
 
-                //}
+                }
             } else {
                 if (randDir == Direction.UP && pos.getY() < 255) {
-                    //TODO
-                    //if (this.canSupportAtFace(world, pos, randDir)) {
+                    if (this.canSupportAtFace(world, pos, randDir)) {
                         world.setBlock(pos, state.setValue(UP, true), 2);
                         return;
-                    //}
+                    }
 
-//                    if (world.isEmptyBlock(upPos)) {
-//                        //TODO
-//                        //if (!this.canSpread(world, pos)) {
-//                        //    return;
-//                        //}
-//
-//                        BlockState blockstate3 = state;
-//
-//                        for(Direction direction2 : Direction.Plane.HORIZONTAL) {
-//                            if (random.nextBoolean() || !isAcceptableNeighbour(world, upPos.relative(direction2), Direction.UP)) {
-//                                blockstate3 = blockstate3.setValue(getPropertyForFace(direction2), false);
-//                            }
-//                        }
-//
-//                        //TODO
-//                        //if (this.hasHorizontalConnection(blockstate3)) {
-//                            world.setBlock(upPos, blockstate3, 2);
-//                        //}
-//
-//                        return;
-//                    }
+                    if (world.isEmptyBlock(upPos)) {
+                        if (!this.canSpread(world, pos)) {
+                            return;
+                        }
+
+                        BlockState blockstate3 = state;
+
+                        for(Direction direction2 : Direction.Plane.HORIZONTAL) {
+                            if (random.nextBoolean() || !isAcceptableNeighbour(world, upPos.relative(direction2), Direction.UP)) {
+                                blockstate3 = blockstate3.setValue(getPropertyForFace(direction2), false);
+                            }
+                        }
+
+                        if (this.hasHorizontalConnection(blockstate3)) {
+                            world.setBlock(upPos, blockstate3, 2);
+                        }
+
+                        return;
+                    }
                 }
 
                 if (pos.getY() > 0) {
@@ -350,11 +350,10 @@ public class FruitVineBlock extends VineBlock {
                     boolean isAir = blockstate.isAir();
                     if (isAir || blockstate.is(this)) {
                         BlockState blockstate1 = isAir ? this.defaultBlockState() : blockstate;
-                        //TODO
-                        //BlockState blockstate2 = this.copyRandomFaces(state, blockstate1, random);
-                        //if (blockstate1 != blockstate2 && this.hasHorizontalConnection(blockstate2)) {
-                        //    world.setBlock(blockpos1, blockstate2, 2);
-                        //}
+                        BlockState blockstate2 = this.copyRandomFaces(state, blockstate1, random);
+                        if (blockstate1 != blockstate2 && this.hasHorizontalConnection(blockstate2)) {
+                            world.setBlock(blockpos1, blockstate2, 2);
+                        }
                     }
                 }
 

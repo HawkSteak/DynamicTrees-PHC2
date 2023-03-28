@@ -2,7 +2,6 @@ package maxhyper.dtphc2.blocks;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
-import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -27,12 +26,12 @@ import javax.annotation.Nonnull;
 public class MapleSpileBucketBlock extends MapleSpileCommon {
 
     static VoxelShape makeBucketShape() {
-//        VoxelShape shape = makeShape();
-//        shape = Shapes.join(shape, Block.box(0.25, 0, 0.0625, 0.75, 0.5625, 0.5625), BooleanOp.OR);
-//        shape = Shapes.join(shape, Block.box(0.6875, 0.0625, 0.125, 0.3125, 0.5625, 0.5), BooleanOp.ONLY_FIRST);
-//        shape = Shapes.join(shape, Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), BooleanOp.OR);
-//        shape = Shapes.join(shape, Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), BooleanOp.OR);
-        VoxelShape shape = Shapes.join(Block.box(5, 1, 2, 11, 9, 8), Block.box(4, 0, 1, 12, 9, 9), BooleanOp.OR);
+        VoxelShape shape = makeShape();
+        shape = Shapes.join(shape, Block.box(0.25, 0, 0.0625, 0.75, 0.5625, 0.5625), BooleanOp.OR);
+        shape = Shapes.join(shape, Block.box(0.3125, 0.0625, 0.125, 0.6875, 0.5625, 0.5), BooleanOp.ONLY_FIRST);
+        //shape = Shapes.join(shape, Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), BooleanOp.OR);
+        //shape = Shapes.join(shape, Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), BooleanOp.OR);
+        //VoxelShape shape = Shapes.join(Block.box(5, 1, 2, 11, 9, 8), Block.box(4, 0, 1, 12, 9, 9), BooleanOp.OR);
         return shape;
     }
 

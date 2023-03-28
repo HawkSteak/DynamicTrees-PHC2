@@ -1,16 +1,10 @@
 package maxhyper.dtphc2.event;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import maxhyper.dtphc2.DynamicTreesPHC2;
 import maxhyper.dtphc2.blocks.ModBlocks;
-import maxhyper.dtphc2.genfeatures.DTPHC2GenFeatures;
-import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.core.BlockPos;
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -18,15 +12,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.Objects;
 

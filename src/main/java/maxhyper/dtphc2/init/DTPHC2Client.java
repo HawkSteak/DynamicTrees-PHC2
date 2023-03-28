@@ -26,6 +26,7 @@ public class DTPHC2Client {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.PASSION_FRUIT_VINE.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.VANILLA_VINE.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.PEPPERCORN_VINE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAPLE_SPILE_BLOCK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.MAPLE_SPILE_BUCKET_BLOCK.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.BANANA_SUCKER_BLOCK.get(), RenderType.cutout());
     }
