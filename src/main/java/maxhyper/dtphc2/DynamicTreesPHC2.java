@@ -1,17 +1,26 @@
 package maxhyper.dtphc2;
 
+import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
+import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
+import com.ferreusveritas.dynamictrees.block.rooty.SoilProperties;
 import com.ferreusveritas.dynamictrees.init.DTConfigs;
+import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
+import com.ferreusveritas.dynamictrees.systems.pod.Pod;
+import com.ferreusveritas.dynamictrees.tree.family.Family;
+import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.pam.pamhc2trees.config.EnableConfig;
-import maxhyper.dtphc2.blocks.ModBlocks;
+import com.pam.pamhc2trees.init.ItemRegistry;
+import maxhyper.dtphc2.init.DTPHC2Blocks;
 import maxhyper.dtphc2.compat.DTPConfig;
 import maxhyper.dtphc2.compat.DTPConfigProxy;
 import maxhyper.dtphc2.compat.DefaultConfig;
 import maxhyper.dtphc2.event.SpilePlacementEvent;
 import maxhyper.dtphc2.init.DTPHC2Client;
 import maxhyper.dtphc2.init.DTPHC2Registries;
-import maxhyper.dtphc2.items.ModItems;
+import maxhyper.dtphc2.init.DTPHC2Items;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,6 +30,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod(DynamicTreesPHC2.MOD_ID)
 @Mod.EventBusSubscriber(modid = DynamicTreesPHC2.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -31,16 +41,17 @@ public class DynamicTreesPHC2 {
 
     public DynamicTreesPHC2() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        bus.addListener(DynamicTreesPHC2::onConstructMod);
+        bus.addListener(this::commonSetup);
         bus.addListener(this::clientSetup);
+        bus.addListener(this::gatherData);
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(SpilePlacementEvent.class);
 
         RegistryHandler.setup(MOD_ID);
 
-        ModBlocks.register(bus);
-        ModItems.register(bus);
+        DTPHC2Blocks.register(bus);
+        DTPHC2Items.register(bus);
         DTPHC2Registries.setup();
         DTPHC2Registries.SOUNDS.register(bus);
 
@@ -50,8 +61,7 @@ public class DynamicTreesPHC2 {
             DTPlusConfig = new DefaultConfig();
     }
 
-    @SubscribeEvent
-    public static void onConstructMod(final FMLConstructModEvent event) {
+    private void commonSetup(final FMLConstructModEvent event) {
         if (DTConfigs.WORLD_GEN.get()) {
             ForgeConfigSpec.BooleanValue[] test = {
                     EnableConfig.apple_worldgen,
@@ -114,9 +124,20 @@ public class DynamicTreesPHC2 {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         DTPHC2Client.setup();
-        ModBlocks.PASSION_FRUIT_VINE.get().setFruitStack(new ItemStack(ItemRegistry.passionfruititem.get()));
-        ModBlocks.VANILLA_VINE.get().setFruitStack(new ItemStack(ItemRegistry.vanillabeanitem.get()));
-        ModBlocks.PEPPERCORN_VINE.get().setFruitStack(new ItemStack(ItemRegistry.peppercornitem.get())).setOverripeFruitStack(new ItemStack(RIPE_PEPPERCORN_ITEM.get()));
+        DTPHC2Blocks.PASSION_FRUIT_VINE.get().setFruitStack(new ItemStack(ItemRegistry.passionfruititem.get()));
+        DTPHC2Blocks.VANILLA_VINE.get().setFruitStack(new ItemStack(ItemRegistry.vanillabeanitem.get()));
+        DTPHC2Blocks.PEPPERCORN_VINE.get().setFruitStack(new ItemStack(ItemRegistry.peppercornitem.get())).setOverripeFruitStack(new ItemStack(DTPHC2Items.RIPE_PEPPERCORN_ITEM.get()));
+    }
+
+    private void gatherData(final GatherDataEvent event) {
+        GatherDataHelper.gatherAllData(MOD_ID, event,
+                SoilProperties.REGISTRY,
+                Family.REGISTRY,
+                Species.REGISTRY,
+                LeavesProperties.REGISTRY,
+                Fruit.REGISTRY,
+                Pod.REGISTRY
+        );
     }
 
     public static ResourceLocation resLoc(final String path) {

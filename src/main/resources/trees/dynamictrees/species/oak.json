@@ -1,0 +1,46 @@
+{
+  "family": "oak",
+  "tapering": 0.3,
+  "signal_energy": 12.0,
+  "growth_rate": 0.8,
+  "leaves_properties": "oak",
+  "environment_factors" : {
+    "cold": 0.75,
+    "hot": 0.5,
+    "dry": 0.5,
+    "forest": 1.05
+  },
+  "perfect_biomes": { "types": [ "forest", "overworld" ] },
+  "primitive_saplings": [
+    { "sapling_block": "oak_sapling" },
+    {
+      "sapling_block": "pamhc2trees:acorn_sapling",
+      "can_craft_seed_to_sapling": false
+    },
+    {
+      "sapling_item": "pamhc2trees:acornitem",
+      "can_craft_seed_to_sapling": false
+    }
+  ],
+  "fruits": [
+    "dtphc2:acorn"
+  ],
+  "features" : [
+    {
+      "name": "rot_soil",
+      "properties": {
+        "rotten_soil": "podzol"
+      }
+    },
+    "mushroom_rot",
+    "bee_nest",
+    {
+      "name": "fruit",
+      "properties": {
+        "fruit": "dtphc2:acorn",
+        "quantity": 1,
+        "place_chance": 0.25
+      }
+    }
+  ]
+}

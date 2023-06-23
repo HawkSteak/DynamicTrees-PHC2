@@ -9,6 +9,7 @@
     }
   },
   "result": {
-    "item": "harvestcraft:coconutitem"
+    "item": "harvestcraft:coconutitem",
+    "count": 2
   }
 }

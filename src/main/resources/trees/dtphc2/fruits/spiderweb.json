@@ -1,6 +1,5 @@
 {
   "type": "dtphc2:cobweb",
-  "block_registry_name": "spiderweb_fruit",
   "item_stack": "string",
   "block_shapes": [
     { "function": "fruit", "parameters": { "radius": 1, "height": 5, "stem_length": 0, "fraction": 16 } },

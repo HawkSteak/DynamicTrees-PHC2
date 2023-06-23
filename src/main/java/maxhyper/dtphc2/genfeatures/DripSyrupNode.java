@@ -4,8 +4,7 @@ import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.network.NodeInspector;
 import maxhyper.dtphc2.blocks.MapleSpileBlock;
 import maxhyper.dtphc2.blocks.MapleSpileBucketBlock;
-import maxhyper.dtphc2.blocks.ModBlocks;
-import maxhyper.dtphc2.init.DTPHC2Registries;
+import maxhyper.dtphc2.init.DTPHC2Blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
@@ -28,7 +27,7 @@ public class DripSyrupNode implements NodeInspector {
             for(Direction face : Direction.Plane.HORIZONTAL) { //Check all sides of this block
                 BlockPos offPos = pos.relative(face);
                 BlockState state = world.getBlockState(offPos);
-                if(state.getBlock() == ModBlocks.MAPLE_SPILE_BUCKET_BLOCK.get()) { //Found a bucket
+                if(state.getBlock() == DTPHC2Blocks.MAPLE_SPILE_BUCKET_BLOCK.get()) { //Found a bucket
                     bucketsVisited++;
                     if(bucketsVisited <= maxBuckets) {
                         int filling = state.getValue(MapleSpileBucketBlock.FILLING);
@@ -41,7 +40,7 @@ public class DripSyrupNode implements NodeInspector {
                         finished = true; //We've hit our limit of buckets we can visit
                     }
                 }
-                else if(state.getBlock() == ModBlocks.MAPLE_SPILE_BLOCK.get()) {
+                else if(state.getBlock() == DTPHC2Blocks.MAPLE_SPILE_BLOCK.get()) {
                     boolean filled = state.getValue(MapleSpileBlock.FILLED);
                     if(!filled) {
                         world.setBlock(offPos, state.setValue(MapleSpileBlock.FILLED, true), 3);

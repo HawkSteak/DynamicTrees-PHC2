@@ -1,6 +1,5 @@
 {
   "type": "dtphc2:palm",
-  "block_registry_name": "date_fruit",
   "item_stack": "pamhc2trees:dateitem",
   "max_age": 3,
   "block_shapes": {

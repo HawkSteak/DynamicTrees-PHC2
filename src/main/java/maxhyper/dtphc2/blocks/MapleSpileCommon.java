@@ -18,10 +18,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -47,10 +44,10 @@ public abstract class MapleSpileCommon extends HorizontalDirectionalBlock {
     protected static VoxelShape SHAPE_W;
 
     protected static VoxelShape makeShape() {
-//        VoxelShape shape = Shapes.empty();
-//        shape = Shapes.join(shape, Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), BooleanOp.OR);
-//        shape = Shapes.join(shape, Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), BooleanOp.OR);
-        VoxelShape shape = Shapes.or(Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375));
+        VoxelShape shape = Shapes.empty();
+        shape = Shapes.join(shape, Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), BooleanOp.OR);
+        shape = Shapes.join(shape, Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), BooleanOp.OR);
+//        VoxelShape shape = Shapes.or(Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375));
         return shape;
     }
 
@@ -107,17 +104,12 @@ public abstract class MapleSpileCommon extends HorizontalDirectionalBlock {
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        //noinspection DuplicatedCode
-        switch (state.getValue(FACING)) {
-            case EAST:
-                return SHAPE_E;
-            case SOUTH:
-                return SHAPE_S;
-            case WEST:
-                return SHAPE_W;
-            default:
-                return SHAPE_N;
-        }//return rotateShape(state.getValue(FACING), defaultBlockState().getValue(FACING), SHAPE);
+        return switch (state.getValue(FACING)) {
+            case EAST -> SHAPE_E;
+            case SOUTH -> SHAPE_S;
+            case WEST -> SHAPE_W;
+            default -> SHAPE_N;
+        };
     }
 
     @Nonnull

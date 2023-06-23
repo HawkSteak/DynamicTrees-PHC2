@@ -1,6 +1,5 @@
 {
   "type": "dtphc2:offset_down",
-  "block_registry_name": "banana_fruit",
   "item_stack": "pamhc2trees:bananaitem",
   "block_shapes": [
     { "function": "fruit", "parameters": { "radius": 1, "height": 3, "stem_length": -1, "fraction": 16 } },

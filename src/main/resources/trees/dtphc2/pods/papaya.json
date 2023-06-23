@@ -1,6 +1,5 @@
 {
   "type": "dtphc2:palm",
-  "block_registry_name": "papaya_fruit",
   "item_stack": "pamhc2trees:papayaitem",
   "max_age": 3,
   "block_shapes": {

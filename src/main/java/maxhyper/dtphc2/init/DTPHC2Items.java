@@ -1,18 +1,18 @@
-package maxhyper.dtphc2.items;
+package maxhyper.dtphc2.init;
 
-import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.init.DTRegistries;
 import maxhyper.dtphc2.DynamicTreesPHC2;
-import net.minecraft.world.item.CreativeModeTab;
+import maxhyper.dtphc2.items.FruitVineItem;
+import maxhyper.dtphc2.items.RipePeppercornItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import static maxhyper.dtphc2.blocks.ModBlocks.*;
+import static maxhyper.dtphc2.init.DTPHC2Blocks.*;
 
-public class ModItems {
+public class DTPHC2Items {
 
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, DynamicTreesPHC2.MOD_ID);

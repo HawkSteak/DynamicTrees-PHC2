@@ -1,0 +1,7 @@
+{
+  "common_leaves": "dtphc2:rubber",
+  "common_species": "dtphc2:rubber",
+  "primitive_log": "pamhc2trees:pamrubber",
+  "generate_stripped_branch": false,
+  "max_branch_radius": 8
+}

@@ -1,7 +1,7 @@
 package maxhyper.dtphc2.event;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import maxhyper.dtphc2.blocks.ModBlocks;
+import maxhyper.dtphc2.init.DTPHC2Blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -51,7 +51,7 @@ public class SpilePlacementEvent {
             world.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1,1);
             // Place the MapleSpileBlock at the clicked block's position
             BlockPlaceContext context = new BlockPlaceContext(player, hand, heldItem, new BlockHitResult(player.getEyePosition(1.0f), event.getFace(), pos, false));
-            BlockState placeState = ModBlocks.MAPLE_SPILE_BLOCK.get().getStateForPlacement(context);
+            BlockState placeState = DTPHC2Blocks.MAPLE_SPILE_BLOCK.get().getStateForPlacement(context);
             if (placeState == null) return;
             world.setBlock(spilePos, placeState, 3);
             event.setCancellationResult(InteractionResult.SUCCESS);

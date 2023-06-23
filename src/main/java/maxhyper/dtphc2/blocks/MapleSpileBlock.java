@@ -2,6 +2,7 @@ package maxhyper.dtphc2.blocks;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
+import maxhyper.dtphc2.init.DTPHC2Blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -10,15 +11,14 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 
 import javax.annotation.Nonnull;
 
@@ -44,7 +44,7 @@ public class MapleSpileBlock extends MapleSpileCommon {
             if (state.hasProperty(FILLED)) {
                 Direction dir = state.getValue(FACING);
                 if (player.getMainHandItem().getItem() == Items.BUCKET) {
-                    world.setBlock(pos, ModBlocks.MAPLE_SPILE_BUCKET_BLOCK.get().defaultBlockState()
+                    world.setBlock(pos, DTPHC2Blocks.MAPLE_SPILE_BUCKET_BLOCK.get().defaultBlockState()
                             .setValue(FACING, dir)
                             .setValue(MapleSpileBucketBlock.FILLING, state.getValue(FILLED) ? 1 : 0), 3);
                     if (!player.isCreative()) player.getMainHandItem().shrink(1);
@@ -76,12 +76,9 @@ public class MapleSpileBlock extends MapleSpileCommon {
         return false;
     }
 
-    //TODO
-//    @Override
-//    public ItemStack getPickBlock(BlockState state, HitResult target, LevelReader world, BlockPos pos, Player player) {
-//        return new ItemStack(Items.IRON_INGOT);
-//    }
-
-
+    @Override
+    public Item asItem() {
+        return Items.IRON_INGOT;
+    }
 
 }
