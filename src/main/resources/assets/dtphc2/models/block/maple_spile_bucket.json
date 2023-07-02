@@ -1,8 +1,8 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "particle": "dtphc2:block/maple_spile_bucket",
-        "bucket": "dtphc2:block/maple_spile_bucket"
+        "particle": "dtphc2:block/spile_bucket",
+        "bucket": "dtphc2:block/spile_bucket"
     },
     "elements": [
         {

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "dtphc2:maple_branch"
+    "dtphc2:stripped_maple_branch",
+    "dtphc2:stripped_rubber_branch"
   ]
 }

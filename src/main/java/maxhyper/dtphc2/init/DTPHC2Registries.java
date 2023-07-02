@@ -22,7 +22,10 @@ import maxhyper.dtphc2.items.FruitVineItem;
 import maxhyper.dtphc2.items.RipePeppercornItem;
 import maxhyper.dtphc2.trees.GenOnExtraSoilSpecies;
 import maxhyper.dtphc2.trees.PaperbarkFamily;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -38,8 +41,9 @@ import net.minecraftforge.registries.RegistryObject;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class DTPHC2Registries {
 
-    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, DynamicTreesPHC2.MOD_ID);
+    public static final TagKey<Block> CAN_BE_SPILED = TagKey.create(Registry.BLOCK_REGISTRY, DynamicTreesPHC2.resLoc("can_be_spiled"));
 
+    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, DynamicTreesPHC2.MOD_ID);
 
     public static final VoxelShape DRAGON_FRUIT_CACTUS_SAPLING_SHAPE = Shapes.box(
                     0.375f, 0.0f, 0.375f,

@@ -1,7 +1,10 @@
 package maxhyper.dtphc2.blocks;
 
+import maxhyper.dtphc2.DynamicTreesPHC2;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -16,21 +19,22 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 
 public class BananaSuckerBlock extends HorizontalDirectionalBlock implements IPlantable {
 
-    protected static final VoxelShape SHAPE_E = Shapes.box(//new AxisAlignedBB(
+    protected static final VoxelShape SHAPE_E = Shapes.box(
             0 /16f,0  /16f,6  /16f,
             4 /16f,15 /16f,10 /16f);
-    protected static final VoxelShape SHAPE_W = Shapes.box(//new AxisAlignedBB(
+    protected static final VoxelShape SHAPE_W = Shapes.box(
             12  /16f,0 /16f, 6  /16f,
             16 /16f,15 /16f,10 /16f);
-    protected static final VoxelShape SHAPE_N = Shapes.box(//new AxisAlignedBB(
+    protected static final VoxelShape SHAPE_N = Shapes.box(
             6  /16f,0  /16f,12  /16f,
             10 /16f,15 /16f,16 /16f);
-    protected static final VoxelShape SHAPE_S = Shapes.box(//new AxisAlignedBB(
+    protected static final VoxelShape SHAPE_S = Shapes.box(
             6  /16f,0  /16f,0 /16f,
             10 /16f,15 /16f,4 /16f);
 
@@ -79,11 +83,11 @@ public class BananaSuckerBlock extends HorizontalDirectionalBlock implements IPl
         }
     }
 
-    //TODO
-//    @Override
-//    public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
-//        Item item = ForgeRegistries.ITEMS.getValue(DynamicTreesPHC2.resLoc("banana_seed"));
-//        if (item == null || item == Items.AIR) return ItemStack.EMPTY;
-//        return new ItemStack(item);
-//    }
+    @Override
+    public Item asItem() {
+        Item item = ForgeRegistries.ITEMS.getValue(DynamicTreesPHC2.resLoc("banana_seed"));
+        if (item == null) return Items.AIR;
+        return item;
+    }
+
 }

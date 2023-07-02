@@ -1,5 +1,6 @@
 package maxhyper.dtphc2.compat.waila;
 
+import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.compat.waila.WailaOther;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
 import maxhyper.dtphc2.blocks.MapleSpileBlock;
@@ -65,7 +66,7 @@ public class WailaSpileHandler implements IComponentProvider {
                 tooltip.add(elements.item(ItemStack.EMPTY, 0.5f));
             }
             Direction dir = state.getValue(MapleSpileCommon.FACING);
-            //species = TreeHelper.getExactSpecies(accessor.getWorld(), accessor.getPosition().offset(dir.getOpposite().getNormal()));
+            species = TreeHelper.getExactSpecies(accessor.getLevel(), accessor.getPosition().offset(dir.getOpposite().getNormal()));
         }
 
         //If everything fails just show an iron ingot, womp womp

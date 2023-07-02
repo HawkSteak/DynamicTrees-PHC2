@@ -1,72 +1,127 @@
 {
-    "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
-    "textures": {
-        "particle": "dtphc2:block/maple_spile_bucket",
-        "bucket": "dtphc2:block/maple_spile_bucket"
-    },
-    "elements": [
-        {
-            "name": "exterior",
-            "from": [ 4.0, 0.0, 1.0 ], 
-            "to": [ 12.0, 9.0, 9.0 ], 
-            "faces": {
-                "north": { "texture": "#bucket", "uv": [ 4.0, 8.0, 8.0, 12.5 ] },
-                "east": { "texture": "#bucket", "uv": [ 4.0, 8.0, 8.0, 12.5 ] },
-                "south": { "texture": "#bucket", "uv": [ 4.0, 8.0, 8.0, 12.5 ] },
-                "west": { "texture": "#bucket", "uv": [ 4.0, 8.0, 8.0, 12.5 ] },
-                "up": { "texture": "#bucket", "uv": [ 0.0, 8.0, 4.0, 12.0 ] },
-                "down": { "texture": "#bucket", "uv": [ 0.0, 4.0, 4.0, 8.0 ] }
-            }
-        },
-        {
-            "name": "interior",
-            "from": [ 11.0, 1.0, 2.0 ],
-            "to": [ 5.0, 9.0, 8.0 ],
-            "faces": {
-                "north": { "texture": "#bucket", "uv": [ 11.0, 8.5, 14.0, 12.5 ] },
-                "east": { "texture": "#bucket", "uv": [ 8.0, 8.5, 11.0, 12.5 ] },
-                "south": { "texture": "#bucket", "uv": [ 8.0, 8.5, 11.0, 12.5 ] },
-                "west": { "texture": "#bucket", "uv": [ 8.0, 8.5, 11.0, 12.5 ] },
-                "down": { "texture": "#bucket", "uv": [ 8.0, 4.5, 11.0, 7.5 ] }
-            }
-        },
-        {
-            "name": "handlew",
-            "from": [ 4.0, 9.0, 4.0 ], 
-            "to": [ 5.0, 13.5, 5.0 ], 
-            "rotation": { "origin": [ 8.0, 9.0, 5.0 ], "axis": "x", "angle": -22.5 },
-            "faces": {
-                "north": { "texture": "#bucket", "uv": [ 4.0, 13.0, 4.5, 15.5 ] },
-                "east": { "texture": "#bucket", "uv": [ 4.0, 13.0, 4.5, 15.5 ] },
-                "south": { "texture": "#bucket", "uv": [ 4.0, 13.0, 4.5, 15.5 ] },
-                "west": { "texture": "#bucket", "uv": [ 4.0, 13.0, 4.5, 15.5 ] },
-                "up": { "texture": "#bucket", "uv": [ 4.0, 12.5, 4.5, 13.0 ] }
-            }
-        },
-        {
-            "name": "handlee",
-            "from": [ 11.0, 9.0, 4.0 ], 
-            "to": [ 12.0, 13.5, 5.0 ], 
-            "rotation": { "origin": [ 8.0, 9.0, 5.0 ], "axis": "x", "angle": -22.5 },
-            "faces": {
-                "north": { "texture": "#bucket", "uv": [ 7.5, 13.0, 8.0, 15.5 ] },
-                "east": { "texture": "#bucket", "uv": [ 7.5, 13.0, 8.0, 15.5 ] },
-                "south": { "texture": "#bucket", "uv": [ 7.5, 13.0, 8.0, 15.5 ] },
-                "west": { "texture": "#bucket", "uv": [ 7.5, 13.0, 8.0, 15.5 ] },
-                "up": { "texture": "#bucket", "uv": [ 7.5, 12.5, 8.0, 13.0 ] }
-            }
-        },
-        {
-            "name": "handleu",
-            "from": [ 5.0, 12.5, 4.0 ], 
-            "to": [ 11.0, 13.5, 5.0 ], 
-            "rotation": { "origin": [ 8.0, 9.0, 5.0 ], "axis": "x", "angle": -22.5 },
-            "faces": {
-                "north": { "texture": "#bucket", "uv": [ 4.5, 13.0, 7.5, 13.5 ] },
-                "south": { "texture": "#bucket", "uv": [ 4.5, 13.0, 7.5, 13.5 ] },
-                "up": { "texture": "#bucket", "uv": [ 4.5, 12.5, 7.5, 13.0 ] },
-                "down": { "texture": "#bucket", "uv": [ 4.5, 13.5, 7.5, 14.0 ] }
-            }
-        }
-    ]
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "dtphc2:block/spile_bucket",
+		"bucket": "dtphc2:block/spile_bucket",
+		"overlay": "dtphc2:block/spile_bucket_overlay"
+	},
+	"elements": [
+		{
+			"name": "exterior",
+			"from": [4, 0, 1],
+			"to": [12, 9, 9],
+			"faces": {
+				"north": {"uv": [4, 0, 8, 4.5], "texture": "#bucket"},
+				"east": {"uv": [4, 0, 8, 4.5], "texture": "#bucket"},
+				"south": {"uv": [4, 0, 8, 4.5], "texture": "#bucket"},
+				"west": {"uv": [4, 0, 8, 4.5], "texture": "#bucket"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#bucket"},
+				"down": {"uv": [0, 4, 4, 8], "texture": "#bucket"}
+			}
+		},
+		{
+			"name": "exterior_overlay",
+			"from": [4, 0, 1],
+			"to": [12, 9, 9],
+			"faces": {
+				"north": {"uv": [4, 0, 8, 4.5], "texture": "#overlay", "tintindex": 0 },
+				"east": {"uv": [4, 0, 8, 4.5], "texture": "#overlay", "tintindex": 0 },
+				"south": {"uv": [4, 0, 8, 4.5], "texture": "#overlay", "tintindex": 0 },
+				"west": {"uv": [4, 0, 8, 4.5], "texture": "#overlay", "tintindex": 0 },
+				"up": {"uv": [0, 0, 4, 4], "texture": "#overlay", "tintindex": 0 },
+				"down": {"uv": [0, 4, 4, 8], "texture": "#overlay", "tintindex": 0 }
+			}
+		},
+		{
+			"name": "interior",
+			"from": [11, 1, 2],
+			"to": [5, 9, 8],
+			"faces": {
+				"north": {"uv": [11, 0.5, 14, 4.5], "texture": "#bucket"},
+				"east": {"uv": [8, 0.5, 11, 4.5], "texture": "#bucket"},
+				"south": {"uv": [8, 0.5, 11, 4.5], "texture": "#bucket"},
+				"west": {"uv": [8, 0.5, 11, 4.5], "texture": "#bucket"},
+				"down": {"uv": [8, 4.5, 11, 7.5], "texture": "#bucket"}
+			}
+		},
+		{
+			"name": "interior_overlay",
+			"from": [11, 1, 2],
+			"to": [5, 9, 8],
+			"faces": {
+				"north": {"uv": [11, 0.5, 14, 4.5], "texture": "#overlay", "tintindex": 0 },
+				"east": {"uv": [8, 0.5, 11, 4.5], "texture": "#overlay", "tintindex": 0 },
+				"south": {"uv": [8, 0.5, 11, 4.5], "texture": "#overlay", "tintindex": 0 },
+				"west": {"uv": [8, 0.5, 11, 4.5], "texture": "#overlay", "tintindex": 0 },
+				"up": {"uv": [0, 0, 0, 0], "texture": "#overlay", "tintindex": 0 },
+				"down": {"uv": [8, 4.5, 11, 7.5], "texture": "#overlay", "tintindex": 0 }
+			}
+		},
+		{
+			"name": "handlew",
+			"from": [4, 9, 4],
+			"to": [5, 13.5, 5],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 9, 5]},
+			"faces": {
+				"north": {"uv": [4, 5, 4.5, 7.5], "texture": "#bucket"},
+				"east": {"uv": [4, 5, 4.5, 7.5], "texture": "#bucket"},
+				"south": {"uv": [4, 5, 4.5, 7.5], "texture": "#bucket"},
+				"west": {"uv": [4, 5, 4.5, 7.5], "texture": "#bucket"},
+				"up": {"uv": [4, 4.5, 4.5, 5], "texture": "#bucket"}
+			}
+		},
+		{
+			"name": "handlew_overlay",
+			"from": [4, 9, 4],
+			"to": [5, 13.5, 5],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 9, 5]},
+			"faces": {
+				"north": {"uv": [4, 5, 4.5, 7.5], "texture": "#overlay", "tintindex": 0 },
+				"east": {"uv": [4, 5, 4.5, 7.5], "texture": "#overlay", "tintindex": 0 },
+				"south": {"uv": [4, 5, 4.5, 7.5], "texture": "#overlay", "tintindex": 0 },
+				"west": {"uv": [4, 5, 4.5, 7.5], "texture": "#overlay", "tintindex": 0 },
+				"up": {"uv": [4, 4.5, 4.5, 5], "texture": "#overlay", "tintindex": 0 },
+				"down": {"uv": [0, 0, 0, 0], "texture": "#overlay", "tintindex": 0 }
+			}
+		},
+		{
+			"name": "handlee",
+			"from": [11, 9, 4],
+			"to": [12, 13.5, 5],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 9, 5]},
+			"faces": {
+				"north": {"uv": [7.5, 5, 8, 7.5], "texture": "#bucket"},
+				"east": {"uv": [7.5, 5, 8, 7.5], "texture": "#bucket"},
+				"south": {"uv": [7.5, 5, 8, 7.5], "texture": "#bucket"},
+				"west": {"uv": [7.5, 5, 8, 7.5], "texture": "#bucket"},
+				"up": {"uv": [7.5, 4.5, 8, 5], "texture": "#bucket"}
+			}
+		},
+		{
+			"name": "handlee_overlay",
+			"from": [11, 9, 4],
+			"to": [12, 13.5, 5],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 9, 5]},
+			"faces": {
+				"north": {"uv": [7.5, 5, 8, 7.5], "texture": "#overlay", "tintindex": 0 },
+				"east": {"uv": [7.5, 5, 8, 7.5], "texture": "#overlay", "tintindex": 0 },
+				"south": {"uv": [7.5, 5, 8, 7.5], "texture": "#overlay", "tintindex": 0 },
+				"west": {"uv": [7.5, 5, 8, 7.5], "texture": "#overlay", "tintindex": 0 },
+				"up": {"uv": [7.5, 4.5, 8, 5], "texture": "#overlay", "tintindex": 0 },
+				"down": {"uv": [0, 0, 0, 0], "texture": "#overlay", "tintindex": 0 }
+			}
+		},
+		{
+			"name": "handleu",
+			"from": [5, 12.5, 4],
+			"to": [11, 13.5, 5],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 9, 5]},
+			"faces": {
+				"north": {"uv": [4.5, 5, 7.5, 5.5], "texture": "#bucket"},
+				"south": {"uv": [4.5, 5, 7.5, 5.5], "texture": "#bucket"},
+				"up": {"uv": [4.5, 4.5, 7.5, 5], "texture": "#bucket"},
+				"down": {"uv": [4.5, 5.5, 7.5, 6], "texture": "#bucket"}
+			}
+		}
+	]
 }

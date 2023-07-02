@@ -2,7 +2,10 @@ package maxhyper.dtphc2.event;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import maxhyper.dtphc2.init.DTPHC2Blocks;
+import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.core.BlockPos;
+import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -25,6 +28,7 @@ import static maxhyper.dtphc2.DynamicTreesPHC2.MOD_ID;
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class SpilePlacementEvent {
 
+
     @SubscribeEvent
     public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
 
@@ -44,7 +48,7 @@ public class SpilePlacementEvent {
         if (!world.getBlockState(spilePos).getMaterial().isReplaceable()) return;
         //Make sure the tree species has the syrup gen feature
         //TODO
-        if(true){//if (BlockTags.getAllTags().getTagOrEmpty(DynamicTreesPHC2.resLoc("can_be_spiled")).contains(state.getBlock())) {
+        if(state.is(DTPHC2Registries.CAN_BE_SPILED)){
             // Remove one item from the player's hand
             if (!player.isCreative()) heldItem.shrink(1);
             // Play a sound

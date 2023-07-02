@@ -15,11 +15,12 @@
   "primitive_sapling": "pamhc2trees:rubber_sapling",
   "features": [
     {
-      "name": "dtphc2:syrup_gen",
+      "name": "dtphc2:syrup",
       "properties": {
-        "base_syrup_chance": 0.05,
-        "out_of_season_syrup_chance": 0.001,
-        "syrup_item": "pamhc2trees:latexitem"
+        "base_syrup_chance": 0.1,
+        "seasonal_range": 4.0,
+        "syrup_item": "pamhc2trees:latexitem",
+        "tint": "#bccbc4"
       }
     }
   ]

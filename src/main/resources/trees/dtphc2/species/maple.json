@@ -19,7 +19,8 @@
       "properties": {
         "base_syrup_chance": 0.05,
         "out_of_season_syrup_chance": 0.001,
-        "syrup_item": "pamhc2trees:maplesyrupitem"
+        "syrup_item": "pamhc2trees:maplesyrupitem",
+        "tint": "#ad5b18"
       }
     }
   ]

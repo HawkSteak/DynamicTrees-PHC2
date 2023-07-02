@@ -17,6 +17,8 @@ import net.minecraft.world.level.LevelAccessor;
 
 import javax.annotation.Nonnull;
 
+import java.awt.*;
+
 import static net.minecraft.util.Mth.clamp;
 
 public class SyrupGenFeature extends GenFeature {
@@ -26,6 +28,7 @@ public class SyrupGenFeature extends GenFeature {
     private static final ConfigurationProperty<Float> SEASONAL_OFFSET = ConfigurationProperty.floatProperty("seasonal_offset");
     private static final ConfigurationProperty<Float> SEASONAL_RANGE = ConfigurationProperty.floatProperty("seasonal_range");
     private static final ConfigurationProperty<Item> SYRUP_ITEM = ConfigurationProperty.item("syrup_item");
+    private static final ConfigurationProperty<String> TINT = ConfigurationProperty.string("tint");
 
     public SyrupGenFeature(ResourceLocation registryName) {
         super(registryName);
@@ -33,7 +36,7 @@ public class SyrupGenFeature extends GenFeature {
 
     @Override
     protected void registerProperties() {
-        this.register(BASE_SYRUP_CHANCE, OUT_OF_SEASON_SYRUP_CHANCE, SYRUP_ITEM, SEASONAL_OFFSET, SEASONAL_RANGE);
+        this.register(BASE_SYRUP_CHANCE, OUT_OF_SEASON_SYRUP_CHANCE, SYRUP_ITEM, SEASONAL_OFFSET, SEASONAL_RANGE, TINT);
     }
 
     @Nonnull
@@ -44,12 +47,15 @@ public class SyrupGenFeature extends GenFeature {
                 .with(OUT_OF_SEASON_SYRUP_CHANCE, 0.001F)
                 .with(SYRUP_ITEM, Items.AIR)
                 .with(SEASONAL_OFFSET, 3.5F)
-                .with(SEASONAL_RANGE, 1.0F);
+                .with(SEASONAL_RANGE, 1.0F)
+                .with(TINT, "#FF00FF");//ugly purple to show that its missing
     }
 
     public Item getSyrupItem(GenFeatureConfiguration config){
         return config.get(SYRUP_ITEM);
     }
+
+    public int getTint(GenFeatureConfiguration config) { return Color.decode(config.get(TINT)).getRGB(); }
 
     @Override
     public boolean postGrow(@Nonnull GenFeatureConfiguration configuration, @Nonnull PostGrowContext context) {

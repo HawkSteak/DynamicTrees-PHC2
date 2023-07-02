@@ -1,6 +1,7 @@
 package maxhyper.dtphc2.init;
 
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
+import maxhyper.dtphc2.blocks.MapleSpileCommon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
@@ -24,8 +25,8 @@ public class DTPHC2Client {
         ItemBlockRenderTypes.setRenderLayer(DTPHC2Blocks.PASSION_FRUIT_VINE.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(DTPHC2Blocks.VANILLA_VINE.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(DTPHC2Blocks.PEPPERCORN_VINE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(DTPHC2Blocks.MAPLE_SPILE_BLOCK.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(DTPHC2Blocks.MAPLE_SPILE_BUCKET_BLOCK.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(DTPHC2Blocks.MAPLE_SPILE_BLOCK.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(DTPHC2Blocks.MAPLE_SPILE_BUCKET_BLOCK.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(DTPHC2Blocks.BANANA_SUCKER_BLOCK.get(), RenderType.cutout());
     }
 
@@ -47,6 +48,12 @@ public class DTPHC2Client {
             ModelHelper.regColorHandler(vineItem, (itemStack, tintIndex) ->
                     itemColors.getColor(new ItemStack(Items.VINE), tintIndex)
             );
+        }
+
+        Block[] spiles = new Block[]{DTPHC2Blocks.MAPLE_SPILE_BLOCK.get(), DTPHC2Blocks.MAPLE_SPILE_BUCKET_BLOCK.get()};
+
+        for (Block spile : spiles){
+            ModelHelper.regColorHandler(spile, ((MapleSpileCommon)spile)::colorMultiplier);
         }
 
     }

@@ -1,0 +1,7 @@
+{
+    "loader": "dynamictrees:branch",
+    "textures": {
+        "bark": "dtphc2:block/branches/dripping_rubber_log",
+        "rings": "dtphc2:block/branches/rubber_log_top"
+    }
+}

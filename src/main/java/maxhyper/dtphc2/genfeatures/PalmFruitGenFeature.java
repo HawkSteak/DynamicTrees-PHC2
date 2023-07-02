@@ -105,9 +105,9 @@ public class PalmFruitGenFeature extends GenFeature {
             Float seasonValue = SeasonHelper.getSeasonValue(context, rootPos);
             Pod pod = configuration.get(POD);
             if (worldGen) {
-                pod.placeDuringWorldGen(world, pos, seasonValue, placeDir.getOpposite());
+                pod.placeDuringWorldGen(world, pos, seasonValue, placeDir.getOpposite(), 8);
             } else {
-                pod.place(world, pos, seasonValue, placeDir.getOpposite());
+                pod.place(world, pos, seasonValue, placeDir.getOpposite(), 8);
             }
         }
     }

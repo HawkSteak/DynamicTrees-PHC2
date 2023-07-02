@@ -1,6 +1,7 @@
 package maxhyper.dtphc2.blocks;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
+import com.ferreusveritas.dynamictrees.block.branch.BranchBlock;
 import com.ferreusveritas.dynamictrees.growthlogic.context.DirectionSelectionContext;
 import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeatureConfiguration;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
@@ -14,10 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -77,6 +75,21 @@ public abstract class MapleSpileCommon extends HorizontalDirectionalBlock {
         GenFeatureConfiguration featureConfig = species.getGenFeatures().stream().filter(fc -> fc.getGenFeature() == DTPHC2GenFeatures.SYRUP_GEN).findFirst().orElse(null);
         if (featureConfig == null) return Items.AIR;
         return ((SyrupGenFeature) DTPHC2GenFeatures.SYRUP_GEN).getSyrupItem(featureConfig);
+    }
+
+    public int colorMultiplier(BlockState state, BlockAndTintGetter level, BlockPos pos, int tintIndex) {
+        if (tintIndex != 0)  return 0;
+        Species species = null;
+        BlockPos treePos = pos.offset(state.getValue(FACING).getOpposite().getNormal());
+        BlockState treeState = level.getBlockState(treePos);
+        if (treeState.getBlock() instanceof BranchBlock branch) {
+            species = branch.getFamily().getCommonSpecies();
+        }
+        if (species == null) return 0;
+
+        GenFeatureConfiguration featureConfig = species.getGenFeatures().stream().filter(fc -> fc.getGenFeature() == DTPHC2GenFeatures.SYRUP_GEN).findFirst().orElse(null);
+        if (featureConfig == null) return 0;
+        return ((SyrupGenFeature) DTPHC2GenFeatures.SYRUP_GEN).getTint(featureConfig);
     }
 
     @Nullable
