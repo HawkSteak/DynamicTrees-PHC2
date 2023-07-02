@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "dtphc2:block/acorn",
+		"fruit": "dtphc2:block/acorn"
+	},
+	"elements": [
+		{
+			"from": [6.8, 12.8, 6.8],
+			"to": [9.2, 16, 9.2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.4, 9, 8.4]},
+			"faces": {
+				"north": {"uv": [4, 5, 7, 9], "texture": "#fruit"},
+				"east": {"uv": [4, 5, 7, 9], "texture": "#fruit"},
+				"south": {"uv": [4, 5, 7, 9], "texture": "#fruit"},
+				"west": {"uv": [4, 5, 7, 9], "texture": "#fruit"},
+				"up": {"uv": [4, 0, 7, 3], "texture": "#fruit"},
+				"down": {"uv": [4, 10, 7, 13], "texture": "#fruit"}
+			}
+		}
+	]
+}

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "dynamictrees:oak_seed"
+    "dynamictrees:oak_seed",
+    "dynamictrees:dark_oak_seed"
   ]
 }

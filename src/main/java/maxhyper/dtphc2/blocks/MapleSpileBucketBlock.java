@@ -11,6 +11,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -27,13 +28,8 @@ import javax.annotation.Nonnull;
 public class MapleSpileBucketBlock extends MapleSpileCommon {
 
     static VoxelShape makeBucketShape() {
-        VoxelShape shape = makeShape();
-        shape = Shapes.join(shape, Block.box(0.25, 0, 0.0625, 0.75, 0.5625, 0.5625), BooleanOp.OR);
-        shape = Shapes.join(shape, Block.box(0.3125, 0.0625, 0.125, 0.6875, 0.5625, 0.5), BooleanOp.ONLY_FIRST);
-        //shape = Shapes.join(shape, Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), BooleanOp.OR);
-        //shape = Shapes.join(shape, Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), BooleanOp.OR);
-        //VoxelShape shape = Shapes.join(Block.box(5, 1, 2, 11, 9, 8), Block.box(4, 0, 1, 12, 9, 9), BooleanOp.OR);
-        return shape;
+        VoxelShape bucket = Shapes.join(Block.box(4, 0, 1, 12, 9, 9), Block.box(5, 1, 2, 11, 9, 8), BooleanOp.ONLY_FIRST);
+        return Shapes.join(bucket, makeShape(), BooleanOp.OR);
     }
 
     public MapleSpileBucketBlock() {
@@ -78,7 +74,7 @@ public class MapleSpileBucketBlock extends MapleSpileCommon {
             if (!world.isClientSide() && !world.restoringBlockSnapshots) {
                 int count = (filling + (filling == maxFilling ? 1 : 0)); //Adds one bonus syrup if collected when its full
                 ItemStack drop = new ItemStack(getSyrupItem(species), count);
-                world.addFreshEntity(new ItemEntity(world, pos.getX()+0.5f, pos.getY()+0.5f, pos.getZ()+0.5f, drop));
+                world.addFreshEntity(new ItemEntity(world, pos.getX()+0.5f, pos.getY()+0.1f, pos.getZ()+0.5f, drop));
             }
             world.playSound(null, pos, SoundEvents.HONEY_DRINK, SoundSource.BLOCKS, 1, 2 - filling / 3f);
             if (filling == maxFilling) world.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 0.5f, 0.8f);
@@ -88,26 +84,19 @@ public class MapleSpileBucketBlock extends MapleSpileCommon {
         return false;
     }
 
-    //TODO
-    // @Override
-//    public ItemStack getPickBlock(BlockState state, HitResult target, IBlockReader world, BlockPos pos, Player player) {
-//        return new ItemStack(Items.BUCKET);
-//    }
+    @Override
+    public Item asItem() {
+        return Items.BUCKET;
+    }
 
-    //TODO: Maybe reimplement these methods idk
-//    @Override
-//    public boolean hasComparatorInputOverride(BlockState state) {
-//        return true;
-//    }
-//
-//    @Override
-//    public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-//        return blockState.getValue(FILLING) * 5;
-//    }
-//
-//    @Override
-//    public BlockRenderLayer getBlockLayer() {
-//        return BlockRenderLayer.CUTOUT_MIPPED;
-//    }
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState pState) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState pBlockState, Level pLevel, BlockPos pPos) {
+        return pBlockState.getValue(FILLING);
+    }
 
 }

@@ -26,6 +26,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -40,15 +41,11 @@ public class DTPHC2Registries {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, DynamicTreesPHC2.MOD_ID);
 
 
-    public static final VoxelShape DRAGON_FRUIT_CACTUS_SAPLING_SHAPE = Block.box(
-            //TODO
-            //new AxisAlignedBB(
+    public static final VoxelShape DRAGON_FRUIT_CACTUS_SAPLING_SHAPE = Shapes.box(
                     0.375f, 0.0f, 0.375f,
                     0.625f, 0.5f, 0.625f);
 
-    public static final VoxelShape BANANA_SAPLING_SHAPE = Block.box(
-            //TODO
-            //new AxisAlignedBB(
+    public static final VoxelShape BANANA_SAPLING_SHAPE = Shapes.box(
                     0.375f, 0.0f, 0.375f,
                     0.625f, 0.9375f, 0.625f);
 

@@ -131,9 +131,9 @@ public class DynamicTreesPHC2 {
 
     private void gatherData(final GatherDataEvent event) {
         GatherDataHelper.gatherAllData(MOD_ID, event,
-                SoilProperties.REGISTRY,
-                Family.REGISTRY,
-                Species.REGISTRY,
+                //SoilProperties.REGISTRY,
+                //Family.REGISTRY,
+                //Species.REGISTRY,
                 LeavesProperties.REGISTRY,
                 Fruit.REGISTRY,
                 Pod.REGISTRY

@@ -36,9 +36,8 @@ public class DTPHC2Blocks {
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
-        RegistryObject<T> toReturn = BLOCKS.register(name, block);
+        return BLOCKS.register(name, block);
         //registerBlockItem(name, toReturn, tab);
-        return toReturn;
     }
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block,

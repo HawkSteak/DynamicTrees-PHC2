@@ -1,7 +1,7 @@
 {
   "family": "spruce",
   "tapering": 0.25,
-  "signal_energy": 18.0,
+  "signal_energy": 10.0,
   "up_probability": 4,
   "lowest_branch_height": 3,
   "growth_rate": 0.9,
@@ -13,30 +13,29 @@
   },
   "seasonal_fruiting_offset": 1,
   "inherit_fruiting_offset_to_fruits": true,
-  "leaves_properties": "spruce",
+  "leaves_properties": "dtphc2:tropical_pine",
   "generate_seed": true,
   "generate_sapling": true,
   "environment_factors" : {
-    "hot": 0.50,
-    "dry": 0.25,
+    "snowy": 0.75,
     "wet": 0.75
   },
-  "perfect_biomes": { "types": [ "conifer", "overworld" ] },
+  "perfect_biomes": { "types": [ "warm", "overworld" ] },
   "primitive_saplings": [
-    { "sapling_block": "pamhc2trees:pinenut_sapling" },
+    { "sapling_block": "pamhc2trees:pinyon_sapling" },
     {
-      "sapling_item": "pamhc2trees:pinenutitem",
+      "sapling_item": "pamhc2trees:pinyonitem",
       "can_craft_seed_to_sapling": false
     }
   ],
   "fruits": [
-    "dtphc2:pinenut"
+    "dtphc2:pinyon"
   ],
   "features": [
     {
       "name": "fruit",
       "properties": {
-        "fruit": "dtphc2:pinenut"
+        "fruit": "dtphc2:pinyon"
       }
     },
     "podzol"

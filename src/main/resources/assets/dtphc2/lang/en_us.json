@@ -128,6 +128,5 @@
   "tooltip.dtphc2.maple_spile_not_filled": "Empty",
   "tooltip.dtphc2.maple_spile_bucket_filling": "Filled: %s",
 
-  "item.pamhc2trees.coconutitem": "Open Coconut",
-  "item.pamhc2trees.maplesyrupitem": "Maple Syrup"
+  "item.pamhc2trees.coconutitem": "Coconut Slice"
 }

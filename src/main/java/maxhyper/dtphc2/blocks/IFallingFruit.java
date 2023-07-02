@@ -15,6 +15,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -45,10 +46,11 @@ public interface IFallingFruit {
             return false;
         }
         if (pos.getY() >= 0 && FallingBlock.isFree(world.getBlockState(pos.below()))) {
-            if (world.isAreaLoaded(pos, 32)) {
+            if (world.isLoaded(pos)) {
                 if (!world.isClientSide()) {
-                    //FallingBlockEntity fallingBlockEntity = getFallingEntity(world, pos, state);
-                    //world.addFreshEntity(fallingBlockEntity);
+                    FallingBlockEntity fallingBlockEntity = getFallingEntity(world, pos, state);
+                    world.addFreshEntity(fallingBlockEntity);
+                    world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
                     return true;
                 }
             }
@@ -56,35 +58,34 @@ public interface IFallingFruit {
         return false;
     }
 
-    //TODO
-//    default FallingBlockEntity getFallingEntity (Level world, BlockPos pos, BlockState state){
-//        //TODO
-//        return new FallingBlockEntity(world, (double)pos.getX() + 0.5D, pos.getY(), (double)pos.getZ() + 0.5D, state){
-//            @Override
-//            public boolean causeFallDamage(float pFallDistance, float pDamageMultiplier, DamageSource source) {
-//                int i = Mth.ceil(pFallDistance - 1.0F);
-//                if (i > 0) {
-//                    List<Entity> list = Lists.newArrayList(this.level.getEntities(this, this.getBoundingBox()));
-//                    for(Entity entity : list) {
-//                        if (entity instanceof LivingEntity){
-//                            entity.hurt(getDamageSource(),
-//                                    (float)Math.min(Mth.floor((float)i * IFallingFruit.fallDamageAmount), IFallingFruit.fallDamageMax));
-//                            level.playSound(null, pos,
-//                                    DTPHC2Registries.FRUIT_BONK.get(), SoundSource.BLOCKS,
-//                                    1.0F, 1.0F);
-//                        }
-//                    }
-//                }
-//                return false;
-//            }
-//
-//            @Nullable
-//            @Override
-//            public ItemEntity spawnAtLocation(@Nonnull ItemLike pItem) {
-//                return this.spawnAtLocation(getDropOnFallItems(pItem, this), 0);
-//            }
-//        };
-//    }
+    default FallingBlockEntity getFallingEntity (Level world, BlockPos pos, BlockState state){
+        return new FallingBlockEntity(world, (double)pos.getX() + 0.5D, pos.getY(), (double)pos.getZ() + 0.5D, state){
+
+            @Override
+            public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
+                int i = (int)Math.ceil(pFallDistance - 1.0F);
+                if (i > 0) {
+                    List<Entity> list = Lists.newArrayList(this.level.getEntities(this, this.getBoundingBox()));
+                    for(Entity entity : list) {
+                        if (entity instanceof LivingEntity){
+                            entity.hurt(getDamageSource(),
+                                    (float)Math.min(Math.floor((float)i * IFallingFruit.fallDamageAmount), IFallingFruit.fallDamageMax) * pMultiplier);
+                            level.playSound(null, pos,
+                                    DTPHC2Registries.FRUIT_BONK.get(), SoundSource.BLOCKS,
+                                    1.0F, 1.0F);
+                        }
+                    }
+                }
+                return false;
+            }
+
+            @Nullable
+            @Override
+            public ItemEntity spawnAtLocation(@Nonnull ItemLike pItem) {
+                return null;
+            }
+        };
+    }
 
     ItemStack getDropOnFallItems(ItemLike item, FallingBlockEntity entity);
     float getRandomFruitFallChance ();

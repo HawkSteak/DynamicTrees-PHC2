@@ -1,5 +1,6 @@
 {
   "type": "dynamictrees:palm",
   "primitive_leaves": "jungle_leaves",
-  "cell_kit": "dynamictrees:palm"
+  "cell_kit": "dynamictrees:palm",
+  "color": "#59C93C"
 }

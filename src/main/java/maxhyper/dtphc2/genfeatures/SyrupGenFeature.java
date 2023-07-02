@@ -23,6 +23,8 @@ public class SyrupGenFeature extends GenFeature {
 
     private static final ConfigurationProperty<Float> BASE_SYRUP_CHANCE = ConfigurationProperty.floatProperty("base_syrup_chance");
     private static final ConfigurationProperty<Float> OUT_OF_SEASON_SYRUP_CHANCE = ConfigurationProperty.floatProperty("out_of_season_syrup_chance");
+    private static final ConfigurationProperty<Float> SEASONAL_OFFSET = ConfigurationProperty.floatProperty("seasonal_offset");
+    private static final ConfigurationProperty<Float> SEASONAL_RANGE = ConfigurationProperty.floatProperty("seasonal_range");
     private static final ConfigurationProperty<Item> SYRUP_ITEM = ConfigurationProperty.item("syrup_item");
 
     public SyrupGenFeature(ResourceLocation registryName) {
@@ -31,7 +33,7 @@ public class SyrupGenFeature extends GenFeature {
 
     @Override
     protected void registerProperties() {
-        this.register(BASE_SYRUP_CHANCE, OUT_OF_SEASON_SYRUP_CHANCE, SYRUP_ITEM);
+        this.register(BASE_SYRUP_CHANCE, OUT_OF_SEASON_SYRUP_CHANCE, SYRUP_ITEM, SEASONAL_OFFSET, SEASONAL_RANGE);
     }
 
     @Nonnull
@@ -40,7 +42,9 @@ public class SyrupGenFeature extends GenFeature {
         return super.createDefaultConfiguration()
                 .with(BASE_SYRUP_CHANCE, 0.05F)
                 .with(OUT_OF_SEASON_SYRUP_CHANCE, 0.001F)
-                .with(SYRUP_ITEM, Items.AIR);
+                .with(SYRUP_ITEM, Items.AIR)
+                .with(SEASONAL_OFFSET, 3.5F)
+                .with(SEASONAL_RANGE, 1.0F);
     }
 
     public Item getSyrupItem(GenFeatureConfiguration config){
@@ -62,7 +66,9 @@ public class SyrupGenFeature extends GenFeature {
     //Update syrup extract rate depending on seasons
     public double getSyrupChance(LevelContext world, BlockPos pos, GenFeatureConfiguration config) {
         Float season = SeasonHelper.getSeasonValue(world, pos);
-        ConfigurationProperty<Float> chanceProp = (season == null || SeasonHelper.isSeasonBetween(season, SeasonHelper.WINTER + 0.5f, SeasonHelper.SPRING + 0.5f)) ? BASE_SYRUP_CHANCE : OUT_OF_SEASON_SYRUP_CHANCE;
+        float offset = config.get(SEASONAL_OFFSET);
+        float range = config.get(SEASONAL_RANGE);
+        ConfigurationProperty<Float> chanceProp = (season == null || SeasonHelper.isSeasonBetween(season,  offset, offset + range)) ? BASE_SYRUP_CHANCE : OUT_OF_SEASON_SYRUP_CHANCE;
         float chance = config.get(chanceProp);
         return clamp(chance, 0.0f, 1.0f);
     }

@@ -38,16 +38,15 @@ public abstract class MapleSpileCommon extends HorizontalDirectionalBlock {
     public static final int maxFilling = 3;
     public static final IntegerProperty FILLING = IntegerProperty.create("filling", 0, maxFilling);
 
-    protected static VoxelShape SHAPE_N;
-    protected static VoxelShape SHAPE_E;
-    protected static VoxelShape SHAPE_S;
-    protected static VoxelShape SHAPE_W;
+    protected VoxelShape SHAPE_N;
+    protected VoxelShape SHAPE_E;
+    protected VoxelShape SHAPE_S;
+    protected VoxelShape SHAPE_W;
 
     protected static VoxelShape makeShape() {
         VoxelShape shape = Shapes.empty();
-        shape = Shapes.join(shape, Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), BooleanOp.OR);
-        shape = Shapes.join(shape, Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375), BooleanOp.OR);
-//        VoxelShape shape = Shapes.or(Block.box(0.4375, 0.625, -0.0625, 0.5625, 0.75, 0.25), Block.box(0.4375, 0.625, 0.25, 0.5625, 0.6875, 0.375));
+        shape = Shapes.join(shape, Block.box(7, 10, -1, 9, 12, 4), BooleanOp.OR);
+        shape = Shapes.join(shape, Block.box(7, 10, 4, 9, 11, 6), BooleanOp.OR);
         return shape;
     }
 
@@ -56,7 +55,10 @@ public abstract class MapleSpileCommon extends HorizontalDirectionalBlock {
 
         int times = (to.ordinal() - from.get2DDataValue() + 4) % 4;
         for (int i = 0; i < times; i++) {
-            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> buffer[1] = Shapes.or(buffer[1], Block.box(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX)));
+            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> {
+                System.out.println("min: "+ maxZ+", "+minX+" | max: "+ minZ+ ", "+ maxX);
+                buffer[1] = Shapes.or(buffer[1], Shapes.box(1- maxZ, minY, minX, 1- minZ, maxY, maxX));
+            });
             buffer[0] = buffer[1];
             buffer[1] = Shapes.empty();
         }

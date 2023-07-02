@@ -15,7 +15,7 @@
   "primitive_sapling": "pamhc2trees:maple_sapling",
   "features": [
     {
-      "name": "dtphc2:syrup_gen",
+      "name": "dtphc2:syrup",
       "properties": {
         "base_syrup_chance": 0.05,
         "out_of_season_syrup_chance": 0.001,

@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.IPlantable;
 
@@ -20,16 +21,16 @@ import javax.annotation.Nonnull;
 
 public class BananaSuckerBlock extends HorizontalDirectionalBlock implements IPlantable {
 
-    protected static final VoxelShape SHAPE_E = Block.box(//new AxisAlignedBB(
+    protected static final VoxelShape SHAPE_E = Shapes.box(//new AxisAlignedBB(
             0 /16f,0  /16f,6  /16f,
             4 /16f,15 /16f,10 /16f);
-    protected static final VoxelShape SHAPE_W = Block.box(//new AxisAlignedBB(
+    protected static final VoxelShape SHAPE_W = Shapes.box(//new AxisAlignedBB(
             12  /16f,0 /16f, 6  /16f,
             16 /16f,15 /16f,10 /16f);
-    protected static final VoxelShape SHAPE_N = Block.box(//new AxisAlignedBB(
+    protected static final VoxelShape SHAPE_N = Shapes.box(//new AxisAlignedBB(
             6  /16f,0  /16f,12  /16f,
             10 /16f,15 /16f,16 /16f);
-    protected static final VoxelShape SHAPE_S = Block.box(//new AxisAlignedBB(
+    protected static final VoxelShape SHAPE_S = Shapes.box(//new AxisAlignedBB(
             6  /16f,0  /16f,0 /16f,
             10 /16f,15 /16f,4 /16f);
 
