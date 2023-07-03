@@ -1,6 +1,6 @@
 {
   "primitive_leaves": "minecraft:jungle_leaves",
-  "smother": 6,
-  "cell_kit": "dynamictrees:conifer",
+  "light_requirement": 12,
+  "cell_kit": "dynamictrees:dark_oak",
   "color": "@spruce"
 }

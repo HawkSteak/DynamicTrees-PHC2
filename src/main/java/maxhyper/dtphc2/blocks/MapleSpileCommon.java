@@ -77,18 +77,19 @@ public abstract class MapleSpileCommon extends HorizontalDirectionalBlock {
         return ((SyrupGenFeature) DTPHC2GenFeatures.SYRUP_GEN).getSyrupItem(featureConfig);
     }
 
+    //For now we cannot get the exact species, so only the common species' tint can be used
     public int colorMultiplier(BlockState state, BlockAndTintGetter level, BlockPos pos, int tintIndex) {
-        if (tintIndex != 0)  return 0;
+        if (tintIndex != 0)  return 1;
         Species species = null;
         BlockPos treePos = pos.offset(state.getValue(FACING).getOpposite().getNormal());
         BlockState treeState = level.getBlockState(treePos);
         if (treeState.getBlock() instanceof BranchBlock branch) {
             species = branch.getFamily().getCommonSpecies();
         }
-        if (species == null) return 0;
+        if (species == null) return 1;
 
         GenFeatureConfiguration featureConfig = species.getGenFeatures().stream().filter(fc -> fc.getGenFeature() == DTPHC2GenFeatures.SYRUP_GEN).findFirst().orElse(null);
-        if (featureConfig == null) return 0;
+        if (featureConfig == null) return 0xFF00FF; //Bright purple to show that the genfeature is missing
         return ((SyrupGenFeature) DTPHC2GenFeatures.SYRUP_GEN).getTint(featureConfig);
     }
 

@@ -50,10 +50,14 @@
   "item.dtphc2.walnut_seed": "Germinated Walnut",
   "item.dtphc2.spiderweb_seed": "Infested Oak Acorn",
   "item.dtphc2.tamarind_seed": "Tamarind Seed",
+  "item.dtphc2.mesquite_seed": "Mesquite Seeds",
+  "item.dtphc2.pinyon_seed": "Pinyon Cone",
+  "item.dtphc2.eucalyptus_seed": "Eucalyptus Capsule",
 
   "item.dtphc2.cinnamon_seed": "Cinnamon Seed",
   "item.dtphc2.maple_seed": "Sugar Maple Samara",
   "item.dtphc2.paperbark_seed": "Paperbark Seeds",
+  "item.dtphc2.rubber_seed": "Rubber Tree Pod",
 
   "species.dtphc2.fruit": "fruit",
   "species.dtphc2.almond": "Almond",
@@ -98,10 +102,14 @@
   "species.dtphc2.walnut": "Walnut",
   "species.dtphc2.spiderweb": "Infested Oak",
   "species.dtphc2.tamarind": "Tamarind",
+  "species.dtphc2.mesquite": "Mesquite",
+  "species.dtphc2.pinyon": "Pinyon Pine",
+  "species.dtphc2.eucalyptus": "Eucalyptus",
 
   "species.dtphc2.cinnamon": "Cinnamon",
   "species.dtphc2.maple": "Sugar Maple",
   "species.dtphc2.paperbark": "Paperbark",
+  "species.dtphc2.rubber": "Rubber",
 
   "species.dtphc2.vine_passion_fruit": "Passion Fruit",
   "species.dtphc2.vine_peppercorn": "Peppercorn",
@@ -112,6 +120,7 @@
   "block.dtphc2.paperbark_branch": "Paper Bark Tree",
   "block.dtphc2.dragon_fruit_branch": "Dragon Fruit Cactus",
   "block.dtphc2.palm_branch": "Palm Tree",
+  "block.dtphc2.rubber_branch": "Rubber Tree",
 
   "block.dtphc2.maple_spile": "Spile",
   "block.dtphc2.maple_spile_bucket": "Spile with Bucket",
@@ -128,5 +137,7 @@
   "tooltip.dtphc2.maple_spile_not_filled": "Empty",
   "tooltip.dtphc2.maple_spile_bucket_filling": "Filled: %s",
 
-  "item.pamhc2trees.coconutitem": "Coconut Slice"
+  "item.pamhc2trees.coconutitem": "Coconut Slice",
+  "item.pamhc2trees.maplesyrupitem": "Maple Syrup",
+  "item.pamhc2trees.eucalyptusitem": "Eucalyptus Leaves"
 }

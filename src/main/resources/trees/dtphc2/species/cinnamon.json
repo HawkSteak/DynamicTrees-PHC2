@@ -1,4 +1,7 @@
 {
+  "type": "dtphc2:fruit_log",
+  "log_drop_item": "pamhc2trees:cinnamonitem",
+  "log_drop_multiplier": 4.5,
   "family": "dtphc2:cinnamon",
   "tapering": 0.1,
   "signal_energy": 14.0,

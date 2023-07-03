@@ -1,6 +1,6 @@
 {
   "family": "spruce",
-  "tapering": 0.25,
+  "tapering": 0.4,
   "signal_energy": 10.0,
   "up_probability": 4,
   "lowest_branch_height": 3,
@@ -8,7 +8,7 @@
   "growth_logic_kit": {
     "name": "conifer",
     "properties": {
-      "energy_divisor": 4
+      "energy_divisor": 2
     }
   },
   "seasonal_fruiting_offset": 1,
@@ -35,7 +35,8 @@
     {
       "name": "fruit",
       "properties": {
-        "fruit": "dtphc2:pinyon"
+        "fruit": "dtphc2:pinyon",
+        "fruiting_radius": 4
       }
     },
     "podzol"

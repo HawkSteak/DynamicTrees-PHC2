@@ -1,4 +1,5 @@
 {
+  "only_if_loaded": ".",
   "item_stack": "pamhc2trees:eucalyptusitem",
   "block_shapes": [
     { "function": "fruit", "parameters": { "radius": 1, "height": 1, "stem_length": 0, "fraction": 16 } },

@@ -1,37 +1,29 @@
 package maxhyper.dtphc2.init;
 
 import com.ferreusveritas.dynamictrees.api.cell.CellKit;
-import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
 import com.ferreusveritas.dynamictrees.api.registry.TypeRegistryEvent;
 import com.ferreusveritas.dynamictrees.api.worldgen.FeatureCanceller;
 import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
-import com.ferreusveritas.dynamictrees.init.DTRegistries;
 import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
 import com.ferreusveritas.dynamictrees.systems.genfeature.GenFeature;
 import com.ferreusveritas.dynamictrees.systems.pod.Pod;
 import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.ferreusveritas.dynamictrees.util.CommonVoxelShapes;
-import com.pam.pamhc2trees.init.ItemRegistry;
 import maxhyper.dtphc2.DynamicTreesPHC2;
 import maxhyper.dtphc2.blocks.*;
 import maxhyper.dtphc2.cells.DTPHC2CellKits;
 import maxhyper.dtphc2.fruits.*;
 import maxhyper.dtphc2.genfeatures.DTPHC2GenFeatures;
-import maxhyper.dtphc2.items.FruitVineItem;
-import maxhyper.dtphc2.items.RipePeppercornItem;
+import maxhyper.dtphc2.trees.FruitLogSpecies;
 import maxhyper.dtphc2.trees.GenOnExtraSoilSpecies;
 import maxhyper.dtphc2.trees.PaperbarkFamily;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
@@ -91,6 +83,7 @@ public class DTPHC2Registries {
 
     @SubscribeEvent
     public static void registerSpeciesType(final TypeRegistryEvent<Species> event) {
+        event.registerType(DynamicTreesPHC2.resLoc("fruit_log"), FruitLogSpecies.TYPE);
         event.registerType(DynamicTreesPHC2.resLoc("generates_on_extra_soil"), GenOnExtraSoilSpecies.TYPE);
     }
 

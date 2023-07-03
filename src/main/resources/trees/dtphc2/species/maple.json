@@ -1,4 +1,8 @@
 {
+  "type": "dtphc2:fruit_log",
+  "log_drop_item": "pamhc2trees:maplesyrupitem",
+  "log_drop_multiplier": 0.8,
+  "log_drop_fake_log": "dark_oak_log",
   "family": "dtphc2:maple",
   "tapering": 0.3,
   "signal_energy": 14.0,
