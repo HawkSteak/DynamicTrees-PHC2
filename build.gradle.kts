@@ -180,33 +180,29 @@ tasks.withType(CurseUploadTask::class.java) {
 }
 
 curseforge {
-    if (!enablePublishing()) {
-        project.logger.log(LogLevel.WARN, "API Key, file type, or project ID for CurseForge not detected; uploading " +
-                "will be disabled.")
-        return@curseforge
-    }
+    if (project.hasProperty("curseApiKey") && project.hasProperty("curseFileType")) {
+        apiKey = property("curseApiKey")
 
-    apiKey = property("curseApiKey")
+        project {
+            id = property("curseProjectId")
 
-    project {
-        id = property("projectId")
+            addGameVersion(mcVersion)
 
-        addGameVersion("1.16.4")
-        addGameVersion(mcVersion)
+            changelog = file("build/changelog.txt")
+            changelogType = "markdown"
+            releaseType = property("curseFileType")
 
-        changelog = readChangelog() ?: "No changelog provided."
-        changelogType = "markdown"
-        releaseType = property("curseFileType")
+            addArtifact(tasks.findByName("sourcesJar"))
 
-        addArtifact(tasks.findByName("sourcesJar"))
-
-        mainArtifact(tasks.findByName("jar")) {
-            relations {
-                requiredDependency("dynamictrees")
-                requiredDependency("oh-the-biomes-youll-go")
-                optionalDependency("dynamictreesplus")
+            mainArtifact(tasks.findByName("jar")) {
+                relations {
+                    requiredDependency("dynamictrees")
+                    requiredDependency("pams-harvestcraft-2-trees")
+                }
             }
         }
+    } else {
+        project.logger.log(LogLevel.WARN, "API Key and file type for CurseForge not detected; uploading will be disabled.")
     }
 }
 
