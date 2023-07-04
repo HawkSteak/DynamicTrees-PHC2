@@ -1,6 +1,6 @@
 package maxhyper.dtphc2.init;
 
-import com.ferreusveritas.dynamictrees.api.cell.CellKit;
+import com.ferreusveritas.dynamictrees.api.registry.RegistryEvent;
 import com.ferreusveritas.dynamictrees.api.registry.TypeRegistryEvent;
 import com.ferreusveritas.dynamictrees.api.worldgen.FeatureCanceller;
 import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
@@ -10,9 +10,10 @@ import com.ferreusveritas.dynamictrees.systems.pod.Pod;
 import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.ferreusveritas.dynamictrees.util.CommonVoxelShapes;
+import com.pam.pamhc2trees.worldgen.*;
 import maxhyper.dtphc2.DynamicTreesPHC2;
-import maxhyper.dtphc2.blocks.*;
-import maxhyper.dtphc2.cells.DTPHC2CellKits;
+import maxhyper.dtphc2.blocks.DragonFruitLeavesProperties;
+import maxhyper.dtphc2.canceller.DTPHC2TreeFeatureCanceller;
 import maxhyper.dtphc2.fruits.*;
 import maxhyper.dtphc2.genfeatures.DTPHC2GenFeatures;
 import maxhyper.dtphc2.trees.FruitLogSpecies;
@@ -33,7 +34,7 @@ import net.minecraftforge.registries.RegistryObject;
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class DTPHC2Registries {
 
-    public static final TagKey<Block> CAN_BE_SPILED = TagKey.create(Registry.BLOCK_REGISTRY, DynamicTreesPHC2.resLoc("can_be_spiled"));
+    public static final TagKey<Block> CAN_BE_SPILED = TagKey.create(Registry.BLOCK_REGISTRY, DynamicTreesPHC2.location("can_be_spiled"));
 
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, DynamicTreesPHC2.MOD_ID);
 
@@ -49,42 +50,42 @@ public class DTPHC2Registries {
     public static final RegistryObject<SoundEvent> FRUIT_BONK = registerSound("falling_fruit.bonk");
 
     public static void setup() {
-        CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.resLoc("dragon_fruit_cactus").toString(), DRAGON_FRUIT_CACTUS_SAPLING_SHAPE);
-        CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.resLoc("banana_sapling").toString(), BANANA_SAPLING_SHAPE);
+        CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.location("dragon_fruit_cactus").toString(), DRAGON_FRUIT_CACTUS_SAPLING_SHAPE);
+        CommonVoxelShapes.SHAPES.put(DynamicTreesPHC2.location("banana_sapling").toString(), BANANA_SAPLING_SHAPE);
 
     }
 
     public static RegistryObject<SoundEvent> registerSound (String name){
-        return SOUNDS.register(name, ()-> new SoundEvent(DynamicTreesPHC2.resLoc(name)));
+        return SOUNDS.register(name, ()-> new SoundEvent(DynamicTreesPHC2.location(name)));
     }
 
     @SubscribeEvent
     public static void registerFruitType(final TypeRegistryEvent<Fruit> event) {
-        event.registerType(DynamicTreesPHC2.resLoc("offset_down"), OffsetFruit.TYPE);
-        event.registerType(DynamicTreesPHC2.resLoc("falling_fruit"), FallingFruit.TYPE);
-        event.registerType(DynamicTreesPHC2.resLoc("cobweb"), CobwebFruit.TYPE);
+        event.registerType(DynamicTreesPHC2.location("offset_down"), OffsetFruit.TYPE);
+        event.registerType(DynamicTreesPHC2.location("falling_fruit"), FallingFruit.TYPE);
+        event.registerType(DynamicTreesPHC2.location("cobweb"), CobwebFruit.TYPE);
     }
 
     @SubscribeEvent
     public static void registerPodType(final TypeRegistryEvent<Pod> event) {
-        event.registerType(DynamicTreesPHC2.resLoc("palm"), PalmPod.TYPE);
-        event.registerType(DynamicTreesPHC2.resLoc("falling_palm"), FallingPalmPod.TYPE);
+        event.registerType(DynamicTreesPHC2.location("palm"), PalmPod.TYPE);
+        event.registerType(DynamicTreesPHC2.location("falling_palm"), FallingPalmPod.TYPE);
     }
 
     @SubscribeEvent
     public static void registerLeavesPropertiesType(final TypeRegistryEvent<LeavesProperties> event) {
-        event.registerType(DynamicTreesPHC2.resLoc("dragon_fruit"), DragonFruitLeavesProperties.TYPE);
+        event.registerType(DynamicTreesPHC2.location("dragon_fruit"), DragonFruitLeavesProperties.TYPE);
     }
 
     @SubscribeEvent
     public static void registerFamilyType(final TypeRegistryEvent<Family> event) {
-        event.registerType(DynamicTreesPHC2.resLoc("paperbark"), PaperbarkFamily.TYPE);
+        event.registerType(DynamicTreesPHC2.location("paperbark"), PaperbarkFamily.TYPE);
     }
 
     @SubscribeEvent
     public static void registerSpeciesType(final TypeRegistryEvent<Species> event) {
-        event.registerType(DynamicTreesPHC2.resLoc("fruit_log"), FruitLogSpecies.TYPE);
-        event.registerType(DynamicTreesPHC2.resLoc("generates_on_extra_soil"), GenOnExtraSoilSpecies.TYPE);
+        event.registerType(DynamicTreesPHC2.location("fruit_log"), FruitLogSpecies.TYPE);
+        event.registerType(DynamicTreesPHC2.location("generates_on_extra_soil"), GenOnExtraSoilSpecies.TYPE);
     }
 
     @SubscribeEvent
@@ -92,14 +93,12 @@ public class DTPHC2Registries {
         DTPHC2GenFeatures.register(event.getRegistry());
     }
 
-    @SubscribeEvent
-    public static void onCellKitRegistry (final com.ferreusveritas.dynamictrees.api.registry.RegistryEvent<CellKit> event) {
-        DTPHC2CellKits.register(event.getRegistry());
-    }
+    public static final FeatureCanceller TREE_CANCELLER = new DTPHC2TreeFeatureCanceller(DynamicTreesPHC2.location("tree"),
+            ColdFruitTreeFeature.class, ColdLogFruitTreeFeature.class, TemperateFruitTreeFeature.class, WarmFruitTreeFeature.class, WarmLogFruitTreeFeature.class);
 
     @SubscribeEvent
-    public static void onFeatureCancellerRegistry(final com.ferreusveritas.dynamictrees.api.registry.RegistryEvent<FeatureCanceller> event) {
-
+    public static void onFeatureCancellerRegistry(final RegistryEvent<FeatureCanceller> event) {
+        event.getRegistry().registerAll(TREE_CANCELLER);
     }
 
 }

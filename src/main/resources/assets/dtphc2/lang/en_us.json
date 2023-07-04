@@ -139,5 +139,7 @@
 
   "item.pamhc2trees.coconutitem": "Coconut Slice",
   "item.pamhc2trees.maplesyrupitem": "Maple Syrup",
-  "item.pamhc2trees.eucalyptusitem": "Eucalyptus Leaves"
+  "item.pamhc2trees.eucalyptusitem": "Eucalyptus Leaves",
+  "item.pamhc2trees.starfruititem": "Starfruit Slice",
+  "item.pamhc2trees.vanillabeanitem": "Vanilla Beans"
 }

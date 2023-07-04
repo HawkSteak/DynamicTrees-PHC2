@@ -9,7 +9,7 @@
           "conditions": [
             {
               "condition": "minecraft:block_state_property",
-              "block": "dtphc2:pistachio_fruit",
+              "block": "dtphc2:pistachio",
               "properties": {
                 "age": "3"
               }
@@ -39,11 +39,6 @@
           "name": "pamhc2trees:pistachioitem"
         }
       ]
-    }
-  ],
-  "functions": [
-    {
-      "function": "minecraft:explosion_decay"
     }
   ]
 }

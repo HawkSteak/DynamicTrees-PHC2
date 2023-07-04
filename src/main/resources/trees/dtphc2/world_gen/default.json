@@ -50,7 +50,9 @@
           "dtphc2:plum": 1,
           "dtphc2:walnut": 1,
           "dtphc2:hazelnut": 1,
-          "dtphc2:soursop": 1
+          "dtphc2:soursop": 1,
+          "dtphc2:mesquite": 1,
+          "dtphc2:pinyon": 1
         }
       }
     }
@@ -70,7 +72,8 @@
           "dtphc2:gooseberry": 2,
           "dtphc2:plum": 2,
           "dtphc2:pawpaw": 2,
-          "dtphc2:lime": 1
+          "dtphc2:lime": 1,
+          "dtphc2:mesquite": 1
         }
       }
     }
@@ -135,7 +138,9 @@
           "dtphc2:vine_passion_fruit": 4,
           "dtphc2:vine_vanilla": 4,
           "dtphc2:date": 1,
-          "dtphc2:mango": 1
+          "dtphc2:mango": 1,
+          "dtphc2:rubber": 2,
+          "dtphc2:eucalyptus": 2
         }
       }
     }
@@ -149,7 +154,7 @@
       "species": {
         "method": "splice_before",
         "random": {
-          "...": 250,
+          "...": 200,
           "dtphc2:apricot": 1,
           "dtphc2:cashew": 1,
           "dtphc2:cinnamon": 1,
@@ -162,7 +167,8 @@
           "dtphc2:pistachio": 1,
           "dtphc2:pomegranate": 1,
           "dtphc2:vine_peppercorn": 1,
-          "dtphc2:vine_vanilla": 1
+          "dtphc2:vine_vanilla": 1,
+          "dtphc2:pinyon": 2
         }
       }
     }
@@ -196,7 +202,8 @@
           "dtphc2:rambutan": 3,
           "dtphc2:durian": 3,
           "dtphc2:papaya": 1,
-          "dtphc2:vine_passion_fruit": 1
+          "dtphc2:vine_passion_fruit": 1,
+          "dtphc2:rubber": 1
         }
       }
     }

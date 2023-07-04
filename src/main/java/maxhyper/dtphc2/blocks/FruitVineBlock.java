@@ -6,11 +6,13 @@ import com.ferreusveritas.dynamictrees.util.LevelContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -61,7 +63,7 @@ public class FruitVineBlock extends VineBlock {
 
     public FruitVineBlock() {
         super(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().strength(0.2F).sound(SoundType.VINE));
-        this.registerDefaultState(this.stateDefinition.any().setValue(ageProperty, 0));
+        this.registerDefaultState(defaultBlockState().setValue(ageProperty, 0));
     }
 
     public void setAge(Level world, BlockPos pos, BlockState state, int age, boolean destroy) {
@@ -275,7 +277,7 @@ public class FruitVineBlock extends VineBlock {
 
     public static boolean isAcceptableNeighbour(BlockGetter pBlockReader, BlockPos pLevel, Direction pNeighborPos) {
         BlockState blockstate = pBlockReader.getBlockState(pLevel);
-        return Block.isFaceFull(blockstate.getCollisionShape(pBlockReader, pLevel), pNeighborPos.getOpposite()) || TreeHelper.isBranch(blockstate);
+        return Block.isFaceFull(blockstate.getCollisionShape(pBlockReader, pLevel), pNeighborPos.getOpposite()) || blockstate.is(BlockTags.LEAVES) || TreeHelper.isBranch(blockstate);
     }
 
     @Override

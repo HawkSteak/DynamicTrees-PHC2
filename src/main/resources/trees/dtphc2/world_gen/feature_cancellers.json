@@ -1,0 +1,10 @@
+[
+  {
+    "select": { "types_or": [ "coniferous", "cold", "hills", "forest", "spooky", "jungle", "ocean", "swamp" ] },
+    "cancellers": {
+      "types": [ "dtphc2:tree" ],
+      "namespaces": ["pamhc2trees"]
+    }
+  }
+
+]

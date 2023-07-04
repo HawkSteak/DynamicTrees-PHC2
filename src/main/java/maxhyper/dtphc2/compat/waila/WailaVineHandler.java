@@ -17,8 +17,7 @@ public class WailaVineHandler implements IComponentProvider {
     @Override
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig iPluginConfig) {
         if (accessor.getTooltipPosition() != TooltipPosition.BODY) return;
-        if (accessor.getBlock() instanceof FruitVineBlock) {
-            FruitVineBlock fruitBlock = (FruitVineBlock) accessor.getBlock();
+        if (accessor.getBlock() instanceof FruitVineBlock fruitBlock) {
             float ageAsPercentage = fruitBlock.getAge(accessor.getBlockState()) * 100F / fruitBlock.getMatureAge();
             tooltip.add(new TranslatableComponent(
                     "tooltip.waila.crop_growth",

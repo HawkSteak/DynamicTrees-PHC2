@@ -9,7 +9,7 @@ import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
 import com.ferreusveritas.dynamictrees.systems.pod.Pod;
 import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
-import com.pam.pamhc2trees.config.EnableConfig;
+import com.pam.pamhc2trees.init.WorldGenRegistry;
 import com.pam.pamhc2trees.init.ItemRegistry;
 import maxhyper.dtphc2.init.DTPHC2Blocks;
 import maxhyper.dtphc2.compat.DTPConfig;
@@ -62,64 +62,57 @@ public class DynamicTreesPHC2 {
     }
 
     private void commonSetup(final FMLConstructModEvent event) {
-        if (DTConfigs.WORLD_GEN.get()) {
-            ForgeConfigSpec.BooleanValue[] test = {
-                    EnableConfig.apple_worldgen,
-                    EnableConfig.avocado_worldgen,
-                    EnableConfig.candlenut_worldgen,
-                    EnableConfig.cherry_worldgen,
-                    EnableConfig.chestnut_worldgen,
-                    EnableConfig.gooseberry_worldgen,
-                    EnableConfig.lemon_worldgen,
-                    EnableConfig.nutmeg_worldgen,
-                    EnableConfig.orange_worldgen,
-                    EnableConfig.peach_worldgen,
-                    EnableConfig.pear_worldgen,
-                    EnableConfig.plum_worldgen,
-                    EnableConfig.walnut_worldgen,
-                    EnableConfig.spiderweb_worldgen,
-                    EnableConfig.hazelnut_worldgen,
-                    EnableConfig.pawpaw_worldgen,
-                    EnableConfig.soursop_worldgen,
-                    EnableConfig.almond_worldgen,
-                    EnableConfig.apricot_worldgen,
-                    EnableConfig.banana_worldgen,
-                    EnableConfig.cashew_worldgen,
-                    EnableConfig.cinnamon_worldgen,
-                    EnableConfig.coconut_worldgen,
-                    EnableConfig.date_worldgen,
-                    EnableConfig.dragonfruit_worldgen,
-                    EnableConfig.durian_worldgen,
-                    EnableConfig.fig_worldgen,
-                    EnableConfig.grapefruit_worldgen,
-                    EnableConfig.lime_worldgen,
-                    EnableConfig.mango_worldgen,
-                    EnableConfig.olive_worldgen,
-                    EnableConfig.papaya_worldgen,
-                    EnableConfig.paperbark_worldgen,
-                    EnableConfig.pecan_worldgen,
-                    EnableConfig.peppercorn_worldgen,
-                    EnableConfig.persimmon_worldgen,
-                    EnableConfig.pistachio_worldgen,
-                    EnableConfig.pomegranate_worldgen,
-                    EnableConfig.starfruit_worldgen,
-                    EnableConfig.vanillabean_worldgen,
-                    EnableConfig.breadfruit_worldgen,
-                    EnableConfig.guava_worldgen,
-                    EnableConfig.jackfruit_worldgen,
-                    EnableConfig.lychee_worldgen,
-                    EnableConfig.passionfruit_worldgen,
-                    EnableConfig.rambutan_worldgen,
-                    EnableConfig.tamarind_worldgen,
-                    EnableConfig.maple_worldgen,
-                    EnableConfig.pinenut_worldgen,
-            };
-
-            for (ForgeConfigSpec.BooleanValue v : test) {
-                //v.set(false);
-                //v.save();
-            }
-        }
+//        if (DTConfigs.WORLD_GEN.get()) {
+//            WorldGenRegistry.apple_worldgen = null;
+//            WorldGenRegistry.avocado_worldgen = null;
+//            WorldGenRegistry.candlenut_worldgen = null;
+//            WorldGenRegistry.cherry_worldgen = null;
+//            WorldGenRegistry.chestnut_worldgen = null;
+//            WorldGenRegistry.gooseberry_worldgen = null;
+//            WorldGenRegistry.lemon_worldgen = null;
+//            WorldGenRegistry.nutmeg_worldgen = null;
+//            WorldGenRegistry.orange_worldgen = null;
+//            WorldGenRegistry.peach_worldgen = null;
+//            WorldGenRegistry.pear_worldgen = null;
+//            WorldGenRegistry.plum_worldgen = null;
+//            WorldGenRegistry.walnut_worldgen = null;
+//            WorldGenRegistry.spiderweb_worldgen = null;
+//            WorldGenRegistry.hazelnut_worldgen = null;
+//            WorldGenRegistry.pawpaw_worldgen = null;
+//            WorldGenRegistry.soursop_worldgen = null;
+//            WorldGenRegistry.almond_worldgen = null;
+//            WorldGenRegistry.apricot_worldgen = null;
+//            WorldGenRegistry.banana_worldgen = null;
+//            WorldGenRegistry.cashew_worldgen = null;
+//            WorldGenRegistry.cinnamon_worldgen = null;
+//            WorldGenRegistry.coconut_worldgen = null;
+//            WorldGenRegistry.date_worldgen = null;
+//            WorldGenRegistry.dragonfruit_worldgen = null;
+//            WorldGenRegistry.durian_worldgen = null;
+//            WorldGenRegistry.fig_worldgen = null;
+//            WorldGenRegistry.grapefruit_worldgen = null;
+//            WorldGenRegistry.lime_worldgen = null;
+//            WorldGenRegistry.mango_worldgen = null;
+//            WorldGenRegistry.olive_worldgen = null;
+//            WorldGenRegistry.papaya_worldgen = null;
+//            WorldGenRegistry.paperbark_worldgen = null;
+//            WorldGenRegistry.pecan_worldgen = null;
+//            WorldGenRegistry.peppercorn_worldgen = null;
+//            WorldGenRegistry.persimmon_worldgen = null;
+//            WorldGenRegistry.pistachio_worldgen = null;
+//            WorldGenRegistry.pomegranate_worldgen = null;
+//            WorldGenRegistry.starfruit_worldgen = null;
+//            WorldGenRegistry.vanillabean_worldgen = null;
+//            WorldGenRegistry.breadfruit_worldgen = null;
+//            WorldGenRegistry.guava_worldgen = null;
+//            WorldGenRegistry.jackfruit_worldgen = null;
+//            WorldGenRegistry.lychee_worldgen = null;
+//            WorldGenRegistry.passionfruit_worldgen = null;
+//            WorldGenRegistry.rambutan_worldgen = null;
+//            WorldGenRegistry.tamarind_worldgen = null;
+//            WorldGenRegistry.maple_worldgen = null;
+//            WorldGenRegistry.pinenut_worldgen = null;
+//        }
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
@@ -140,7 +133,7 @@ public class DynamicTreesPHC2 {
         );
     }
 
-    public static ResourceLocation resLoc(final String path) {
+    public static ResourceLocation location(final String path) {
         return new ResourceLocation(MOD_ID, path);
     }
 

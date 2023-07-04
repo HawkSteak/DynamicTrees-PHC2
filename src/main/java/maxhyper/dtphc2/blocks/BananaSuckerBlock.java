@@ -85,7 +85,7 @@ public class BananaSuckerBlock extends HorizontalDirectionalBlock implements IPl
 
     @Override
     public Item asItem() {
-        Item item = ForgeRegistries.ITEMS.getValue(DynamicTreesPHC2.resLoc("banana_seed"));
+        Item item = ForgeRegistries.ITEMS.getValue(DynamicTreesPHC2.location("banana_seed"));
         if (item == null) return Items.AIR;
         return item;
     }
