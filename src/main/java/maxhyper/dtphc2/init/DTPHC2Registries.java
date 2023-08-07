@@ -20,6 +20,7 @@ import maxhyper.dtphc2.trees.FruitLogSpecies;
 import maxhyper.dtphc2.trees.GenOnExtraSoilSpecies;
 import maxhyper.dtphc2.trees.PaperbarkFamily;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -94,7 +95,7 @@ public class DTPHC2Registries {
     }
 
     public static final FeatureCanceller TREE_CANCELLER = new DTPHC2TreeFeatureCanceller(DynamicTreesPHC2.location("tree"),
-            ColdFruitTreeFeature.class, ColdLogFruitTreeFeature.class, TemperateFruitTreeFeature.class, WarmFruitTreeFeature.class, WarmLogFruitTreeFeature.class);
+            ConfiguredFeatures.CONFIGURED_FEATURES.getEntries().stream().map(RegistryObject::getId).toArray(ResourceLocation[]::new));
 
     @SubscribeEvent
     public static void onFeatureCancellerRegistry(final RegistryEvent<FeatureCanceller> event) {
