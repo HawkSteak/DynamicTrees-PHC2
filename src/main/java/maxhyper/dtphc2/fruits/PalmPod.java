@@ -12,8 +12,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Random;
-
 public class PalmPod extends Pod {
 
     public static final TypedRegistry.EntryType<Pod> TYPE = TypedRegistry.newType(PalmPod::new);

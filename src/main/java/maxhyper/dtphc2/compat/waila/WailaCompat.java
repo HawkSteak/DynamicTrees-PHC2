@@ -2,7 +2,7 @@ package maxhyper.dtphc2.compat.waila;
 
 import maxhyper.dtphc2.blocks.FruitVineBlock;
 import maxhyper.dtphc2.blocks.MapleSpileCommon;
-import mcp.mobius.waila.api.*;
+import snownee.jade.api.*;
 
 @WailaPlugin
 public class WailaCompat implements IWailaPlugin {
@@ -10,14 +10,14 @@ public class WailaCompat implements IWailaPlugin {
     @SuppressWarnings("UnstableApiUsage")
     @Override
     public void registerClient(IWailaClientRegistration registration) {
-        registration.registerComponentProvider(WailaVineHandler.INSTANCE, TooltipPosition.BODY, FruitVineBlock.class);
-        registration.registerComponentProvider(WailaSpileHandler.INSTANCE, TooltipPosition.BODY, MapleSpileCommon.class);
-        registration.registerIconProvider(WailaSpileHandler.INSTANCE, MapleSpileCommon.class);
+        registration.registerBlockComponent(WailaVineHandler.INSTANCE, FruitVineBlock.class);
+        registration.registerBlockComponent(WailaSpileHandler.INSTANCE, MapleSpileCommon.class);
+        registration.registerBlockIcon(WailaSpileHandler.INSTANCE, MapleSpileCommon.class);
     }
 
     @SuppressWarnings("removal")
     @Override
-    public void register(IRegistrar registrar) {
+    public void register(IWailaCommonRegistration registrar) {
         //registrar.registerStackProvider(new WailaSpileHandler(), MapleSpileCommon.class);
     }
 

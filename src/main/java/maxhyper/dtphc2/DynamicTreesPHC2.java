@@ -9,8 +9,7 @@ import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
 import com.ferreusveritas.dynamictrees.systems.pod.Pod;
 import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
-import com.pam.pamhc2trees.init.WorldGenRegistry;
-import com.pam.pamhc2trees.init.ItemRegistry;
+import com.pam.pamhc2trees.init.ItemRegistration;
 import maxhyper.dtphc2.init.DTPHC2Blocks;
 import maxhyper.dtphc2.compat.DTPConfig;
 import maxhyper.dtphc2.compat.DTPConfigProxy;
@@ -30,7 +29,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.data.event.GatherDataEvent;
 
 @Mod(DynamicTreesPHC2.MOD_ID)
 @Mod.EventBusSubscriber(modid = DynamicTreesPHC2.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -117,9 +116,9 @@ public class DynamicTreesPHC2 {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         DTPHC2Client.setup();
-        DTPHC2Blocks.PASSION_FRUIT_VINE.get().setFruitStack(new ItemStack(ItemRegistry.passionfruititem.get()));
-        DTPHC2Blocks.VANILLA_VINE.get().setFruitStack(new ItemStack(ItemRegistry.vanillabeanitem.get()));
-        DTPHC2Blocks.PEPPERCORN_VINE.get().setFruitStack(new ItemStack(ItemRegistry.peppercornitem.get())).setOverripeFruitStack(new ItemStack(DTPHC2Items.RIPE_PEPPERCORN_ITEM.get()));
+        DTPHC2Blocks.PASSION_FRUIT_VINE.get().setFruitStack(new ItemStack(ItemRegistration.passionfruititem.get()));
+        DTPHC2Blocks.VANILLA_VINE.get().setFruitStack(new ItemStack(ItemRegistration.vanillabeanitem.get()));
+        DTPHC2Blocks.PEPPERCORN_VINE.get().setFruitStack(new ItemStack(ItemRegistration.peppercornitem.get())).setOverripeFruitStack(new ItemStack(DTPHC2Items.RIPE_PEPPERCORN_ITEM.get()));
     }
 
     private void gatherData(final GatherDataEvent event) {

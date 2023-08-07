@@ -4,15 +4,17 @@ import com.ferreusveritas.dynamictrees.block.leaves.PalmLeavesProperties;
 import com.ferreusveritas.dynamictrees.client.ModelUtils;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import com.google.common.primitives.Ints;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.IDynamicBakedModel;
-import net.minecraftforge.client.model.data.IModelData;
+import net.minecraftforge.client.model.IDynamicBakedModel;
+import net.minecraftforge.client.model.data.ModelData;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -40,7 +42,7 @@ public class SmallPalmLeavesBakedModel implements IDynamicBakedModel {
 
         for (CoordUtils.Surround surr : CoordUtils.Surround.values()) {
 
-            SimpleBakedModel.Builder builder = new SimpleBakedModel.Builder(blockModel.customData, ItemOverrides.EMPTY).particle(frondsTexture);
+            SimpleBakedModel.Builder builder = new SimpleBakedModel.Builder(blockModel, ItemOverrides.EMPTY, false).particle(frondsTexture);
 
             BlockVertexData[] quadData = {
                     new BlockVertexData(0, 0, 2, 10, 4),
@@ -141,7 +143,7 @@ public class SmallPalmLeavesBakedModel implements IDynamicBakedModel {
 
     @Nonnull
     @Override
-    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
+    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull RandomSource rand, @Nonnull ModelData extraData, @Nullable RenderType renderType) {
         if (state == null || side != null)
             return Collections.emptyList();
 
@@ -150,7 +152,7 @@ public class SmallPalmLeavesBakedModel implements IDynamicBakedModel {
         int direction = state.getValue(PalmLeavesProperties.DynamicPalmLeavesBlock.DIRECTION);
 
         if (direction != 0)
-            quads.addAll(bakedFronds[direction-1].getQuads(state, null, rand, extraData));
+            quads.addAll(bakedFronds[direction-1].getQuads(state, null, rand, extraData, renderType));
 
 
         return quads;
@@ -197,11 +199,6 @@ public class SmallPalmLeavesBakedModel implements IDynamicBakedModel {
     @Override
     public ItemOverrides getOverrides() {
         return ItemOverrides.EMPTY;
-    }
-
-    @Override
-    public boolean doesHandlePerspectives() {
-        return false;
     }
 
 //    public static class ModelPalmSurround implements IModelData {

@@ -1,7 +1,6 @@
 package maxhyper.dtphc2.items;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -21,7 +20,7 @@ public class RipePeppercornItem extends Item {
 
     @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(@Nonnull ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, @Nonnull TooltipFlag pFlag) {
-        pTooltip.add(new TranslatableComponent("tooltip.dtphc2.ripe_peppercorn_item"));
+        pTooltip.add(Component.translatable("tooltip.dtphc2.ripe_peppercorn_item"));
     }
 
 }

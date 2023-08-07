@@ -7,12 +7,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -29,7 +29,6 @@ import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Random;
 
 import static com.ferreusveritas.dynamictrees.compat.season.SeasonHelper.isSeasonBetween;
 
@@ -120,7 +119,7 @@ public class FruitVineBlock extends VineBlock {
         builder.add(ageProperty);
     }
 
-    public void doTick(BlockState state, Level world, BlockPos pos, Random random) {
+    public void doTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         final Integer age = getAge(state);
         if (age == null) return;
         final Float season = SeasonHelper.getSeasonValue(LevelContext.create(world), pos);
@@ -139,7 +138,7 @@ public class FruitVineBlock extends VineBlock {
         }
     }
 
-    private void tryGrow(BlockState state, Level world, BlockPos pos, Random random, int age,
+    private void tryGrow(BlockState state, Level world, BlockPos pos, RandomSource random, int age,
                          @Nullable Float season) {
         float chance = age == 0 ? getFruitingChance(world, pos)
                 : ((matureAge != maxAge && age >= matureAge) ? fruitOverripenChance : fruitGrowChance);
@@ -281,7 +280,7 @@ public class FruitVineBlock extends VineBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         doTick(state, world, pos, random);
 
         if (world.random.nextFloat() < attemptSpread && world.isAreaLoaded(pos, 4)) { // Forge: check area to prevent loading unloaded chunks
@@ -361,6 +360,19 @@ public class FruitVineBlock extends VineBlock {
 
             }
         }
+    }
+
+    private BlockState copyRandomFaces(BlockState from, BlockState to, RandomSource random) {
+        for(Direction direction : Direction.Plane.HORIZONTAL) {
+            if (random.nextBoolean()) {
+                BooleanProperty booleanproperty = getPropertyForFace(direction);
+                if (from.getValue(booleanproperty)) {
+                    to = to.setValue(booleanproperty, Boolean.TRUE);
+                }
+            }
+        }
+
+        return to;
     }
 
 }

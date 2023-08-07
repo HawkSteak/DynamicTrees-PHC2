@@ -6,20 +6,21 @@ import com.ferreusveritas.dynamictrees.tree.species.Species;
 import maxhyper.dtphc2.blocks.MapleSpileBlock;
 import maxhyper.dtphc2.blocks.MapleSpileBucketBlock;
 import maxhyper.dtphc2.blocks.MapleSpileCommon;
-import mcp.mobius.waila.api.BlockAccessor;
-import mcp.mobius.waila.api.IComponentProvider;
-import mcp.mobius.waila.api.ITooltip;
-import mcp.mobius.waila.api.config.IPluginConfig;
-import mcp.mobius.waila.api.ui.IElementHelper;
+import maxhyper.dtphc2.init.DTPHC2Blocks;
+import net.minecraft.resources.ResourceLocation;
+import snownee.jade.api.BlockAccessor;
+import snownee.jade.api.IBlockComponentProvider;
+import snownee.jade.api.ITooltip;
+import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.api.ui.IElementHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class WailaSpileHandler implements IComponentProvider {
+public class WailaSpileHandler implements IBlockComponentProvider {
 
     public static WailaSpileHandler INSTANCE = new WailaSpileHandler();
 
@@ -31,14 +32,14 @@ public class WailaSpileHandler implements IComponentProvider {
         if (accessor.getBlockState().hasProperty(MapleSpileBlock.FILLED)) {
             boolean filled = accessor.getBlockState().getValue(MapleSpileBlock.FILLED);
             Component filledText = filled
-                    ? new TranslatableComponent("tooltip.dtphc2.maple_spile_filled")
-                    : new TranslatableComponent("tooltip.dtphc2.maple_spile_not_filled");
+                    ? Component.translatable("tooltip.dtphc2.maple_spile_filled")
+                    : Component.translatable("tooltip.dtphc2.maple_spile_not_filled");
             tooltip.add(filledText);
         }
         if (accessor.getBlockState().hasProperty(MapleSpileBucketBlock.FILLING)) {
             int filling = accessor.getBlockState().getValue(MapleSpileBucketBlock.FILLING);
             float percent = filling / 3.0F * 100;
-            tooltip.add(new TranslatableComponent("tooltip.dtphc2.maple_spile_bucket_filling", String.format("%.0f%%", percent)));
+            tooltip.add(Component.translatable("tooltip.dtphc2.maple_spile_bucket_filling", String.format("%.0f%%", percent)));
         }
 
         // ADD ICON
@@ -87,4 +88,8 @@ public class WailaSpileHandler implements IComponentProvider {
     }
 
 
+    @Override
+    public ResourceLocation getUid() {
+        return DTPHC2Blocks.MAPLE_SPILE_BLOCK.getId();
+    }
 }
