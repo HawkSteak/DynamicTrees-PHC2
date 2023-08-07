@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[40,)"
+loaderVersion="[43,44)"
 license="MIT"
 
 [[mods]]
@@ -18,28 +18,28 @@ Compatibility Mod between Dynamic Trees and Pam's HarvestCraft 2: Trees
 [[dependencies.dtphc2]]
     modId="forge"
     mandatory=true
-    versionRange="[40,)"
+    versionRange="[43.2.0,44)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.dtphc2]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2,1.19)"
+    versionRange="[1.19.2,1.19.3)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.dtphc2]]
     modId="dynamictrees"
     mandatory=true
-    versionRange="[0.11.0,)"
+    versionRange="[1.1.0-BETA5,)"
     ordering="AFTER"
     side="BOTH"
 
 [[dependencies.dtphc2]]
     modId="dynamictreesplus"
     mandatory=false
-    versionRange="[0.1.0,)"
+    versionRange="[1.1.1,)"
     ordering="AFTER"
     side="BOTH"
 
