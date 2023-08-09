@@ -101,11 +101,11 @@ dependencies {
     minecraft("net.minecraftforge:forge:${mcVersion}-${property("forgeVersion")}")
 
     // Compile PHC and DT, of course.
-    implementation(fg.deobf("curse.maven:pams-harvestcraft-2-trees-365460:4360314"))
+    implementation(fg.deobf("curse.maven:pams-harvestcraft-2-trees-365460:4480280"))
     implementation(fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-$mcVersion:${property("dynamicTreesVersion")}"))
 
     // Compile Jade, but don't include in runtime.
-    compileOnly(fg.deobf("curse.maven:Jade-324717:4082408"))
+    compileOnly(fg.deobf("curse.maven:Jade-324717:4433884"))
 
     // DT+ is optional, but it's implemented as there is access to its classes and needs to be compiled.
     implementation(fg.deobf("com.ferreusveritas.dynamictreesplus:DynamicTreesPlus-$mcVersion:${property("dynamicTreesPlusVersion")}"))
@@ -115,27 +115,27 @@ dependencies {
     /////////////////////////////////////////
 
     // At runtime, use the full Jade mod.
-    runtimeOnly(fg.deobf("curse.maven:Jade-324717:4082408"))
+    runtimeOnly(fg.deobf("curse.maven:Jade-324717:4433884"))
 
     // At runtime, use the full JEI mod.
     // TEMP FIX: TEHNUT MAVEN IS DOWN
-    runtimeOnly(fg.deobf("curse.maven:jei-238222:4434393"))
+    runtimeOnly(fg.deobf("curse.maven:jei-238222:4615177"))
     //runtimeOnly(fg.deobf("mezz.jei:jei-$mcVersion:${property("jeiVersion")}"))
 
     // At runtime, use CC for creating growth chambers.
     runtimeOnly(fg.deobf("org.squiddev:cc-tweaked-$mcVersion:${property("ccVersion")}"))
 
     // At runtime, get rid of experimental settings warning screen.
-    runtimeOnly(fg.deobf("curse.maven:ShutUpExperimentalSettings-407174:3544525"))
+    runtimeOnly(fg.deobf("curse.maven:ShutUpExperimentalSettings-407174:3759881"))
 
     // At runtime use serene seasons to test seasonal mechanics
-    runtimeOnly(fg.deobf("curse.maven:SereneSeasons-291874:3693807"))
+    runtimeOnly(fg.deobf("curse.maven:SereneSeasons-291874:4037228"))
 
     // At runtime, use suggestion provider fix mod.
-    runtimeOnly(fg.deobf("com.harleyoconnor.suggestionproviderfix:SuggestionProviderFix-1.18.1:${property("suggestionProviderFixVersion")}"))
+    runtimeOnly(fg.deobf("com.harleyoconnor.suggestionproviderfix:SuggestionProviderFix-1.19:${property("suggestionProviderFixVersion")}"))
 
     // If needed, include Cyanide mod to get more info about datapack errors
-    runtimeOnly(fg.deobf("curse.maven:Cyanide-541676:3811793"))
+    runtimeOnly(fg.deobf("curse.maven:Cyanide-541676:4126944"))
 
 }
 

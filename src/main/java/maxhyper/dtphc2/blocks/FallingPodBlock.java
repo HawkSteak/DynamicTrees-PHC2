@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +23,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Random;
 
 public class FallingPodBlock extends PodBlock implements IFallingFruit {
 
@@ -44,7 +44,7 @@ public class FallingPodBlock extends PodBlock implements IFallingFruit {
     }
 
     @Override
-    public void doTick(BlockState state, Level world, BlockPos pos, Random random) {
+    public void doTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         if (checkToFall(state, world, pos, random)){
             //System.out.println(this.asItem());
             doFall(state, world, pos);

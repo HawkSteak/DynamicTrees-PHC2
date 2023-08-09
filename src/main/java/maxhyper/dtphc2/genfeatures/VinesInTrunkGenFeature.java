@@ -9,14 +9,13 @@ import maxhyper.dtphc2.blocks.FruitVineBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-
-import java.util.Random;
 
 public class VinesInTrunkGenFeature extends GenFeature {
 
@@ -58,7 +57,7 @@ public class VinesInTrunkGenFeature extends GenFeature {
 
     private void placeVines (GenFeatureConfiguration configuration, LevelAccessor world, BlockPos pos, Direction direction){
         BlockState state = configuration.get(BLOCK).defaultBlockState().setValue(sideVineStates[direction.getOpposite().ordinal()], true);
-        Random rand = world.getRandom();
+        RandomSource rand = world.getRandom();
         for (int i=0; i < configuration.get(MAX_HEIGHT); i++){
             BlockPos current = pos.above(i);
             if (VineBlock.isAcceptableNeighbour(world, current.above(), Direction.UP) || TreeHelper.isBranch(world.getBlockState(current.above())))
