@@ -38,7 +38,7 @@ version = "$mcVersion-$modVersion"
 group = property("group")
 
 minecraft {
-    mappings("parchment", "${property("mappingsVersion")}-$mcVersion")
+    mappings(property("mappingsChannel"), property("mappingsVersion"))
 
     accessTransformer(file("src/main/resources/META-INF/accesstransformer.cfg"))
 
@@ -98,44 +98,47 @@ sourceSets.main.get().resources {
 
 dependencies {
     // Not sure if we need this one, what is a "forge" anyway?
-    minecraft("net.minecraftforge:forge:${mcVersion}-${property("forgeVersion")}")
+    minecraft("net.minecraftforge:forge:1.20.1-47.2.0")
 
     // Compile PHC and DT, of course.
-    implementation(fg.deobf("curse.maven:pams-harvestcraft-2-trees-365460:4480280"))
-    implementation(fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-$mcVersion:${property("dynamicTreesVersion")}"))
+    implementation(fg.deobf("curse.maven:pams-harvestcraft-2-trees-365460:4625518"))
+    implementation(fg.deobf("curse.maven:dynamictrees-252818:5065701"))
 
     // Compile Jade, but don't include in runtime.
-    compileOnly(fg.deobf("curse.maven:Jade-324717:4433884"))
+    compileOnly(fg.deobf("curse.maven:jade-324717:4986594"))
 
     // DT+ is optional, but it's implemented as there is access to its classes and needs to be compiled.
-    implementation(fg.deobf("com.ferreusveritas.dynamictreesplus:DynamicTreesPlus-$mcVersion:${property("dynamicTreesPlusVersion")}"))
+    //Uncomment/add the dependency for DynamicTreesPlus before building
+    //implementation(fg.deobf("com.ferreusveritas.dynamictreesplus:DynamicTreesPlus-$mcVersion:${property("dynamicTreesPlusVersion")}"))
 
     /////////////////////////////////////////
     /// Runtime Dependencies (optional)
     /////////////////////////////////////////
 
     // At runtime, use the full Jade mod.
-    runtimeOnly(fg.deobf("curse.maven:Jade-324717:4433884"))
+    runtimeOnly(fg.deobf("curse.maven:jade-324717:4986594"))
 
     // At runtime, use the full JEI mod.
     // TEMP FIX: TEHNUT MAVEN IS DOWN
-    runtimeOnly(fg.deobf("curse.maven:jei-238222:4615177"))
-    //runtimeOnly(fg.deobf("mezz.jei:jei-$mcVersion:${property("jeiVersion")}"))
+    compileOnly(fg.deobf("mezz.jei:jei-$mcVersion-forge-api:${property("jeiVersion")}"))
+    compileOnly(fg.deobf("mezz.jei:jei-$mcVersion-common-api:${property("jeiVersion")}"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-$mcVersion-forge:${property("jeiVersion")}"))
 
     // At runtime, use CC for creating growth chambers.
-    runtimeOnly(fg.deobf("org.squiddev:cc-tweaked-$mcVersion:${property("ccVersion")}"))
+    runtimeOnly(fg.deobf("cc.tweaked:cc-tweaked-$mcVersion-core:${property("ccVersion")}"))
+    runtimeOnly(fg.deobf("cc.tweaked:cc-tweaked-$mcVersion-forge:${property("ccVersion")}"))
 
     // At runtime, get rid of experimental settings warning screen.
     runtimeOnly(fg.deobf("curse.maven:ShutUpExperimentalSettings-407174:3759881"))
 
     // At runtime use serene seasons to test seasonal mechanics
-    runtimeOnly(fg.deobf("curse.maven:SereneSeasons-291874:4037228"))
+    runtimeOnly(fg.deobf("curse.maven:SereneSeasons-291874:4761603"))
 
     // At runtime, use suggestion provider fix mod.
-    runtimeOnly(fg.deobf("com.harleyoconnor.suggestionproviderfix:SuggestionProviderFix-1.19:${property("suggestionProviderFixVersion")}"))
+    runtimeOnly(fg.deobf("curse.maven:suggestion-provider-fix-469647:4591193"))
 
     // If needed, include Cyanide mod to get more info about datapack errors
-    runtimeOnly(fg.deobf("curse.maven:Cyanide-541676:4126944"))
+    runtimeOnly(fg.deobf("curse.maven:Cyanide-541676:4824162"))
 
 }
 
