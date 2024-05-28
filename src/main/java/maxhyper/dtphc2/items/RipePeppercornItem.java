@@ -1,5 +1,6 @@
 package maxhyper.dtphc2.items;
 
+import com.ferreusveritas.dynamictrees.init.DTRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -16,6 +17,7 @@ public class RipePeppercornItem extends Item {
 
     public RipePeppercornItem(Item.Properties properties) {
         super(properties);
+        DTRegistries.CREATIVE_TAB_ITEMS.add(this);
     }
 
     @Override @OnlyIn(Dist.CLIENT)

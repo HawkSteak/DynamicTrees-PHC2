@@ -3,6 +3,7 @@ package maxhyper.dtphc2.blocks;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
 import maxhyper.dtphc2.init.DTPHC2Blocks;
+import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -44,7 +45,7 @@ public class MapleSpileBlock extends MapleSpileCommon {
             if (state.hasProperty(FILLED)) {
                 Direction dir = state.getValue(FACING);
                 if (player.getMainHandItem().getItem() == Items.BUCKET) {
-                    world.setBlock(pos, DTPHC2Blocks.MAPLE_SPILE_BUCKET_BLOCK.get().defaultBlockState()
+                    world.setBlock(pos, DTPHC2Registries.MAPLE_SPILE_BUCKET_BLOCK.get().defaultBlockState()
                             .setValue(FACING, dir)
                             .setValue(MapleSpileBucketBlock.FILLING, state.getValue(FILLED) ? 1 : 0), 3);
                     if (!player.isCreative()) player.getMainHandItem().shrink(1);

@@ -49,8 +49,6 @@ public class DynamicTreesPHC2 {
 
         RegistryHandler.setup(MOD_ID);
 
-        DTPHC2Blocks.register(bus);
-        DTPHC2Items.register(bus);
         DTPHC2Registries.setup();
         DTPHC2Registries.SOUNDS.register(bus);
 
@@ -116,9 +114,9 @@ public class DynamicTreesPHC2 {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         DTPHC2Client.setup();
-        DTPHC2Blocks.PASSION_FRUIT_VINE.get().setFruitStack(new ItemStack(ItemRegistration.passionfruititem.get()));
-        DTPHC2Blocks.VANILLA_VINE.get().setFruitStack(new ItemStack(ItemRegistration.vanillabeanitem.get()));
-        DTPHC2Blocks.PEPPERCORN_VINE.get().setFruitStack(new ItemStack(ItemRegistration.peppercornitem.get())).setOverripeFruitStack(new ItemStack(DTPHC2Items.RIPE_PEPPERCORN_ITEM.get()));
+        DTPHC2Registries.PASSION_FRUIT_VINE.get().setFruitStack(new ItemStack(ItemRegistration.passionfruititem.get()));
+        DTPHC2Registries.VANILLA_VINE.get().setFruitStack(new ItemStack(ItemRegistration.vanillabeanitem.get()));
+        DTPHC2Registries.PEPPERCORN_VINE.get().setFruitStack(new ItemStack(ItemRegistration.peppercornitem.get())).setOverripeFruitStack(new ItemStack(DTPHC2Registries.RIPE_PEPPERCORN_ITEM.get()));
     }
 
     private void gatherData(final GatherDataEvent event) {

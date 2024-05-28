@@ -1,6 +1,7 @@
 package maxhyper.dtphc2.items;
 
 import com.ferreusveritas.dynamictrees.compat.season.SeasonHelper;
+import com.ferreusveritas.dynamictrees.init.DTRegistries;
 import com.ferreusveritas.dynamictrees.util.LevelContext;
 import maxhyper.dtphc2.blocks.FruitVineBlock;
 import net.minecraft.ChatFormatting;
@@ -21,7 +22,8 @@ public class FruitVineItem extends BlockItem {
 
     public FruitVineItem(FruitVineBlock pBlock, Properties pProperties) {
         super(pBlock, pProperties);
-        vineBlock = pBlock;
+        this.vineBlock = pBlock;
+        DTRegistries.CREATIVE_TAB_ITEMS.add(this);
     }
 
     @Override
