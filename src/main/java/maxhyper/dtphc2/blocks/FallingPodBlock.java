@@ -20,6 +20,10 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.core.Holder;
+
+
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -33,7 +37,8 @@ public class FallingPodBlock extends PodBlock implements IFallingFruit {
 
     public FallingPodBlock(Properties properties, Pod pod) {
         super(properties, pod);
-        damageSource = new DamageSource(DynamicTreesPHC2.MOD_ID+".falling_fruit."+ pod.getRegistryName().getPath());
+        DamageType damageType = new DamageType(DynamicTreesPHC2.MOD_ID+".falling_fruit."+ pod.getRegistryName().getPath(), 1F);
+        damageSource = new DamageSource(Holder.direct(damageType));
     }
 
     @Override
@@ -81,7 +86,7 @@ public class FallingPodBlock extends PodBlock implements IFallingFruit {
     @Override
     public ItemStack getDropOnFallItems(ItemLike item, @Nonnull FallingBlockEntity entity) {
         if (entity.getServer() == null) return ItemStack.EMPTY;
-        ServerLevel level = entity.getServer().getLevel(entity.level.dimension());
+        ServerLevel level = entity.getServer().getLevel(entity.level().dimension());
         if (level == null) return ItemStack.EMPTY;
         List<ItemStack> drops = getDrops(entity.getBlockState(), level, entity.blockPosition(), null);
         if (drops.isEmpty()) return ItemStack.EMPTY;

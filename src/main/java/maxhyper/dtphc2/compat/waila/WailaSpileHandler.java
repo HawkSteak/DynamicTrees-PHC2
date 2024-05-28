@@ -3,10 +3,12 @@ package maxhyper.dtphc2.compat.waila;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.compat.waila.WailaOther;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
+import maxhyper.dtphc2.DynamicTreesPHC2;
 import maxhyper.dtphc2.blocks.MapleSpileBlock;
 import maxhyper.dtphc2.blocks.MapleSpileBucketBlock;
 import maxhyper.dtphc2.blocks.MapleSpileCommon;
 import maxhyper.dtphc2.init.DTPHC2Blocks;
+import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.resources.ResourceLocation;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
@@ -90,6 +92,6 @@ public class WailaSpileHandler implements IBlockComponentProvider {
 
     @Override
     public ResourceLocation getUid() {
-        return DTPHC2Blocks.MAPLE_SPILE_BLOCK.getId();
+        return DynamicTreesPHC2.location("maple_spile");
     }
 }

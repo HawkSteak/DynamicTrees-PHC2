@@ -1,7 +1,9 @@
 package maxhyper.dtphc2.compat.waila;
 
+import maxhyper.dtphc2.DynamicTreesPHC2;
 import maxhyper.dtphc2.blocks.FruitVineBlock;
 import maxhyper.dtphc2.init.DTPHC2Blocks;
+import maxhyper.dtphc2.init.DTPHC2Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import snownee.jade.api.BlockAccessor;
@@ -27,6 +29,6 @@ public class WailaVineHandler implements IBlockComponentProvider {
 
     @Override
     public ResourceLocation getUid() {
-        return DTPHC2Blocks.PASSION_FRUIT_VINE.getId();
+        return DynamicTreesPHC2.location("maple_spile_bucket");
     }
 }
