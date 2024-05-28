@@ -10,6 +10,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +24,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -61,7 +61,7 @@ public class FruitVineBlock extends VineBlock {
     private int maxFruitsAround = 2;
 
     public FruitVineBlock() {
-        super(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().strength(0.2F).sound(SoundType.VINE));
+        super(BlockBehaviour.Properties.of().noCollission().randomTicks().strength(0.2F).sound(SoundType.VINE));
         this.registerDefaultState(defaultBlockState().setValue(ageProperty, 0));
     }
 
@@ -243,7 +243,7 @@ public class FruitVineBlock extends VineBlock {
     @Nonnull
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-                                BlockHitResult hit) {
+                                 BlockHitResult hit) {
         Integer age = getAge(state);
         if (age == null) return InteractionResult.PASS;
         // Drop fruit if mature.
